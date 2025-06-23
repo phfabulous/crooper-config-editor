@@ -1,0 +1,729 @@
+/* style.css */
+/* Base Styles */
+html, body { /* Assurez-vous que HTML et BODY prennent 100% de la hauteur */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent body scroll, content areas will scroll */
+}
+
+/* Header Styles */
+#app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    z-index: 101; /* Au-dessus d'autres éléments principaux */
+    position: relative; /* TRÈS IMPORTANT pour le positionnement du dropdown */
+}
+
+.header-left, .header-right, .header-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.current-file-display {
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Base button styles */
+button {
+    padding: 8px 15px;
+    font-size: 0.95em;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Primary buttons */
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Icon buttons (for menu, actions on cards) */
+.icon-btn {
+    background: none;
+    color: #6c757d;
+    font-size: 1.4em;
+    padding: 5px;
+    border-radius: 4px;
+}
+.icon-btn:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+
+/* Dropdown Menu Styles (for global actions) */
+#mainMenuDropdown {
+    position: absolute;
+    top: calc(100% + 5px); /* Positionne juste en dessous du header, avec un petit espace */
+    left: 20px; /* Aligné avec le bouton menu */
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 250px;
+    z-index: 1000; /* Assure qu'il est au-dessus de tout */
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    /* Styles de débogage temporaires */
+    border: 2px solid red !important; /* TEMPORAIRE: Bordure rouge pour le voir */
+}
+#mainMenuDropdown.visible {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #f8f8f8 !important; /* TEMPORAIRE: Couleur de fond distincte */
+}
+.dropdown-menu .menu-section-title {
+    font-weight: bold;
+    color: #888;
+    padding: 8px 15px 5px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+}
+.dropdown-menu .menu-item {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    background: none;
+    color: #333;
+    border-radius: 0;
+    font-size: 1em;
+}
+.dropdown-menu .menu-item:hover {
+    background-color: #f0f2f5;
+}
+
+
+/* Main Wrapper Styles */
+#main-wrapper {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out;
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar.collapsed .saved-templates-container,
+.sidebar.collapsed .sidebar-actions,
+.sidebar.collapsed h2 {
+    display: none;
+}
+
+.sidebar.collapsed .toggle-sidebar-btn {
+    transform: rotate(180deg);
+    left: 50%;
+    transform-origin: center center;
+    top: 50%;
+}
+
+
+.sidebar h2 {
+    color: #85c1e9;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Saved Templates section */
+.saved-templates-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#noSavedTemplatesMessage {
+    text-align: center;
+    color: #a0b0c0;
+    font-style: italic;
+    padding: 20px;
+}
+
+.template-item {
+    background-color: #3a5068;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.template-item:hover {
+    background-color: #4c6a85;
+    transform: translateY(-2px);
+}
+
+.template-item.selected {
+    border: 2px solid #85c1e9;
+}
+
+.template-item .template-name-container {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.template-item .friendly-name {
+    font-weight: 500;
+    color: #fff;
+    font-size: 1em;
+    display: block;
+}
+
+.template-item .tech-name {
+    font-size: 0.75em;
+    color: #a0b0c0;
+    display: block;
+}
+
+.template-item .template-actions {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.template-item .template-actions button {
+    background: none;
+    color: #ccc;
+    padding: 3px 6px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    line-height: 1;
+    text-align: center;
+    min-width: 30px;
+}
+.template-item .template-actions button:hover {
+    background-color: #607d8b;
+    color: white;
+}
+.template-item .template-actions button.delete-template-btn {
+    color: #ff7f7f;
+}
+.template-item .template-actions button.delete-template-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* Content Area Styles */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* ANCIEN: top-controls - SUPPRIMÉ */
+.top-controls {
+    display: none;
+}
+
+.product-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#noProductMessage {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 50px;
+}
+
+
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.product-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+.product-card.dragging {
+    opacity: 0.6;
+    border: 2px dashed #007bff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.product-card .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.product-card h3 {
+    margin-top: 0;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.product-card h3 .collapse-icon {
+    font-size: 1em;
+    transition: transform 0.2s;
+    color: #6c757d;
+}
+
+.product-card.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.product-card .product-details {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    max-height: 1000px;
+}
+
+.product-card.collapsed .product-details {
+    max-height: 0;
+}
+
+
+/* Direct editable fields in product card - read-only now */
+.product-card .editable-field {
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background-color: white;
+    width: calc(100% - 12px);
+    pointer-events: none; /* Make read-only */
+    color: #555; /* Dimmer text for read-only */
+}
+
+/* Duplicate Product Styling */
+.product-card.duplicate {
+    border: 2px solid #ff7f7f;
+    box-shadow: 0 0 10px rgba(255, 127, 127, 0.6);
+}
+
+.product-card.duplicate::before {
+    content: "DUPLICATE!";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff7f7f;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Product Card Actions (Icons) */
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.product-actions button {
+    padding: 6px 10px;
+    font-size: 0.75em;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    color: #495057;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.product-actions button:hover {
+    background-color: #dde1e6;
+    color: #212529;
+}
+
+.product-actions button.edit-btn {
+    background-color: #ffecb3;
+    color: #e65100;
+}
+.product-actions button.edit-btn:hover {
+    background-color: #ffe082;
+}
+
+.product-actions button.duplicate-btn {
+    background-color: #b3e0ed;
+    color: #007bff;
+}
+.product-actions button.duplicate-btn:hover {
+    background-color: #90d6ec;
+}
+
+.product-actions button.delete-btn {
+    background-color: #ffcdd2;
+    color: #c62828;
+}
+.product-actions button.delete-btn:hover {
+    background-color: #ef9a9a;
+}
+
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 30px 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 24px);
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+    background-color: #fcfcfc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.2);
+    background-color: white;
+}
+
+.form-group textarea {
+    min-height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.05em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Secondary action buttons in modals */
+.modal-actions .secondary-action-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+}
+.modal-actions .secondary-action-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Alias Quick Access Section */
+.alias-quick-access-container {
+    background-color: #e0f7fa;
+    border-left: 5px solid #00acc1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.alias-quick-access-container h2 {
+    color: #00838f;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 1.5em;
+}
+
+.alias-blocks-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+}
+
+.alias-block {
+    background-color: #00bcd4;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.alias-block:hover {
+    background-color: #0097a7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.alias-block.add-alias-block {
+    background-color: #20c997;
+}
+
+.alias-block.add-alias-block:hover {
+    background-color: #17a2b8;
+}
+
+.alias-block .edit-alias-icon {
+    font-size: 0.9em;
+    margin-left: 8px;
+    color: rgba(255,255,255,0.8);
+}
+.alias-block:hover .edit-alias-icon {
+    color: white;
+}
+
+/* Styles pour les champs dynamiques dans la modale d'édition/ajout de produit */
+#dynamicFormFields .form-group input[type="text"],
+#dynamicFormFields .form-group input[type="number"],
+#dynamicFormFields .form-group select,
+#dynamicFormFields .form-group textarea {
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+}
+
+/* Styles pour la modale Manage Fields */
+#manageFieldsModal .modal-content {
+    max-width: 900px;
+}
+
+.field-management-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.field-management-controls label {
+    font-weight: bold;
+}
+
+.field-management-controls select,
+.field-management-controls button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.field-management-controls button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.field-management-controls button:hover {
+    background-color: #0056b3;
+}
+
+#fieldsListContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.field-row:last-child {
+    border-bottom: none;
+}
+
+.field-row.field-header {
+    font-weight: bold;
+    background-color: #e9ecef;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.field-row input[type="text"],
+.field-row select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+    flex-grow: 1;
+}
+
+/* Spécifications de largeur pour les colonnes des champs */
+.field-label-col, .field-label-input { flex: 3; }
+.field-key-col, .field-key-input { flex: 3; }
+.field-type-col, .field-type-select { flex: 2; }
+.field-required-col { flex: 1; text-align: center; }
+.field-required-checkbox-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; } /* Added for checkbox centering */
+.field-options-col, .field-options-input { flex: 4; }
+.field-actions-col { flex: 1.5; text-align: right; }
+
+
+.field-row input[type="checkbox"] {
+    margin: 0;
+}
+
+.field-row .remove-field-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.field-row .remove-field-btn:hover {
+    background-color: #c82333;
+}
+
+#saveFieldsConfigBtn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#saveFieldsConfigBtn:hover {
+    background-color: #218838;
+}
