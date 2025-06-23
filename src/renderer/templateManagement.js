@@ -1,6 +1,7 @@
 // src/renderer/templateManagement.js
 import { renderProducts } from './productManagement.js';
 import { TEMPLATES_FILE_NAME } from './constants.js';
+import { cleanObject } from './utils.js';
 
 // DOM elements (passed during initialization)
 let elements;
@@ -20,9 +21,96 @@ export const initializeTemplateElements = (domElements, config, templates) => {
 // Function to update global state references when they change in mainRenderer
 export const updateTemplateData = (config, templates) => {
     currentConfig = config;
-    savedProductTemplates = templates; 
+    savedProductTemplates = templates;
     renderSavedProductTemplates(savedProductTemplates); // Re-render sidebar templates when data updates
 };
+
+function collectMockupPaths(containerElement) {
+    if (!containerElement) return [];
+    const mockups = [];
+    containerElement.querySelectorAll('.mockup-path-entry').forEach(entry => {
+        const path = entry.querySelector('.mockup-path').value.trim();
+        const name = entry.querySelector('.mockup-name').value.trim();
+        if (path || name) {
+            mockups.push({ path, name });
+        }
+    });
+    return mockups;
+}
+
+function collectVariantsFromDisplay() {
+    if (!elements.currentVariantsDisplay) return {};
+    return elements.currentVariantsDisplay.currentVariantsData || {};
+}
+
+function collectProductDataFromForm() {
+    if (!elements.dynamicFormFields) return {};
+
+    const productData = {};
+
+    elements.dynamicFormFields.querySelectorAll('.dynamic-field').forEach(inputElement => {
+        const fieldKey = inputElement.dataset.key;
+        let value = inputElement.type === 'checkbox' ? inputElement.checked : inputElement.value;
+        if (inputElement.type === 'number') {
+            const parsed = parseFloat(value);
+            value = isNaN(parsed) ? '' : parsed;
+        }
+        const pathParts = fieldKey.split('.');
+        let currentLevel = productData;
+        for (let i = 0; i < pathParts.length; i++) {
+            const part = pathParts[i];
+            if (i === pathParts.length - 1) {
+                currentLevel[part] = value;
+            } else {
+                if (!currentLevel[part] || typeof currentLevel[part] !== 'object' || Array.isArray(currentLevel[part])) {
+                    currentLevel[part] = {};
+                }
+                currentLevel = currentLevel[part];
+            }
+        }
+    });
+
+    if (elements.customFieldsContainer) {
+        elements.customFieldsContainer.querySelectorAll('.custom-field-row').forEach(row => {
+            const key = row.querySelector('.custom-field-key').value.trim();
+            const value = row.querySelector('.custom-field-value').value;
+            if (key) {
+                const pathParts = key.split('.');
+                let currentLevel = productData;
+                for (let i = 0; i < pathParts.length; i++) {
+                    const part = pathParts[i];
+                    if (i === pathParts.length - 1) {
+                        currentLevel[part] = value;
+                    } else {
+                        if (!currentLevel[part] || typeof currentLevel[part] !== 'object' || Array.isArray(currentLevel[part])) {
+                            currentLevel[part] = {};
+                        }
+                        currentLevel = currentLevel[part];
+                    }
+                }
+            }
+        });
+    }
+
+    const typeInput = elements.dynamicFormFields.querySelector('[data-key="type"]');
+    const type = typeInput ? typeInput.value : '';
+
+    if (type === 'alias') {
+        productData.mockups = collectMockupPaths(elements.mockupPathsContainer);
+    } else if (type === 'simple' || type === 'parent') {
+        if (elements.hasAliasCheckbox && elements.hasAliasCheckbox.checked && elements.productAliasSelect && elements.productAliasSelect.value) {
+            productData.alias = elements.productAliasSelect.value;
+        } else {
+            productData.mockups = collectMockupPaths(elements.mockupPathsContainer);
+        }
+    }
+
+    if (type === 'parent') {
+        productData.variant = collectVariantsFromDisplay();
+    }
+
+    return cleanObject(productData);
+}
 
 export function renderSavedProductTemplates(templatesToRender) {
     console.log("[TemplateManagement] Rendering templates. Count:", Object.keys(templatesToRender).length);
@@ -147,14 +235,13 @@ async function handleSaveTemplateFormSubmit(event) {
         return;
     }
 
-    if (!currentConfig || !currentConfig[technicalName]) {
-        alert('Error: The selected product to save as template was not found in the current configuration.');
-        closeSaveTemplateModal();
-        return;
+    let productToSave;
+    if (currentConfig && currentConfig[technicalName]) {
+        productToSave = JSON.parse(JSON.stringify(currentConfig[technicalName]));
+    } else {
+        productToSave = collectProductDataFromForm();
+        productToSave.name = technicalName;
     }
-
-    const productToSave = JSON.parse(JSON.stringify(currentConfig[technicalName]));
-    productToSave.friendlyName = friendlyName;
 
     let baseTechnicalName = technicalName;
     let uniqueTemplateKey = baseTechnicalName;
