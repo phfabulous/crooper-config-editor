@@ -1,10 +1,11 @@
 // src/renderer/fieldManagement.js
 import { FIELDS_CONFIG_FILE_NAME, KNOWN_FIELDS_CONFIG } from './constants.js';
-import { cleanObject } from './utils.js';
+import { cleanObject, getDragAfterElement } from './utils.js';
 
 let elements;
 let currentKnownFieldsConfig = {};
 let originalModalStateBeforePromotion = null; // Nouvelle variable pour stocker l'état de la modale produit
+let draggedFieldRow = null; // For drag and drop ordering
 
 export const initializeFieldManagementElements = (domElements, initialFieldsConfig) => {
     elements = domElements;
@@ -15,6 +16,8 @@ export const initializeFieldManagementElements = (domElements, initialFieldsConf
     elements.productTypeForFields.addEventListener('change', renderFieldsList);
     elements.addNewFieldBtn.addEventListener('click', addEditableFieldRow);
     elements.saveFieldsConfigBtn.addEventListener('click', saveKnownFieldsConfigToDisk);
+
+    elements.fieldsListContainer.addEventListener('dragover', handleFieldDragOver);
 
     // Initial render when the module is initialized
     renderFieldsList();
@@ -114,6 +117,15 @@ function addEditableFieldRow(fieldData = {}) {
     const fieldRow = document.createElement('div');
     fieldRow.classList.add('field-row');
     fieldRow.dataset.fieldKey = fieldData.key || '';
+    fieldRow.draggable = true;
+    fieldRow.addEventListener('dragstart', () => {
+        draggedFieldRow = fieldRow;
+        fieldRow.classList.add('dragging');
+    });
+    fieldRow.addEventListener('dragend', () => {
+        draggedFieldRow = null;
+        fieldRow.classList.remove('dragging');
+    });
 
     const labelInput = document.createElement('input');
     labelInput.type = 'text';
@@ -298,5 +310,22 @@ export async function loadKnownFieldsConfig() {
         console.error("[FieldManagement] Error during loadKnownFieldsConfig:", error);
         alert('An unexpected error occurred while loading fields configuration: ' + error.message);
         return {};
+    }
+}
+
+function handleFieldDragOver(e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(
+        elements.fieldsListContainer,
+        e.clientY,
+        '.field-row:not(.field-header)'
+    );
+    const draggable = document.querySelector('.field-row.dragging');
+    if (draggable) {
+        if (afterElement == null) {
+            elements.fieldsListContainer.appendChild(draggable);
+        } else {
+            elements.fieldsListContainer.insertBefore(draggable, afterElement);
+        }
     }
 }

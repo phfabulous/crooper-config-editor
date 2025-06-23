@@ -70,8 +70,8 @@ export function findDuplicates(keys) {
 }
 
 // Drag and Drop Helper: Get element to insert after
-export function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.product-card:not(.dragging)')];
+export function getDragAfterElement(container, y, selector = '.product-card') {
+    const draggableElements = [...container.querySelectorAll(`${selector}:not(.dragging)`)];
 
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();

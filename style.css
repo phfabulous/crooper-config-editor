@@ -327,6 +327,11 @@ h1 {
     border: 2px dashed #007bff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+.field-row.dragging {
+    opacity: 0.6;
+    border: 2px dashed #007bff;
+}
+
 
 .product-card .product-header {
     display: flex;
@@ -680,6 +685,7 @@ button[type="submit"] {
     gap: 10px;
     padding: 8px 0;
     border-bottom: 1px dashed #eee;
+    cursor: grab;
 }
 
 .field-row:last-child {
