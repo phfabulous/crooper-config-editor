@@ -797,6 +797,34 @@ function renderDynamicFormFields(productData = {}) {
 
         formGroup.appendChild(inputElement);
 
+        const orderWrapper = document.createElement('div');
+        orderWrapper.classList.add('field-order-buttons');
+        const upBtn = document.createElement('button');
+        upBtn.type = 'button';
+        upBtn.textContent = '↑';
+        upBtn.classList.add('move-field-up-btn');
+        upBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const prev = formGroup.previousElementSibling;
+            if (prev) {
+                elements.dynamicFormFields.insertBefore(formGroup, prev);
+            }
+        });
+        const downBtn = document.createElement('button');
+        downBtn.type = 'button';
+        downBtn.textContent = '↓';
+        downBtn.classList.add('move-field-down-btn');
+        downBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const next = formGroup.nextElementSibling;
+            if (next) {
+                elements.dynamicFormFields.insertBefore(next, formGroup);
+            }
+        });
+        orderWrapper.appendChild(upBtn);
+        orderWrapper.appendChild(downBtn);
+        formGroup.appendChild(orderWrapper);
+
         const errorMessage = document.createElement('span');
         errorMessage.classList.add('error-message');
         errorMessage.dataset.key = `${fieldKey}Error`;

@@ -330,7 +330,8 @@ function renderAliasQuickAccess() {
             editIcon.textContent = ' ⚙️';
             aliasBlock.appendChild(editIcon);
 
-            aliasBlock.addEventListener('click', () => openAliasEditModal(aliasKey));
+            // Utiliser la modale d'édition de produit pour les profils d'aliasing
+            aliasBlock.addEventListener('click', () => openEditProductModal(aliasKey));
             elements.aliasBlocksContainer.appendChild(aliasBlock);
         });
     }
