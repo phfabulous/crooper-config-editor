@@ -826,6 +826,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+        // When product data changes (add/edit/delete/CSV import etc.), re-render UI
+        document.addEventListener('product-data-updated', (event) => {
+            currentConfig = event.detail.config;
+            currentSelectedProductKey = event.detail.updatedKey;
+            renderAllContent();
+        });
+    
+        // When templates list changes, refresh sidebar templates
+        document.addEventListener('templates-updated', (event) => {
+            savedProductTemplates = event.detail.templates;
+            renderAllContent();
+        });
+    
     // Handle initial load of templates (if any)
     if (Object.keys(savedProductTemplates).length === 0) {
         console.log("[MainRenderer] No templates loaded initially. Attempting to load from disk.");
