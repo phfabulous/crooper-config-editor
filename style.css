@@ -728,3 +728,43 @@ button[type="submit"] {
 #saveFieldsConfigBtn:hover {
     background-color: #218838;
 }
+/* Styles for custom fields in product modal */
+#customFieldsContainer .custom-field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+#customFieldsContainer .custom-field-row input[type="text"] {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+#customFieldsContainer .custom-field-row button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#customFieldsContainer .promote-field-btn {
+    background-color: #17a2b8;
+    color: white;
+}
+#customFieldsContainer .promote-field-btn:hover {
+    background-color: #117a8b;
+}
+
+#customFieldsContainer .remove-custom-field-btn {
+    background-color: #dc3545;
+    color: white;
+}
+#customFieldsContainer .remove-custom-field-btn:hover {
+    background-color: #c82333;
+}
