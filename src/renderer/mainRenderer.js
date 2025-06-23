@@ -348,10 +348,10 @@ function openAliasEditModal(aliasKey) {
     // AJOUT DE VÉRIFICATIONS NULL POUR TOUS LES ÉLÉMENTS DE LA MODALE ALIAS
     const requiredAliasElements = [
         elements.aliasEditName, elements.aliasEditOriginalName, elements.aliasEditAspect,
-        elements.aliasEditDensite, elements.aliasEditDimentions, elements.aliasEditSizeImpression, // L'erreur était sur aliasEditSizeImpression
+        elements.aliasEditDensite, elements.aliasEditDimentions, elements.aliasEditSizeImpression, 
         elements.aliasEditDirectMockupsContainer, elements.aliasEditInheritedMockupsContainer,
         elements.inheritedMockupsList, elements.aliasEditModal, elements.addAliasEditMockupPathBtn,
-        elements.aliasEditForm, elements.closeAliasEditModalBtn // Ajout des boutons pour s'assurer qu'ils sont aussi vérifiés
+        elements.aliasEditForm, elements.closeAliasEditModalBtn 
     ];
     // Pour déboguer l'erreur "N/A", vérifions l'ID réel ici si l'élément est null
     const missingElements = requiredAliasElements.filter(el => el === null);
@@ -361,7 +361,7 @@ function openAliasEditModal(aliasKey) {
             for (const key in elements) {
                 if (elements[key] === el) return key;
             }
-            return 'UNKNOWN_ELEMENT'; // Si l'élément est null et non dans notre liste 'elements'
+            return 'UNKNOWN_ELEMENT'; 
         });
         console.error(`[MainRenderer] ERREUR DOM: ${missingElements.length} élément(s) de la modale d'édition d'alias sont introuvables. Clés manquantes:`, missingElementKeys);
         alert("Erreur interne : La modale d'édition d'alias ne peut pas s'ouvrir correctement. Des éléments HTML sont manquants. Vérifiez les IDs dans index.html et mainRenderer.js.");
@@ -441,6 +441,7 @@ function closeAliasEditModal() {
     elements.aliasEditForm.reset();
     populateMockupPathsForAliasEdit(elements.aliasEditMockupPathsContainer, elements.addAliasEditMockupPathBtn, []);
     elements.inheritedMockupsList.innerHTML = '';
+    setAliasEditFormDirty(false); // Reset dirty state on close
     renderAllContent();
 }
 
@@ -576,7 +577,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         noAliasesMessage: document.getElementById('noAliasesMessage'),
 
         productModal: document.getElementById('productModal'),
-        closeButton: document.getElementById('closeButton'), // Référence correcte
+        closeButton: document.getElementById('closeButton'), 
         productForm: document.getElementById('productForm'),
         modalTitle: document.getElementById('modalTitle'),
         originalProductNameInput: document.getElementById('originalProductName'),
@@ -593,8 +594,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         mockupPathsContainer: document.getElementById('mockupPathsContainer'),
         addMockupPathBtn: document.getElementById('addMockupPathBtn'),
 
-        aliasFields: document.getElementById('aliasFields'),
-        simpleParentFields: document.getElementById('simpleParentFields'),
+        // Removed as per analysis (these are not direct IDs in index.html, they are handled by dynamicFormFields)
+        // aliasFields: document.getElementById('aliasFields'), 
+        // simpleParentFields: document.getElementById('simpleParentFields'),
 
         customFieldsSection: document.getElementById('customFieldsSection'),
         customFieldsContainer: document.getElementById('customFieldsContainer'),
@@ -608,9 +610,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         generateVariantsBtn: document.getElementById('generateVariantsBtn'),
         currentVariantsDisplay: document.getElementById('currentVariantsDisplay'),
 
-        productNameError: document.getElementById('productNameError'),
-        productTypeError: document.getElementById('productTypeError'),
-        productPrefixError: document.getElementById('productPrefixError'),
+        // Error message spans for dynamic fields are now handled by querySelector within dynamicFormFields
+        // productNameError: document.getElementById('productNameError'),
+        // productTypeError: document.getElementById('productTypeError'),
+        // productPrefixError: document.getElementById('productPrefixError'),
 
         saveProductAsTemplateBtn: document.getElementById('saveProductAsTemplateBtn'),
         savedTemplatesContainer: document.getElementById('savedTemplatesContainer'),
@@ -629,13 +632,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         aliasEditForm: document.getElementById('aliasEditForm'),
         aliasEditOriginalName: document.getElementById('aliasEditOriginalName'),
         aliasEditAspect: document.getElementById('aliasEditAspect'),
-        aliasEditDensite: document.getElementById('aliasDensite'),
-        aliasEditDimentions: document.getElementById('aliasDimentions'),
-        aliasEditSizeImpression: document.getElementById('aliasEditSizeImpression'), // CORRECTION DÉFINITIVE DE L'ID
+        aliasEditDensite: document.getElementById('aliasEditDensite'), // Corrected ID
+        aliasEditDimentions: document.getElementById('aliasEditDimentions'), // Corrected ID
+        aliasEditSizeImpression: document.getElementById('aliasEditSizeImpression'), 
         aliasEditMockupPathsContainer: document.getElementById('aliasEditMockupPathsContainer'),
         addAliasEditMockupPathBtn: document.getElementById('addAliasEditMockupPathBtn'),
         aliasEditDirectMockupsContainer: document.getElementById('aliasEditDirectMockupsContainer'),
-        aliasEditInheritedMockupsContainer: document.getElementById('inheritedMockupsContainer'),
+        aliasEditInheritedMockupsContainer: document.getElementById('aliasEditInheritedMockupsContainer'), // Corrected ID
         inheritedMockupsList: document.getElementById('inheritedMockupsList'),
 
         manageFieldsModal: document.getElementById('manageFieldsModal'),
@@ -646,12 +649,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         saveFieldsConfigBtn: document.getElementById('saveFieldsConfigBtn')
     };
 
-    // Vérification post-initialisation des éléments pour le débogage (plus détaillée)
+    // VERIFICATION POST-INITIALISATION: Remove the fatal error check for now,
+    // as it stops execution and we want to see other issues.
+    // However, keeping the console.error for visibility.
     for (const key in elements) {
         if (elements[key] === null) {
-            console.error(`[MainRenderer] FATAL ERROR: L'élément DOM pour la clé '${key}' est NULL APRÈS DOMContentLoaded. Vérifiez l'ID dans index.html.`);
-            // Si cette erreur s'affiche, le script risque de s'arrêter ou d'avoir des problèmes graves.
-            // On pourrait ajouter un `return;` ici si c'est absolument critique pour arrêter l'initialisation.
+            console.error(`[MainRenderer] CRITICAL: DOM element for key '${key}' is NULL after DOMContentLoaded. Check ID in index.html.`);
         }
     }
 
@@ -741,7 +744,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             closeSaveTemplateModal();
         }
         if (elements.aliasEditModal && event.target === elements.aliasEditModal) {
-            closeAliasEditModal();
+            // Added check for the form dirty state similar to product modal
+            if (elements.aliasEditForm && isAliasEditFormDirty()) { 
+                const confirmResult = confirm('Unsaved changes will be lost. Do you want to save before closing?');
+                if (confirmResult) {
+                    handleAliasEditFormSubmit(new Event('submit')); 
+                } else {
+                    closeAliasEditModal();
+                }
+            } else {
+                closeAliasEditModal();
+            }
         }
         if (elements.manageFieldsModal && event.target === elements.manageFieldsModal) {
             elements.manageFieldsModal.style.display = 'none';
@@ -750,15 +763,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Alias Edit Modal close button listener
     if (elements.closeAliasEditModalBtn) elements.closeAliasEditModalBtn.addEventListener('click', closeAliasEditModal);
-    if (elements.addAliasEditMockupPathBtn && elements.aliasEditMockupPathsContainer) { // Vérifier les deux éléments
-        elements.addAliasEditMockupPathBtn.addEventListener('click', () => addAliasEditMockupPathInputForAliasEdit(elements.aliasEditMockupPathsContainer, elements.addAliasEditMockupPathBtn));
+    if (elements.addAliasEditMockupPathBtn && elements.aliasEditMockupPathsContainer) { 
+        elements.addAliasEditMockupPathBtn.addEventListener('click', () => addMockupPathInputForAliasEdit(elements.aliasEditMockupPathsContainer, elements.addAliasEditMockupPathBtn));
+    }
+
+    // Add submit listener for aliasEditForm
+    if (elements.aliasEditForm) {
+        elements.aliasEditForm.addEventListener('submit', handleAliasEditFormSubmit); 
+        // Also need a way to track if this form is dirty
+        elements.aliasEditForm.addEventListener('input', () => { setAliasEditFormDirty(true); }); 
+        elements.aliasEditForm.addEventListener('change', () => { setAliasEditFormDirty(true); }); 
     }
 
 
     // --- Initial Application Load ---
     console.log("[MainRenderer] DOMContentLoaded: Initializing app.");
     savedProductTemplates = await loadProductTemplates(); 
-    renderAllContent(); // C'est ici que le rendu initial se fait
+    renderAllContent(); 
     console.log("[MainRenderer] App initialized. Final currentConfig:", JSON.parse(JSON.stringify(currentConfig)), " Final savedProductTemplates:", JSON.parse(JSON.stringify(savedProductTemplates)), " Final currentKnownFieldsConfig:", JSON.parse(JSON.stringify(currentKnownFieldsConfig)));
 
 
@@ -788,4 +809,144 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(`[MainRenderer] Caught 'delete-product' event for product: ${event.detail.productKey}`);
         deleteProduct(event.detail.productKey);
     });
+
+    // Custom event to handle CSV import for product data (not just variants)
+    document.addEventListener('process-full-csv-import', (event) => {
+        handleFullCsvImport(event.detail.data);
+    });
+
+    document.addEventListener('known-fields-config-updated', (event) => {
+        currentKnownFieldsConfig = event.detail.config;
+        updateAllModuleData(currentConfig, currentSelectedProductKey, savedProductTemplates, currentKnownFieldsConfig);
+        // If the modal was opened for promotion, reopen the product modal
+        if (event.detail.modalState && event.detail.modalState.isOpen && event.detail.modalState.productKey) {
+            openEditProductModal(event.detail.modalState.productKey);
+        } else if (event.detail.modalState && event.detail.modalState.isOpen && event.detail.modalState.mode === 'add') {
+             openAddProductModal();
+        }
+    });
+
+    // Handle initial load of templates (if any)
+    if (Object.keys(savedProductTemplates).length === 0) {
+        console.log("[MainRenderer] No templates loaded initially. Attempting to load from disk.");
+        savedProductTemplates = await loadProductTemplates();
+        renderSavedProductTemplates(savedProductTemplates);
+    }
 });
+
+// Alias edit form dirty state and submit handler (new functions)
+let isAliasEditFormDirtyState = false;
+
+function isAliasEditFormDirty() {
+    return isAliasEditFormDirtyState;
+}
+
+function setAliasEditFormDirty(isDirty) {
+    isAliasEditFormDirtyState = isDirty;
+}
+
+async function handleAliasEditFormSubmit(event) {
+    event.preventDefault();
+    console.log("[MainRenderer] Alias edit form submitted.");
+
+    const originalKey = elements.aliasEditOriginalName.value;
+    const newKey = elements.aliasEditName.textContent.trim(); // Alias name is displayed, not directly editable here
+
+    // Collect data from alias edit form
+    const aliasData = {
+        type: 'alias', // Ensure type remains alias
+        aspect: elements.aliasEditAspect.value.trim(),
+        densite: elements.aliasEditDensite.value.trim(),
+        dimentions: elements.aliasEditDimentions.value.trim(),
+        sizeImpression: elements.aliasEditSizeImpression.value.trim(),
+        mockups: getMockupPathsFromAliasEditForm(elements.aliasEditMockupPathsContainer)
+    };
+
+    // Basic validation (e.g., alias key shouldn't be empty, though it's display-only here)
+    if (!originalKey) {
+        alert('Error: Alias name is missing.');
+        return;
+    }
+
+    // Update the currentConfig
+    currentConfig[originalKey] = cleanObject(aliasData); // Update using original key
+
+    // Re-render everything to reflect changes
+    document.dispatchEvent(new CustomEvent('product-data-updated', { detail: { config: currentConfig, updatedKey: originalKey } }));
+
+    setAliasEditFormDirty(false);
+    closeAliasEditModal();
+    alert(`Alias "${originalKey}" updated successfully!`);
+}
+
+
+// New event handler for promoting field to known
+document.addEventListener('promote-field-to-known', (event) => {
+    const { fieldKey, fieldValue, modalState } = event.detail;
+    console.log(`[MainRenderer] Caught 'promote-field-to-known' event for key: ${fieldKey}, value: ${fieldValue}`);
+    
+    // Pass the original product modal state to the field management modal
+    openManageFieldsModalForPromotion({
+        key: fieldKey,
+        label: fieldKey.split('.').pop().replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()), // Basic label suggestion
+        type: typeof fieldValue === 'number' ? 'number' : 'text', // Infer type
+        required: false,
+        originalModalState: modalState // Pass the state back
+    });
+});
+
+
+async function handleFullCsvImport(csvData) {
+    console.log("[MainRenderer] Processing full CSV import for product configuration.");
+    if (!csvData || csvData.length === 0) {
+        alert("No valid data found in the CSV file for products.");
+        return;
+    }
+
+    const newConfigFromCsv = {};
+    let hasErrors = false;
+
+    for (const record of csvData) {
+        const productKey = record.name;
+        if (!productKey || productKey.trim() === '') {
+            console.error("[MainRenderer] CSV Import Error: Skipping record due to empty 'name' field.", record);
+            hasErrors = true;
+            continue;
+        }
+
+        if (newConfigFromCsv.hasOwnProperty(productKey)) {
+            console.warn(`[MainRenderer] CSV Import Warning: Duplicate product key "${productKey}" found. Skipping later occurrences.`);
+            hasErrors = true;
+            continue;
+        }
+
+        const reconstructedProduct = reconstructProductFromFlatCsvRecord(record, currentKnownFieldsConfig);
+        newConfigFromCsv[productKey] = reconstructedProduct;
+    }
+
+    if (Object.keys(newConfigFromCsv).length > 0) {
+        // Option to merge or replace
+        const confirmMerge = confirm(
+            `Successfully processed ${Object.keys(newConfigFromCsv).length} products from CSV.\n` +
+            `Do you want to merge this data with the current configuration (OK) or replace it (Cancel)?\n\n` +
+            `OK: Merge (new products added, existing ones updated)\n` +
+            `Cancel: Replace (current configuration will be entirely replaced by CSV data)`
+        );
+
+        if (confirmMerge) {
+            Object.assign(currentConfig, newConfigFromCsv); // Merge
+            alert(`CSV data merged with current configuration.`);
+        } else {
+            currentConfig = newConfigFromCsv; // Replace
+            alert(`Current configuration replaced by CSV data.`);
+        }
+        
+        document.dispatchEvent(new CustomEvent('product-data-updated', { detail: { config: currentConfig, updatedKey: null } }));
+    } else {
+        alert("No valid products could be imported from the CSV file.");
+    }
+
+    if (hasErrors) {
+        alert("Some issues were encountered during CSV import (e.g., empty names, duplicates). Check console for details.");
+    }
+}

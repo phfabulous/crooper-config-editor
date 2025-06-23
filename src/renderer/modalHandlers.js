@@ -116,7 +116,7 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
     populateKnownFieldsDatalist();
 
     // NOUVEAU: Gérer l'événement d'importation CSV pour les variantes
-    window.addEventListener('populate-variants-from-csv', (event) => {
+    document.addEventListener('populate-variants-from-csv', (event) => { // Changed from window.addEventListener to document.addEventListener
         handleCsvImportForVariants(event.detail.data);
     });
 };
@@ -152,14 +152,14 @@ function populateKnownFieldsDatalist() {
         const allKnownFieldKeys = new Set();
         for (const typeKey in currentKnownFieldsConfig) {
             if (currentKnownFieldsConfig[typeKey] && currentKnownFieldsConfig[typeKey].fields) {
-                for (const fieldKey in currentKnownFieldsConfig[typeKey].fields) { // Correction de kfKey en fieldKey
+                for (const fieldKey in currentKnownFieldsConfig[typeKey].fields) {
                     allKnownFieldKeys.add(fieldKey);
                 }
             }
         }
         for (const typeKey in KNOWN_FIELDS_CONFIG) {
             if (KNOWN_FIELDS_CONFIG[typeKey] && KNOWN_FIELDS_CONFIG[typeKey].fields) {
-                for (const fieldKey in KNOWN_FIELDS_CONFIG[typeKey].fields) { // Correction de kfKey en fieldKey
+                for (const fieldKey in KNOWN_FIELDS_CONFIG[typeKey].fields) {
                     allKnownFieldKeys.add(fieldKey);
                 }
             }
@@ -178,9 +178,11 @@ function populateKnownFieldsDatalist() {
 
 
 function clearModalErrors() {
-    if (elements.productNameError) hideError(elements.productNameError);
-    if (elements.productTypeError) hideError(elements.productTypeError);
-    if (elements.productPrefixError) hideError(elements.productPrefixError);
+    // These specific error elements are no longer directly used for dynamic fields.
+    // Errors are now placed next to their respective dynamic input fields.
+    // if (elements.productNameError) hideError(elements.productNameError);
+    // if (elements.productTypeError) hideError(elements.productTypeError);
+    // if (elements.productPrefixError) hideError(elements.productPrefixError);
     if (elements.productAliasError) hideError(elements.productAliasError);
 
     if (elements.dynamicFormFields) {
@@ -194,11 +196,15 @@ function clearModalErrors() {
 function toggleProductTypeFields(selectedType) {
     console.log("[ModalHandlers] toggleProductTypeFields called. Selected type:", selectedType);
 
-    if (elements.aliasFields) elements.aliasFields.classList.add('hidden');
-    if (elements.simpleParentFields) elements.simpleParentFields.classList.add('hidden');
+    // Dynamic fields determined by currentKnownFieldsConfig, so these are not directly needed anymore
+    // if (elements.aliasFields) elements.aliasFields.classList.add('hidden');
+    // if (elements.simpleParentFields) elements.simpleParentFields.classList.add('hidden');
+    
     if (elements.parentFields) elements.parentFields.classList.add('hidden');
     if (elements.aliasSelectionGroup) elements.aliasSelectionGroup.classList.add('hidden');
 
+    // Only hide alias/dropdown if *not* in edit mode OR if explicitly changing to alias type
+    // This allows existing products to keep their alias selection visible if already set
     if (!isEditMode || selectedType === 'alias') {
         if (elements.hasAliasCheckbox) elements.hasAliasCheckbox.checked = false;
         if (elements.aliasDropdownContainer) elements.aliasDropdownContainer.classList.add('hidden');
@@ -206,10 +212,12 @@ function toggleProductTypeFields(selectedType) {
     }
 
     if (selectedType === 'alias') {
-        if (elements.aliasFields) elements.aliasFields.classList.remove('hidden');
+        // dynamicFormFields will handle alias fields based on known_fields_config
+        // if (elements.aliasFields) elements.aliasFields.classList.remove('hidden');
         if (elements.aliasSelectionGroup) elements.aliasSelectionGroup.classList.add('hidden');
     } else if (selectedType === 'simple' || selectedType === 'parent') {
-        if (elements.simpleParentFields) elements.simpleParentFields.classList.remove('hidden');
+        // dynamicFormFields will handle simple/parent fields based on known_fields_config
+        // if (elements.simpleParentFields) elements.simpleParentFields.classList.remove('hidden');
         if (elements.aliasSelectionGroup) elements.aliasSelectionGroup.classList.remove('hidden');
         if (elements.parentFields) {
             if (selectedType === 'parent') {
@@ -278,7 +286,15 @@ function updateMockupPathVisibilityAndContent() {
                 if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Profil d'aliasing sélectionné invalide.`;
             }
         } else {
-            if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Définir les mockups pour ce produit (ils seront stockés dans un profil d'aliasing si vous en sélectionnez un).`;
+            // If no alias is selected, and it's a simple/parent product, use its own mockups if they exist
+            if (productBeingEdited && productBeingEdited.mockups && productBeingEdited.mockups.length > 0) {
+                mockupsToDisplay = productBeingEdited.mockups;
+                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Définis ici pour ce produit (ils ne seront pas liés à un profil d'aliasing).`;
+                if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'self';
+            } else {
+                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Définir les mockups pour ce produit (ils seront stockés dans un profil d'aliasing si vous en sélectionnez un).`;
+                if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'none';
+            }
         }
         if (elements.mockupPathsContainer && elements.addMockupPathBtn) populateMockupPaths(elements.mockupPathsContainer, elements.addMockupPathBtn, mockupsToDisplay);
     } else {
@@ -761,6 +777,7 @@ function renderDynamicFormFields(productData = {}) {
 
     // Mettre à jour les références des éléments DOM après leur (re)création dynamique.
     // C'est crucial pour que les gestionnaires d'événements et le reste du code y accèdent correctement.
+    // NOTE: Ces sélecteurs sont corrects si les data-key correspondent aux IDs ou noms de champ.
     elements.productNameInput = elements.dynamicFormFields.querySelector('[data-key="name"]');
     elements.productTypeSelect = elements.dynamicFormFields.querySelector('[data-key="type"]');
     elements.productPrefixInput = elements.dynamicFormFields.querySelector('[data-key="prefix"]');
@@ -793,13 +810,13 @@ function renderCustomFields(productData = {}) {
     for (const typeKey in currentKnownFieldsConfig) {
         if (currentKnownFieldsConfig[typeKey] && currentKnownFieldsConfig[typeKey].fields) {
             for (const fieldKey in currentKnownFieldsConfig[typeKey].fields) {
-                allKnownFieldKeys.add(fieldKey); // Correction de kfKey en fieldKey
+                allKnownFieldKeys.add(fieldKey); 
             }
         }
     }
     for (const typeKey in KNOWN_FIELDS_CONFIG) {
         if (KNOWN_FIELDS_CONFIG[typeKey] && KNOWN_FIELDS_CONFIG[typeKey].fields) {
-            for (const fieldKey in KNOWN_FIELDS_CONFIG[typeKey].fields) { // Correction de kfKey en fieldKey
+            for (const fieldKey in KNOWN_FIELDS_CONFIG[typeKey].fields) { 
                 allKnownFieldKeys.add(fieldKey);
             }
         }
@@ -1093,23 +1110,17 @@ async function handleProductFormSubmit(event) {
     }
 
 
-    const productNameErrorMessage = elements.productNameError;
+    const productNameErrorMessage = elements.dynamicFormFields.querySelector('[data-key="nameError"]'); // Use dynamic error element
     if (!newKey) {
-        const dynamicNameError = elements.dynamicFormFields.querySelector('[data-key="nameError"]');
-        if (dynamicNameError) showError(dynamicNameError, 'Product Key / Name is required.');
-        else if (productNameErrorMessage) showError(productNameErrorMessage, 'Product Key / Name is required.');
+        if (productNameErrorMessage) showError(productNameErrorMessage, 'Product Key / Name is required.');
         isValid = false;
     } else if (!isEditMode || (isEditMode && newKey !== originalKey)) {
         if (currentConfig.hasOwnProperty(newKey)) {
-            const dynamicNameError = elements.dynamicFormFields.querySelector('[data-key="nameError"]');
-            if (dynamicNameError) showError(dynamicNameError, 'A product with this name already exists.');
-            else if (productNameErrorMessage) showError(productNameErrorMessage, 'A product with this name already exists.');
+            if (productNameErrorMessage) showError(productNameErrorMessage, 'A product with this name already exists.');
             isValid = false;
         }
     } else {
-        const dynamicNameError = elements.dynamicFormFields.querySelector('[data-key="nameError"]');
-        if (dynamicNameError) hideError(dynamicNameError);
-        else if (productNameErrorMessage) hideError(productNameErrorMessage);
+        if (productNameErrorMessage) hideError(productNameErrorMessage);
     }
 
     const productAliasErrorMessage = elements.productAliasError;
@@ -1129,6 +1140,7 @@ async function handleProductFormSubmit(event) {
     if (type === 'alias') {
         productData.mockups = getMockupPathsFromForm(elements.mockupPathsContainer);
     } else if (type === 'simple' || type === 'parent') {
+        // Only set/update alias if hasAliasCheckbox is checked AND a value is selected
         if (elements.hasAliasCheckbox.checked && elements.productAliasSelect.value) {
             const selectedAliasKey = elements.productAliasSelect.value;
             productData.alias = selectedAliasKey;
@@ -1136,15 +1148,23 @@ async function handleProductFormSubmit(event) {
 
             const aliasObject = currentConfig[selectedAliasKey];
             if (aliasObject && aliasObject.type === 'alias') {
+                // Mockups for a product with an alias should be saved directly ON THE ALIAS, not on the product itself.
+                // The current logic of getMockupPathsFromForm() gets the mockups displayed in the modal.
+                // The source of truth for these mockups when an alias is selected is the alias itself.
+                // So, update the alias object's mockups.
                 aliasObject.mockups = getMockupPathsFromForm(elements.mockupPathsContainer);
                 currentConfig[selectedAliasKey] = cleanObject(aliasObject);
                 console.log(`[ModalHandlers] Mockups saved to alias "${selectedAliasKey}":`, aliasObject.mockups);
             } else {
                  console.warn(`[ModalHandlers] Selected alias "${selectedAliasKey}" not found or not an alias type. Mockups not saved to alias.`);
             }
+            // Ensure product's own mockups are removed if an alias is selected
+            delete productData.mockups;
         } else {
-            delete productData.alias;
-            console.log(`[ModalHandlers] Product ${newKey} alias explicitly set to undefined (will be removed).`);
+            // If alias checkbox is not checked, or no alias is selected, product handles its own mockups
+            delete productData.alias; // Ensure alias property is removed if not linked
+            productData.mockups = getMockupPathsFromForm(elements.mockupPathsContainer); // Save product's own mockups
+            console.log(`[ModalHandlers] Product ${newKey} has no alias. Mockups saved directly to product:`, productData.mockups);
         }
     }
 

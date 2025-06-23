@@ -174,6 +174,7 @@ async function handleSaveTemplateFormSubmit(event) {
         alert(`Failed to save template "${friendlyName}". Check console for errors.`);
     }
     
+    // Dispatch event to mainRenderer to trigger a full re-render of content
     document.dispatchEvent(new CustomEvent('templates-updated', { detail: { templates: savedProductTemplates } }));
 }
 
@@ -200,6 +201,7 @@ export function addProductFromTemplate(templateKey) {
 
     currentConfig[newProductKey] = newProduct;
     console.log(`[TemplateManagement] New product added to currentConfig: ${newProductKey}`, JSON.parse(JSON.stringify(newProduct)));
+    // Dispatch event to mainRenderer to trigger a full re-render of content
     document.dispatchEvent(new CustomEvent('product-data-updated', { detail: { config: currentConfig, updatedKey: newProductKey } }));
     alert(`Template "${templateProduct.friendlyName || templateKey}" added to current configuration as "${newProductKey}".`);
 }
@@ -213,6 +215,7 @@ export function deleteProductTemplate(templateKey) {
         saveProductTemplatesToDisk();
         alert(`Product template "${templateKey}" deleted.`);
 
+        // Dispatch event to mainRenderer to trigger a full re-render of content
         document.dispatchEvent(new CustomEvent('templates-updated', { detail: { templates: savedProductTemplates } }));
     }
 }

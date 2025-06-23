@@ -58,6 +58,7 @@ export const initializeProductElements = (domElements, config, selectedKey, know
                 });
 
                 currentConfig = newOrderedConfig;
+                // Dispatch event to mainRenderer to trigger a full re-render of content
                 document.dispatchEvent(new CustomEvent('product-data-updated', { detail: { config: currentConfig, updatedKey: droppedKey } }));
             }
         };
@@ -70,9 +71,8 @@ export const updateProductData = (config, selectedKey, knownFieldsConfig) => { /
     currentConfig = config;
     currentSelectedProductKey = selectedKey;
     currentKnownFieldsConfig = knownFieldsConfig; // Mettre à jour la config des champs connus
-    // Rappeler renderProducts ici pour rafraîchir après une mise à jour des données
-    // Cela est déjà fait via renderAllContent() -> updateAllModuleData() -> updateProductData()
-    // et renderAllContent() appelle aussi renderProducts() directement.
+    // Call renderProducts here to refresh the display based on updated data
+    renderProducts(currentConfig, elements.productContainer, false);
 };
 
 
@@ -94,7 +94,8 @@ export function renderProducts(configToRender, container, isTemplateView = false
     const productNames = Object.keys(nonAliasProducts);
     const duplicateNames = isTemplateView ? [] : findDuplicates(productNames);
 
-    const messageElement = isTemplateView ? elements.noSavedTemplatesMessage : elements.noProductMessage;
+    // Ensure elements.noProductMessage and elements.noSavedTemplatesMessage are correctly referenced
+    const messageElement = isTemplateView ? (elements.noSavedTemplatesMessage || document.getElementById('noSavedTemplatesMessage')) : (elements.noProductMessage || document.getElementById('noProductMessage'));
 
     if (productNames.length === 0) {
         if (messageElement) messageElement.style.display = 'block';

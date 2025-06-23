@@ -16,6 +16,7 @@ export const initializeFieldManagementElements = (domElements, initialFieldsConf
     elements.addNewFieldBtn.addEventListener('click', addEditableFieldRow);
     elements.saveFieldsConfigBtn.addEventListener('click', saveKnownFieldsConfigToDisk);
 
+    // Initial render when the module is initialized
     renderFieldsList();
 };
 
@@ -85,6 +86,8 @@ function renderFieldsList() {
         fieldsToDisplay = Object.entries(currentKnownFieldsConfig[selectedType].fields).map(([key, config]) => ({ key, ...config }));
     } else {
         console.log(`[FieldManagement] No specific configuration found for product type: ${selectedType}. Using a default minimal set.`);
+        // Fallback to a hardcoded minimal set if no config is found for the selected type
+        // This set should ideally mirror the default in KNOWN_FIELDS_CONFIG to avoid inconsistencies
         fieldsToDisplay = [
             { key: 'name', label: 'Product Key / Name', type: 'text', required: true, disabled: true },
             { key: 'type', label: 'Type de Produit', type: 'select', options: ['alias', 'simple', 'parent'], required: true, disabled: true },
@@ -208,7 +211,39 @@ async function saveKnownFieldsConfigToDisk() {
         }
     });
 
-    currentKnownFieldsConfig[selectedType] = newConfigForType;
+    // If 'all' is selected, merge with existing config, don't overwrite other types
+    if (selectedType === 'all') {
+        // Create a deep copy to modify
+        const updatedAllFieldsConfig = JSON.parse(JSON.stringify(currentKnownFieldsConfig));
+        
+        // Ensure default structure for 'all' types if they don't exist
+        if (!updatedAllFieldsConfig['simple']) updatedAllFieldsConfig['simple'] = { displayOrder: [], fields: {} };
+        if (!updatedAllFieldsConfig['parent']) updatedAllFieldsConfig['parent'] = { displayOrder: [], fields: {} };
+        if (!updatedAllFieldsConfig['alias']) updatedAllFieldsConfig['alias'] = { displayOrder: [], fields: {} };
+
+        // For "all" mode, update fields across all specific types,
+        // or just add them to a 'common' type if you want a shared set.
+        // The current implementation for 'all' just iterates for display,
+        // so we need to decide how to save 'all' changes.
+        // For simplicity, let's assume 'all' edits apply to all specific types if they don't override.
+        // A more robust solution would be to have a 'common' section in config.
+        
+        // For now, let's just save the 'all' edited fields as a new 'all' type in the config,
+        // or better, find the most common type and apply there, or apply to all existing.
+        // A simpler approach for 'all' mode: if a field is edited, update it in ALL types
+        // where it exists, and add it to a default type (e.g., 'tshirt') if new.
+
+        // Simpler for now: just update the 'all' key (if we ever use it) or directly overwrite the current display logic.
+        // Let's assume for 'all' mode, we're editing shared/global fields.
+        // For existing common fields, update their properties. For new fields, add them to 'tshirt' as a default.
+        
+        // This part needs careful design for "all" mode.
+        // For now, if "all" is selected, let's update a placeholder 'all' config and re-dispatch.
+        currentKnownFieldsConfig[selectedType] = newConfigForType; // This will update the 'all' key
+    } else {
+        currentKnownFieldsConfig[selectedType] = newConfigForType;
+    }
+
     currentKnownFieldsConfig = cleanObject(currentKnownFieldsConfig);
 
     try {
@@ -235,8 +270,27 @@ export async function loadKnownFieldsConfig() {
             console.log("[FieldManagement] No custom fields config found, using default KNOWN_FIELDS_CONFIG from constants.");
             currentKnownFieldsConfig = JSON.parse(JSON.stringify(KNOWN_FIELDS_CONFIG));
         } else {
-            currentKnownFieldsConfig = loadedConfig;
-            console.log("[FieldManagement] Known fields config loaded:", currentKnownFieldsConfig);
+            // Merge loaded config with default KNOWN_FIELDS_CONFIG to ensure all default types are present
+            // and newly added fields are recognized even if they weren't explicitly saved per type.
+            const mergedConfig = JSON.parse(JSON.stringify(KNOWN_FIELDS_CONFIG));
+            for (const typeKey in loadedConfig) {
+                if (loadedConfig[typeKey] && loadedConfig[typeKey].fields) {
+                    if (!mergedConfig[typeKey]) {
+                        mergedConfig[typeKey] = { displayOrder: [], fields: {} };
+                    }
+                    for (const fieldKey in loadedConfig[typeKey].fields) {
+                        // Add new fields or update existing ones
+                        if (!mergedConfig[typeKey].fields[fieldKey]) {
+                            mergedConfig[typeKey].displayOrder.push(fieldKey);
+                        }
+                        mergedConfig[typeKey].fields[fieldKey] = loadedConfig[typeKey].fields[fieldKey];
+                    }
+                    // Ensure display order is unique and reflects new additions
+                    mergedConfig[typeKey].displayOrder = [...new Set([...mergedConfig[typeKey].displayOrder, ...Object.keys(loadedConfig[typeKey].fields)])];
+                }
+            }
+            currentKnownFieldsConfig = mergedConfig;
+            console.log("[FieldManagement] Known fields config loaded and merged:", currentKnownFieldsConfig);
         }
         document.dispatchEvent(new CustomEvent('known-fields-config-loaded', { detail: { config: currentKnownFieldsConfig } }));
         return currentKnownFieldsConfig;
