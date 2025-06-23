@@ -370,6 +370,13 @@ function getMockupPathsFromForm(containerElement) {
     return mockups;
 }
 
+function handleProductConfigChange() {
+    const newProductKey = elements.productProductInput ? elements.productProductInput.value : '';
+    const newType = elements.productTypeSelect ? elements.productTypeSelect.value : 'simple';
+    renderDynamicFormFields({ product: newProductKey, type: newType });
+    renderCustomFields({});
+}
+
 function generateVariants() {
     if (!elements.variant1TypeInput || !elements.variant1ValuesInput || !elements.variant2TypeInput || !elements.variant2ValuesInput) {
         console.warn("[ModalHandlers] Missing variant generation input elements.");
@@ -526,9 +533,21 @@ export function openAddProductModal() {
     const productTypeSelectDynamic = elements.dynamicFormFields.querySelector('[data-key="type"]');
     if (productTypeSelectDynamic) {
         toggleProductTypeFields(productTypeSelectDynamic.value);
-        productTypeSelectDynamic.addEventListener('change', (e) => toggleProductTypeFields(e.target.value));
     } else {
         toggleProductTypeFields('simple');
+    }
+    const productInputDynamic = elements.dynamicFormFields.querySelector('[data-key="product"]');
+    if (productInputDynamic) {
+        productInputDynamic.addEventListener('change', (e) => {
+            const currentType = productTypeSelectDynamic ? productTypeSelectDynamic.value : 'simple';
+            renderDynamicFormFields({ product: e.target.value, type: currentType });
+            renderCustomFields({});
+            const newTypeSelect = elements.dynamicFormFields.querySelector('[data-key="type"]');
+            if (newTypeSelect) {
+                toggleProductTypeFields(newTypeSelect.value);
+                newTypeSelect.addEventListener('change', (ev) => toggleProductTypeFields(ev.target.value));
+            }
+        });
     }
     elements.productModal.style.display = 'block';
     isFormDirty = false;
@@ -571,9 +590,20 @@ export function openEditProductModal(productKey) {
     const productTypeSelectDynamic = elements.dynamicFormFields.querySelector('[data-key="type"]');
     if (productTypeSelectDynamic) {
         toggleProductTypeFields(productTypeSelectDynamic.value);
-        productTypeSelectDynamic.addEventListener('change', (e) => toggleProductTypeFields(e.target.value));
     }
-
+    const productInputDynamic = elements.dynamicFormFields.querySelector('[data-key="product"]');
+    if (productInputDynamic) {
+        productInputDynamic.addEventListener('change', (e) => {
+            const currentType = productTypeSelectDynamic ? productTypeSelectDynamic.value : 'simple';
+            renderDynamicFormFields({ product: e.target.value, type: currentType });
+            renderCustomFields({});
+            const newTypeSelect = elements.dynamicFormFields.querySelector('[data-key="type"]');
+            if (newTypeSelect) {
+                toggleProductTypeFields(newTypeSelect.value);
+                newTypeSelect.addEventListener('change', (ev) => toggleProductTypeFields(ev.target.value));
+            }
+        });
+    }
 
     populateAliasDropdown();
     console.log(`[ModalHandlers] Product ${productKey} alias property in config:`, product.alias);
@@ -795,6 +825,14 @@ function renderDynamicFormFields(productData = {}) {
     elements.aliasDimentionsInput = elements.dynamicFormFields.querySelector('[data-key="dimentions"]');
     elements.aliasSizeImpressionInput = elements.dynamicFormFields.querySelector('[data-key="sizeImpression"]');
 
+    
+    if (elements.productTypeSelect) {
+        toggleProductTypeFields(elements.productTypeSelect.value);
+        elements.productTypeSelect.addEventListener('change', () => handleProductConfigChange());
+    }
+    if (elements.productProductInput) {
+        elements.productProductInput.addEventListener('change', () => handleProductConfigChange());
+    }
 
     console.log("[ModalHandlers] Dynamic form fields rendered.");
 }
