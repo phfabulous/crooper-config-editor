@@ -473,6 +473,9 @@ h1 {
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+#productModal .modal-content {
+    font-size: 0.9em;
+}
 
 /* Form Styles */
 .form-group {
@@ -514,11 +517,11 @@ h1 {
 button[type="submit"] {
     background-color: #28a745;
     color: white;
-    padding: 12px 25px;
+    padding: 8px 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1.05em;
+    font-size: 0.9em;
     transition: background-color 0.2s ease-in-out;
 }
 
@@ -526,7 +529,7 @@ button[type="submit"] {
 .modal-actions .secondary-action-btn {
     background-color: #6c757d;
     color: white;
-    padding: 12px 25px;
+    padding: 8px 16px;
     border-radius: 6px;
 }
 .modal-actions .secondary-action-btn:hover {
@@ -596,11 +599,23 @@ button[type="submit"] {
 }
 
 /* Styles pour les champs dynamiques dans la modale d'édition/ajout de produit */
+#dynamicFormFields .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+#dynamicFormFields .form-group label {
+    flex: 0 0 35%;
+    margin-bottom: 0;
+}
 #dynamicFormFields .form-group input[type="text"],
 #dynamicFormFields .form-group input[type="number"],
 #dynamicFormFields .form-group select,
 #dynamicFormFields .form-group textarea {
-    width: calc(100% - 24px);
+    flex: 1;
+    width: auto;
+    padding: 6px 8px;
     box-sizing: border-box;
 }
 
