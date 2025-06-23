@@ -7,6 +7,7 @@ import { renderProducts, initializeProductElements, updateProductData } from './
 import { loadProductTemplates, openSaveTemplateModal, closeSaveTemplateModal, addProductFromTemplate, deleteProductTemplate, renderSavedProductTemplates, saveProductTemplatesToDisk, updateTemplateData, initializeTemplateElements } from './templateManagement.js';
 import { initializeFieldManagementElements, loadKnownFieldsConfig, updateFieldManagementData, openManageFieldsModal, openManageFieldsModalForPromotion } from './fieldManagement.js';
 import { cleanObject } from './utils.js';
+import { initializeUnsavedDialogElements, openUnsavedDialog } from './unsavedDialog.js';
 
 // Global state variables
 let currentConfig = {};
@@ -646,7 +647,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         productTypeForFields: document.getElementById('productTypeForFields'),
         addNewFieldBtn: document.getElementById('addNewFieldBtn'),
         fieldsListContainer: document.getElementById('fieldsListContainer'),
-        saveFieldsConfigBtn: document.getElementById('saveFieldsConfigBtn')
+        saveFieldsConfigBtn: document.getElementById('saveFieldsConfigBtn'),
+
+        // Unsaved changes confirmation modal
+        unsavedChangesModal: document.getElementById('unsavedChangesModal'),
+        unsavedSaveBtn: document.getElementById('unsavedSaveBtn'),
+        unsavedDiscardBtn: document.getElementById('unsavedDiscardBtn'),
+        unsavedCancelBtn: document.getElementById('unsavedCancelBtn')
     };
 
     // VERIFICATION POST-INITIALISATION: Remove the fatal error check for now,
@@ -666,6 +673,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeModalElements(elements, currentConfig, currentSelectedProductKey, currentKnownFieldsConfig);
     initializeTemplateElements(elements, currentConfig, savedProductTemplates);
     initializeFieldManagementElements(elements, currentKnownFieldsConfig);
+    initializeUnsavedDialogElements(elements);
 
     // --- Gestionnaire pour le clic sur le bouton menu principal ---
     if (elements.mainMenuBtn && elements.mainMenuDropdown && elements.appHeader) {
@@ -736,20 +744,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // Gérer le clic en dehors de la modale produit pour déclencher la confirmation
-    window.addEventListener('click', (event) => {
+    window.addEventListener('click', async (event) => {
         if (elements.productModal && event.target === elements.productModal) {
-            handleCloseModalRequest();
+            await handleCloseModalRequest();
         }
         if (elements.saveTemplateModal && event.target === elements.saveTemplateModal) {
             closeSaveTemplateModal();
         }
         if (elements.aliasEditModal && event.target === elements.aliasEditModal) {
-            // Added check for the form dirty state similar to product modal
-            if (elements.aliasEditForm && isAliasEditFormDirty()) { 
-                const confirmResult = confirm('Unsaved changes will be lost. Do you want to save before closing?');
-                if (confirmResult) {
-                    handleAliasEditFormSubmit(new Event('submit')); 
-                } else {
+            if (elements.aliasEditForm && isAliasEditFormDirty()) {
+                const choice = await openUnsavedDialog();
+                if (choice === 'save') {
+                    await handleAliasEditFormSubmit(new Event('submit'));
+                } else if (choice === 'discard') {
                     closeAliasEditModal();
                 }
             } else {

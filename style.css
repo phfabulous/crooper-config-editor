@@ -525,6 +525,14 @@ button[type="submit"] {
     transition: background-color 0.2s ease-in-out;
 }
 
+/* Container for actions inside confirmation modal */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
 /* Secondary action buttons in modals */
 .modal-actions .secondary-action-btn {
     background-color: #6c757d;

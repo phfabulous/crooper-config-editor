@@ -1,6 +1,7 @@
 // src/renderer/modalHandlers.js
 import { cleanObject, showError, hideError } from './utils.js';
 import { PREDEFINED_VALUES, KNOWN_FIELDS_CONFIG, FIELD_CONDITIONS, CROOPER_VARIABLES } from './constants.js';
+import { openUnsavedDialog } from './unsavedDialog.js';
 
 // DOM elements (passed during initialization)
 let elements;
@@ -478,16 +479,16 @@ function getVariantsFromDisplay() {
 }
 
 // Fonction pour gérer la demande de fermeture de la modale
-export function handleCloseModalRequest() {
+export async function handleCloseModalRequest() {
     if (!elements.productModal) {
         console.warn("[ModalHandlers] Product modal element not found for closing request.");
         return;
     }
     if (isFormDirty) {
-        const confirmResult = confirm('Des modifications non sauvegardées seront perdues. Voulez-vous sauvegarder avant de fermer ?\n\nOK: Sauvegarder\nAnnuler: Ne pas sauvegarder');
-        if (confirmResult) {
+        const choice = await openUnsavedDialog();
+        if (choice === 'save') {
             handleProductFormSubmit(new Event('submit'));
-        } else {
+        } else if (choice === 'discard') {
             closeProductModal();
         }
     } else {
