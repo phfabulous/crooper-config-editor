@@ -810,6 +810,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         deleteProduct(event.detail.productKey);
     });
 
+        // Handle request to open the 'Save As Template' modal from product editor
+        document.addEventListener('open-save-template-naming-modal', (event) => {
+            console.log(`[MainRenderer] Caught 'open-save-template-naming-modal' for product: ${event.detail.productKeyToSave}`);
+            openSaveTemplateModal(event.detail.productKeyToSave);
+        });
+    
     // Custom event to handle CSV import for product data (not just variants)
     document.addEventListener('process-full-csv-import', (event) => {
         handleFullCsvImport(event.detail.data);

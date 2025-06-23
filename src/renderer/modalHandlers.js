@@ -516,7 +516,7 @@ export function openAddProductModal() {
     if (elements.aliasDropdownContainer) elements.aliasDropdownContainer.classList.add('hidden');
     if (elements.productAliasSelect) elements.productAliasSelect.value = '';
 
-    if (elements.saveProductAsTemplateBtn) elements.saveProductAsTemplateBtn.style.display = 'none';
+    if (elements.saveProductAsTemplateBtn) elements.saveProductAsTemplateBtn.style.display = 'inline-block';
 
     productBeingEdited = {};
     renderDynamicFormFields({});

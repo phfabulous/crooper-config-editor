@@ -356,13 +356,14 @@ h1 {
 }
 
 .product-card .product-details {
-    overflow: hidden;
+    overflow: visible;
     transition: max-height 0.3s ease-out;
-    max-height: 1000px;
+    max-height: none;
 }
 
 .product-card.collapsed .product-details {
     max-height: 0;
+    overflow: hidden;
 }
 
 
