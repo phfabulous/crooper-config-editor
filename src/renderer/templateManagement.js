@@ -124,61 +124,89 @@ export function renderSavedProductTemplates(templatesToRender) {
         elements.noSavedTemplatesMessage.style.display = 'none';
     }
 
-    templateKeys.forEach(key => {
-        const template = templatesToRender[key];
-        const templateItem = document.createElement('div');
-        templateItem.classList.add('template-item');
-        templateItem.dataset.templateKey = key;
+    const aliasKeys = templateKeys.filter(k => templatesToRender[k].type === 'alias');
+    const productKeys = templateKeys.filter(k => templatesToRender[k].type !== 'alias');
 
-        const nameContainer = document.createElement('div'); // Conteneur pour les noms
-        nameContainer.classList.add('template-name-container');
+    function createSection(title, keys) {
+        if (keys.length === 0) return;
+        const section = document.createElement('div');
+        section.classList.add('template-section');
 
-        const friendlyNameSpan = document.createElement('span');
-        friendlyNameSpan.classList.add('friendly-name');
-        friendlyNameSpan.textContent = template.friendlyName || key;
-        nameContainer.appendChild(friendlyNameSpan);
+        const header = document.createElement('div');
+        header.classList.add('template-section-header');
+        header.textContent = title;
 
-        const techNameSpan = document.createElement('span');
-        techNameSpan.classList.add('tech-name');
-        techNameSpan.textContent = ` (${key})`;
-        nameContainer.appendChild(techNameSpan);
-
-        const actionsDiv = document.createElement('div');
-        actionsDiv.classList.add('template-actions');
-
-        const addToConfigBtn = document.createElement('button');
-        addToConfigBtn.textContent = 'Add';
-        addToConfigBtn.classList.add('add-from-template-btn');
-        addToConfigBtn.title = 'Add to Configuration';
-        addToConfigBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            console.log(`[TemplateManagement] Bouton 'Add' cliqué pour template: ${key}`);
-            document.dispatchEvent(new CustomEvent('add-product-from-template', { detail: { templateKey: key } }));
+        const itemsContainer = document.createElement('div');
+        itemsContainer.classList.add('template-section-items');
+        itemsContainer.style.display = 'none';
+        header.addEventListener('click', () => {
+            itemsContainer.style.display = itemsContainer.style.display === 'none' ? 'block' : 'none';
         });
 
-        const deleteTemplateBtn = document.createElement('button');
-        deleteTemplateBtn.textContent = 'Del';
-        deleteTemplateBtn.classList.add('delete-template-btn');
-        deleteTemplateBtn.title = 'Delete Template';
-        deleteTemplateBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            console.log(`[TemplateManagement] Bouton 'Del' cliqué pour template: ${key}`);
-            document.dispatchEvent(new CustomEvent('delete-product-template', { detail: { templateKey: key } }));
+        section.appendChild(header);
+        section.appendChild(itemsContainer);
+
+        keys.forEach(key => {
+            const template = templatesToRender[key];
+            const templateItem = document.createElement('div');
+            templateItem.classList.add('template-item');
+            templateItem.dataset.templateKey = key;
+
+            const nameContainer = document.createElement('div'); // Conteneur pour les noms
+            nameContainer.classList.add('template-name-container');
+
+            const friendlyNameSpan = document.createElement('span');
+            friendlyNameSpan.classList.add('friendly-name');
+            friendlyNameSpan.textContent = template.friendlyName || key;
+            nameContainer.appendChild(friendlyNameSpan);
+
+            const techNameSpan = document.createElement('span');
+            techNameSpan.classList.add('tech-name');
+            techNameSpan.textContent = ` (${key})`;
+            nameContainer.appendChild(techNameSpan);
+
+            const actionsDiv = document.createElement('div');
+            actionsDiv.classList.add('template-actions');
+
+            const addToConfigBtn = document.createElement('button');
+            addToConfigBtn.textContent = 'Add';
+            addToConfigBtn.classList.add('add-from-template-btn');
+            addToConfigBtn.title = 'Add to Configuration';
+            addToConfigBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log(`[TemplateManagement] Bouton 'Add' cliqué pour template: ${key}`);
+                document.dispatchEvent(new CustomEvent('add-product-from-template', { detail: { templateKey: key } }));
+            });
+
+            const deleteTemplateBtn = document.createElement('button');
+            deleteTemplateBtn.textContent = 'Del';
+            deleteTemplateBtn.classList.add('delete-template-btn');
+            deleteTemplateBtn.title = 'Delete Template';
+            deleteTemplateBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log(`[TemplateManagement] Bouton 'Del' cliqué pour template: ${key}`);
+                document.dispatchEvent(new CustomEvent('delete-product-template', { detail: { templateKey: key } }));
+            });
+
+            actionsDiv.appendChild(addToConfigBtn);
+            actionsDiv.appendChild(deleteTemplateBtn);
+
+            templateItem.appendChild(nameContainer);
+            templateItem.appendChild(actionsDiv);
+
+            templateItem.addEventListener('click', () => {
+                document.querySelectorAll('.template-item.selected').forEach(item => item.classList.remove('selected'));
+                templateItem.classList.add('selected');
+            });
+
+            itemsContainer.appendChild(templateItem);
         });
 
-        actionsDiv.appendChild(addToConfigBtn);
-        actionsDiv.appendChild(deleteTemplateBtn);
+        elements.savedTemplatesContainer.appendChild(section);
+    }
 
-        templateItem.appendChild(nameContainer);
-        templateItem.appendChild(actionsDiv);
-
-        templateItem.addEventListener('click', () => {
-            document.querySelectorAll('.template-item.selected').forEach(item => item.classList.remove('selected'));
-            templateItem.classList.add('selected');
-        });
-
-        elements.savedTemplatesContainer.appendChild(templateItem);
-    });
+    createSection("Groupes d'Aliasing", aliasKeys);
+    createSection("Templates Produits", productKeys);
 }
 
 export async function loadProductTemplates() {

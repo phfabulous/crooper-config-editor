@@ -269,6 +269,23 @@ button {
     color: white;
 }
 
+.template-section {
+    margin-bottom: 10px;
+}
+
+.template-section-header {
+    background-color: #263544;
+    color: #fff;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.template-section-items {
+    padding-left: 10px;
+}
+
 
 /* Content Area Styles */
 .content-area {
@@ -738,6 +755,23 @@ button[type="submit"] {
 
 .field-row .remove-field-btn:hover {
     background-color: #c82333;
+}
+
+.field-row .move-field-up-btn,
+.field-row .move-field-down-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-right: 4px;
+}
+
+.field-row .move-field-up-btn:hover,
+.field-row .move-field-down-btn:hover {
+    background-color: #0069d9;
 }
 
 #saveFieldsConfigBtn {

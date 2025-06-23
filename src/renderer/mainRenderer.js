@@ -635,9 +635,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         aliasEditAspect: document.getElementById('aliasEditAspect'),
         aliasEditDensite: document.getElementById('aliasEditDensite'), // Corrected ID
         aliasEditDimentions: document.getElementById('aliasEditDimentions'), // Corrected ID
-        aliasEditSizeImpression: document.getElementById('aliasEditSizeImpression'), 
+        aliasEditSizeImpression: document.getElementById('aliasEditSizeImpression'),
         aliasEditMockupPathsContainer: document.getElementById('aliasEditMockupPathsContainer'),
         addAliasEditMockupPathBtn: document.getElementById('addAliasEditMockupPathBtn'),
+        saveAliasAsTemplateBtn: document.getElementById('saveAliasAsTemplateBtn'),
         aliasEditDirectMockupsContainer: document.getElementById('aliasEditDirectMockupsContainer'),
         aliasEditInheritedMockupsContainer: document.getElementById('aliasEditInheritedMockupsContainer'), // Corrected ID
         inheritedMockupsList: document.getElementById('inheritedMockupsList'),
@@ -776,10 +777,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Add submit listener for aliasEditForm
     if (elements.aliasEditForm) {
-        elements.aliasEditForm.addEventListener('submit', handleAliasEditFormSubmit); 
+        elements.aliasEditForm.addEventListener('submit', handleAliasEditFormSubmit);
         // Also need a way to track if this form is dirty
-        elements.aliasEditForm.addEventListener('input', () => { setAliasEditFormDirty(true); }); 
-        elements.aliasEditForm.addEventListener('change', () => { setAliasEditFormDirty(true); }); 
+        elements.aliasEditForm.addEventListener('input', () => { setAliasEditFormDirty(true); });
+        elements.aliasEditForm.addEventListener('change', () => { setAliasEditFormDirty(true); });
+    }
+
+    if (elements.saveAliasAsTemplateBtn) {
+        elements.saveAliasAsTemplateBtn.addEventListener('click', () => {
+            const aliasKey = elements.aliasEditName ? elements.aliasEditName.textContent.trim() : '';
+            if (!aliasKey) {
+                alert('Cannot save as template: alias name is empty.');
+                return;
+            }
+            document.dispatchEvent(new CustomEvent('open-save-template-naming-modal', { detail: { productKeyToSave: aliasKey } }));
+        });
     }
 
 

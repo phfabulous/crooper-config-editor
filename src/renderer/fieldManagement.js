@@ -180,8 +180,32 @@ function addEditableFieldRow(fieldData = {}) {
         }
     });
 
+    const moveUpButton = document.createElement('button');
+    moveUpButton.textContent = '↑';
+    moveUpButton.classList.add('move-field-up-btn');
+    moveUpButton.type = 'button';
+    moveUpButton.addEventListener('click', () => {
+        const prev = fieldRow.previousElementSibling;
+        if (prev && !prev.classList.contains('field-header')) {
+            elements.fieldsListContainer.insertBefore(fieldRow, prev);
+        }
+    });
+
+    const moveDownButton = document.createElement('button');
+    moveDownButton.textContent = '↓';
+    moveDownButton.classList.add('move-field-down-btn');
+    moveDownButton.type = 'button';
+    moveDownButton.addEventListener('click', () => {
+        const next = fieldRow.nextElementSibling;
+        if (next) {
+            elements.fieldsListContainer.insertBefore(next, fieldRow);
+        }
+    });
+
     const actionsCol = document.createElement('div');
     actionsCol.classList.add('field-actions-col');
+    actionsCol.appendChild(moveUpButton);
+    actionsCol.appendChild(moveDownButton);
     actionsCol.appendChild(deleteButton);
 
 

@@ -1211,6 +1211,10 @@ async function handleProductFormSubmit(event) {
         productData.variant = getVariantsFromDisplay();
     }
 
+    if (!productData.product) {
+        productData.product = type;
+    }
+
     console.log("[ModalHandlers] Product data BEFORE cleanObject:", JSON.parse(JSON.stringify(productData)));
     productData = cleanObject(productData);
     console.log("[ModalHandlers] Final productData AFTER cleanObject:", JSON.parse(JSON.stringify(productData)));

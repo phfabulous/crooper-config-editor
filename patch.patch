@@ -1,0 +1,148 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/style.css b/style.css
+index 2ca0b5b618632e512e050d479da9ff2b3593053d..d7857d1729d8217cccce4f766d308de9b3bfbb62 100644
+--- a/style.css
++++ b/style.css
+@@ -247,50 +247,67 @@ button {
+     flex-shrink: 0;
+     white-space: nowrap;
+ }
+ .template-item .template-actions button {
+     background: none;
+     color: #ccc;
+     padding: 3px 6px;
+     font-size: 0.8em;
+     border-radius: 4px;
+     line-height: 1;
+     text-align: center;
+     min-width: 30px;
+ }
+ .template-item .template-actions button:hover {
+     background-color: #607d8b;
+     color: white;
+ }
+ .template-item .template-actions button.delete-template-btn {
+     color: #ff7f7f;
+ }
+ .template-item .template-actions button.delete-template-btn:hover {
+     background-color: #dc3545;
+     color: white;
+ }
+ 
++.template-section {
++    margin-bottom: 10px;
++}
++
++.template-section-header {
++    background-color: #263544;
++    color: #fff;
++    padding: 8px 10px;
++    cursor: pointer;
++    border-radius: 4px;
++    margin-bottom: 5px;
++}
++
++.template-section-items {
++    padding-left: 10px;
++}
++
+ 
+ /* Content Area Styles */
+ .content-area {
+     flex-grow: 1;
+     padding: 20px;
+     overflow-y: auto;
+     background-color: #f8f9fa;
+ }
+ 
+ h1 {
+     color: #2c3e50;
+     text-align: center;
+     margin-top: 0;
+     margin-bottom: 30px;
+     font-size: 2em;
+ }
+ 
+ /* ANCIEN: top-controls - SUPPRIMÉ */
+ .top-controls {
+     display: none;
+ }
+ 
+ .product-container {
+     background-color: #ffffff;
+     padding: 20px;
+diff --git a/style.css b/style.css
+index 2ca0b5b618632e512e050d479da9ff2b3593053d..d7857d1729d8217cccce4f766d308de9b3bfbb62 100644
+--- a/style.css
++++ b/style.css
+@@ -718,50 +735,67 @@ button[type="submit"] {
+ .field-required-col { flex: 1; text-align: center; }
+ .field-required-checkbox-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; } /* Added for checkbox centering */
+ .field-options-col, .field-options-input { flex: 4; }
+ .field-actions-col { flex: 1.5; text-align: right; }
+ 
+ 
+ .field-row input[type="checkbox"] {
+     margin: 0;
+ }
+ 
+ .field-row .remove-field-btn {
+     background-color: #dc3545;
+     color: white;
+     border: none;
+     padding: 5px 10px;
+     border-radius: 3px;
+     cursor: pointer;
+     font-size: 0.8em;
+     transition: background-color 0.2s ease-in-out;
+ }
+ 
+ .field-row .remove-field-btn:hover {
+     background-color: #c82333;
+ }
+ 
++.field-row .move-field-up-btn,
++.field-row .move-field-down-btn {
++    background-color: #007bff;
++    color: white;
++    border: none;
++    padding: 4px 8px;
++    border-radius: 3px;
++    cursor: pointer;
++    font-size: 0.8em;
++    margin-right: 4px;
++}
++
++.field-row .move-field-up-btn:hover,
++.field-row .move-field-down-btn:hover {
++    background-color: #0069d9;
++}
++
+ #saveFieldsConfigBtn {
+     display: block;
+     width: 100%;
+     margin-top: 20px;
+     padding: 12px 20px;
+     font-size: 1.1em;
+     background-color: #28a745;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.2s ease-in-out;
+ }
+ 
+ #saveFieldsConfigBtn:hover {
+     background-color: #218838;
+ }
+ /* Styles for custom fields in product modal */
+ #customFieldsContainer .custom-field-row {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin-bottom: 8px;
+ }
+ 
+ 
+EOF
+)
