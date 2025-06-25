@@ -423,6 +423,16 @@ function displayCurrentVariants(variantsData) {
         return;
     }
 
+    const reservedKeys = new Set(['type', 'variant', 'color', 'color_FR']);
+    const fieldsToDisplaySet = new Set();
+    for (const pk in variantsData) {
+        const pv = variantsData[pk];
+        Object.keys(pv).forEach(k => {
+            if (!reservedKeys.has(k)) fieldsToDisplaySet.add(k);
+        });
+    }
+    const fieldsToDisplay = Array.from(fieldsToDisplaySet);
+
     for (const primaryKey in variantsData) {
         const primaryVariant = variantsData[primaryKey];
         const colorVariantEntry = document.createElement('div');
@@ -436,7 +446,6 @@ function displayCurrentVariants(variantsData) {
         `;
         colorVariantEntry.appendChild(header);
 
-        const fieldsToDisplay = ['prixFabric', 'saleFabric', 'picture_Amazon1', 'picture_Amazon2'];
         fieldsToDisplay.forEach(field => {
             const formGroup = document.createElement('div');
             formGroup.classList.add('form-group');
@@ -1020,6 +1029,33 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
     elements.customFieldsContainer.appendChild(customFieldRow);
 }
 
+function getKnownFieldOptions(fieldKey) {
+    if (currentKnownFieldsConfig) {
+        for (const typeKey in currentKnownFieldsConfig) {
+            const fieldInfo = currentKnownFieldsConfig[typeKey]?.fields?.[fieldKey];
+            if (fieldInfo && Array.isArray(fieldInfo.options)) {
+                return fieldInfo.options;
+            }
+        }
+    }
+    for (const typeKey in KNOWN_FIELDS_CONFIG) {
+        const fieldInfo = KNOWN_FIELDS_CONFIG[typeKey]?.fields?.[fieldKey];
+        if (fieldInfo && Array.isArray(fieldInfo.options)) {
+            return fieldInfo.options;
+        }
+    }
+    return [];
+}
+
+function populateDatalist(datalist, values) {
+    datalist.innerHTML = '';
+    values.forEach(val => {
+        const option = document.createElement('option');
+        option.value = val;
+        datalist.appendChild(option);
+    });
+}
+
 function addVariantDefaultFieldRow(key = '', value = '', level = 'variant') {
     if (!elements.variantDefaultFieldsContainer) return;
     const row = document.createElement('div');
@@ -1029,11 +1065,27 @@ function addVariantDefaultFieldRow(key = '', value = '', level = 'variant') {
     keyInput.type = 'text';
     keyInput.placeholder = 'Key';
     keyInput.value = key;
-
+    keyInput.setAttribute('list', 'knownFieldSuggestions');
+    keyInput.autocomplete = 'off';
+    
     const valueInput = document.createElement('input');
     valueInput.type = 'text';
     valueInput.placeholder = 'Value';
     valueInput.value = value;
+
+    
+    const valueDatalist = document.createElement('datalist');
+    const datalistId = `variant-value-${Date.now()}-${Math.floor(Math.random()*1000)}`;
+    valueDatalist.id = datalistId;
+    valueInput.setAttribute('list', datalistId);
+
+    const updateValueSuggestions = () => {
+        const options = getKnownFieldOptions(keyInput.value);
+        const combined = [...CROOPER_VARIABLES, ...options];
+        populateDatalist(valueDatalist, combined);
+    };
+    updateValueSuggestions();
+    keyInput.addEventListener('input', updateValueSuggestions);
 
     const levelSelect = document.createElement('select');
     const optVariant = document.createElement('option');
@@ -1053,6 +1105,7 @@ function addVariantDefaultFieldRow(key = '', value = '', level = 'variant') {
 
     row.appendChild(keyInput);
     row.appendChild(valueInput);
+    row.appendChild(valueDatalist);
     row.appendChild(levelSelect);
     row.appendChild(removeBtn);
     elements.variantDefaultFieldsContainer.appendChild(row);
