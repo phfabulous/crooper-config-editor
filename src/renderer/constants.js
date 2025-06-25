@@ -10,12 +10,9 @@ export const PREDEFINED_VALUES = {
         { value: 'red', label: 'rouge' },
         { value: 'blue', label: 'bleu' },
         { value: 'grey', label: 'gris' },
-        { value: 'green', label: 'vert' },
-        { value: 'yellow', label: 'jaune' },
-        { value: 'orange', label: 'orange' },
-        { value: 'purple', label: 'violet' }
+        { value: 'pink', label: 'rose' }
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
 };
 
 // Nouvelle constante pour les variables du Crooper
@@ -28,7 +25,6 @@ export const CROOPER_VARIABLES = [
     '{category}',
     '{genre}',
     '{prefix}',
-    '{mockupChoice}', // Variable spécifique aux mockups/images
     '{sku}', // SKU du variant si pertinent
     '{parentSku}', // SKU du parent si pertinent
     // Ajoutez ici d'autres variables qui pourraient être nécessaires
@@ -40,8 +36,7 @@ export const KNOWN_FIELDS_CONFIG = {
             "name", "type", "prefix", "category", "genre", "product", "alias",
             "ERPCategory", "price", "weight",
             "amazon.Title_FR", "amazon.DesCourtes",
-            "picture_Amazon1", "picture_Amazon2", // Ajout de champs d'image si non présents
-            "picture_catalog", "picture_main", "picture_side", // Autres exemples de champs d'image
+            "picture_catalog", "picture_main", // Autres exemples de champs d'image
             "aspect", "densite", "dimentions", "sizeImpression"
         ],
         "fields": {
@@ -58,11 +53,8 @@ export const KNOWN_FIELDS_CONFIG = {
             "amazon.Title_FR": { "type": "text", "label": "Amazon Title (FR)" },
             "amazon.DesCourtes": { "type": "textarea", "label": "Amazon Short Description (FR)" },
             // Définition des champs d'image comme type 'text' pour l'instant
-            "picture_Amazon1": { "type": "text", "label": "Picture Amazon 1" },
-            "picture_Amazon2": { "type": "text", "label": "Picture Amazon 2" },
             "picture_catalog": { "type": "text", "label": "Picture Catalog" },
             "picture_main": { "type": "text", "label": "Picture Main" },
-            "picture_side": { "type": "text", "label": "Picture Side" },
             "aspect": { "type": "text", "label": "Aspect Ratio" },
             "densite": { "type": "text", "label": "Density" },
             "dimentions": { "type": "text", "label": "Dimensions" },
@@ -73,9 +65,8 @@ export const KNOWN_FIELDS_CONFIG = {
         "displayOrder": [
             "name", "type", "prefix", "category", "genre", "product", "alias",
             "ERPCategory", "price", "weight",
-            "amazon.Title_FR", "amazon.DesCourtes",
-            "picture_Amazon1", "picture_Amazon2" // Assurez-vous que ces champs sont aussi dans 'sweat'
-        ],
+            "amazon.Title_FR", "amazon.DesCourtes"
+                ],
         "fields": {
             "name": { "type": "text", "label": "Product Key / Name", "required": true },
             "type": { "type": "select", "label": "Type de Produit", "options": ["alias", "simple", "parent"], "required": true },
@@ -88,9 +79,7 @@ export const KNOWN_FIELDS_CONFIG = {
             "price": { "type": "number", "label": "Price" },
             "weight": { "type": "number", "label": "Weight (g)" },
             "amazon.Title_FR": { "type": "text", "label": "Amazon Title (FR)" },
-            "amazon.DesCourtes": { "type": "textarea", "label": "Amazon Short Description (FR)" },
-            "picture_Amazon1": { "type": "text", "label": "Picture Amazon 1" }, // Ajout
-            "picture_Amazon2": { "type": "text", "label": "Picture Amazon 2" } // Ajout
+            "amazon.DesCourtes": { "type": "textarea", "label": "Amazon Short Description (FR)" }
         }
     },
     // Vous pourriez ajouter une configuration "image_url" ou "common_image_fields" ici

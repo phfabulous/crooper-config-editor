@@ -306,27 +306,16 @@ export async function loadKnownFieldsConfig() {
             console.log("[FieldManagement] No custom fields config found, using default KNOWN_FIELDS_CONFIG from constants.");
             currentKnownFieldsConfig = JSON.parse(JSON.stringify(KNOWN_FIELDS_CONFIG));
         } else {
-            // Merge loaded config with default KNOWN_FIELDS_CONFIG to ensure all default types are present
-            // and newly added fields are recognized even if they weren't explicitly saved per type.
-            const mergedConfig = JSON.parse(JSON.stringify(KNOWN_FIELDS_CONFIG));
-            for (const typeKey in loadedConfig) {
-                if (loadedConfig[typeKey] && loadedConfig[typeKey].fields) {
-                    if (!mergedConfig[typeKey]) {
-                        mergedConfig[typeKey] = { displayOrder: [], fields: {} };
-                    }
-                    for (const fieldKey in loadedConfig[typeKey].fields) {
-                        // Add new fields or update existing ones
-                        if (!mergedConfig[typeKey].fields[fieldKey]) {
-                            mergedConfig[typeKey].displayOrder.push(fieldKey);
-                        }
-                        mergedConfig[typeKey].fields[fieldKey] = loadedConfig[typeKey].fields[fieldKey];
-                    }
-                    // Ensure display order is unique and reflects new additions
-                    mergedConfig[typeKey].displayOrder = [...new Set([...mergedConfig[typeKey].displayOrder, ...Object.keys(loadedConfig[typeKey].fields)])];
-                }
+             // Start with the loaded config to respect deletions the user made.
+             const mergedConfig = JSON.parse(JSON.stringify(loadedConfig));
+
+             // Ensure all default types exist but do NOT merge their fields automatically.
+             for (const typeKey in KNOWN_FIELDS_CONFIG) {
+                 if (!mergedConfig[typeKey]) {
+                     mergedConfig[typeKey] = JSON.parse(JSON.stringify(KNOWN_FIELDS_CONFIG[typeKey]));                }
             }
             currentKnownFieldsConfig = mergedConfig;
-            console.log("[FieldManagement] Known fields config loaded and merged:", currentKnownFieldsConfig);
+            console.log("[FieldManagement] Known fields config loaded without reintroducing removed fields:", currentKnownFieldsConfig);
         }
         document.dispatchEvent(new CustomEvent('known-fields-config-loaded', { detail: { config: currentKnownFieldsConfig } }));
         return currentKnownFieldsConfig;
