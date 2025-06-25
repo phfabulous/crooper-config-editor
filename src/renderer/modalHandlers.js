@@ -110,6 +110,18 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
 
     if (elements.addCustomFieldBtn) elements.addCustomFieldBtn.addEventListener('click', () => addCustomFieldInput());
 
+    if (elements.addVariantDefaultFieldBtn) elements.addVariantDefaultFieldBtn.addEventListener('click', () => addVariantDefaultFieldRow());
+    if (elements.applyVariantDefaultFieldsBtn) elements.applyVariantDefaultFieldsBtn.addEventListener('click', () => {
+        const currentData = getVariantsFromDisplay();
+        const defaultFields = getVariantDefaultFields();
+        applyDefaultFieldsToVariants(currentData, defaultFields);
+        displayCurrentVariants(currentData);
+    });
+
+    if (elements.variantDefaultFieldsContainer && elements.variantDefaultFieldsContainer.childElementCount === 0) {
+        addVariantDefaultFieldRow();
+    }
+
     if (elements.productForm) elements.productForm.addEventListener('submit', handleProductFormSubmit);
 
     // Initialiser les datalists des suggestions (appelées après que elements soit prêt)
@@ -394,6 +406,8 @@ function generateVariants() {
     }
 
     const generatedVariants = generateVariantsStructure(variant1Type, variant1Values, variant2Type, variant2Values);
+    const defaultFields = getVariantDefaultFields();
+    applyDefaultFieldsToVariants(generatedVariants, defaultFields);
     displayCurrentVariants(generatedVariants);
 }
 
@@ -1006,6 +1020,77 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
     elements.customFieldsContainer.appendChild(customFieldRow);
 }
 
+function addVariantDefaultFieldRow(key = '', value = '', level = 'variant') {
+    if (!elements.variantDefaultFieldsContainer) return;
+    const row = document.createElement('div');
+    row.classList.add('variant-default-field-row');
+
+    const keyInput = document.createElement('input');
+    keyInput.type = 'text';
+    keyInput.placeholder = 'Key';
+    keyInput.value = key;
+
+    const valueInput = document.createElement('input');
+    valueInput.type = 'text';
+    valueInput.placeholder = 'Value';
+    valueInput.value = value;
+
+    const levelSelect = document.createElement('select');
+    const optVariant = document.createElement('option');
+    optVariant.value = 'variant';
+    optVariant.textContent = 'Variant';
+    const optSub = document.createElement('option');
+    optSub.value = 'subvariant';
+    optSub.textContent = 'Sub-variant';
+    levelSelect.appendChild(optVariant);
+    levelSelect.appendChild(optSub);
+    levelSelect.value = level;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.textContent = 'X';
+    removeBtn.addEventListener('click', () => row.remove());
+
+    row.appendChild(keyInput);
+    row.appendChild(valueInput);
+    row.appendChild(levelSelect);
+    row.appendChild(removeBtn);
+    elements.variantDefaultFieldsContainer.appendChild(row);
+}
+
+function getVariantDefaultFields() {
+    const defaults = [];
+    if (!elements.variantDefaultFieldsContainer) return defaults;
+    elements.variantDefaultFieldsContainer.querySelectorAll('.variant-default-field-row').forEach(row => {
+        const key = row.querySelector('input[type="text"]')?.value.trim();
+        const inputs = row.querySelectorAll('input[type="text"]');
+        const value = inputs[1]?.value ?? '';
+        const level = row.querySelector('select')?.value || 'variant';
+        if (key) {
+            defaults.push({ key, value, level });
+        }
+    });
+    return defaults;
+}
+
+function applyDefaultFieldsToVariants(variantsData, fields) {
+    fields.forEach(f => {
+        for (const primaryKey in variantsData) {
+            const primaryVar = variantsData[primaryKey];
+            if (f.level === 'variant') {
+                if (primaryVar[f.key] === undefined) primaryVar[f.key] = f.value;
+            }
+            if (f.level === 'subvariant' && primaryVar.variant) {
+                for (const subKey in primaryVar.variant) {
+                    if (primaryVar.variant[subKey][f.key] === undefined) {
+                        primaryVar.variant[subKey][f.key] = f.value;
+                    }
+                }
+            }
+        }
+    });
+}
+
 // Fonction pour gérer les données CSV importées et pré-remplir les champs de variantes
 function handleCsvImportForVariants(csvData) {
     console.log("[ModalHandlers] Processing CSV data for variants:", csvData);
@@ -1050,6 +1135,8 @@ function handleCsvImportForVariants(csvData) {
     // Déclencher la génération des variantes si nous avons des données pour le premier groupe
     if (variant1Type && variant1Values.length > 0) {
         const generatedVariantObject = generateVariantsStructure(variant1Type, variant1Values, variant2Type, variant2Values);
+        const defaultFields = getVariantDefaultFields();
+        applyDefaultFieldsToVariants(generatedVariantObject, defaultFields);
         displayCurrentVariants(generatedVariantObject);
     }
 

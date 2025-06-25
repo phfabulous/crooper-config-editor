@@ -672,7 +672,7 @@ button[type="submit"] {
 
 /* Styles pour la modale Manage Fields */
 #manageFieldsModal .modal-content {
-    max-width: 900px;
+    max-width: 1100px;
 }
 
 .field-management-controls {
@@ -756,7 +756,15 @@ button[type="submit"] {
 .field-required-col { flex: 1; text-align: center; }
 .field-required-checkbox-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; } /* Added for checkbox centering */
 .field-options-col, .field-options-input { flex: 4; }
-.field-actions-col { flex: 1.5; text-align: right; }
+.field-actions-col {
+    flex: 1.5;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
 
 
 .field-row input[type="checkbox"] {
@@ -850,5 +858,37 @@ button[type="submit"] {
     color: white;
 }
 #customFieldsContainer .remove-custom-field-btn:hover {
+    background-color: #c82333;
+}
+
+/* Styles for variant default fields */
+#variantDefaultFieldsContainer {
+    margin-bottom: 10px;
+}
+
+.variant-default-field-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.variant-default-field-row input[type="text"],
+.variant-default-field-row select {
+    padding: 4px 6px;
+    font-size: 0.9em;
+}
+
+.variant-default-field-row button {
+    padding: 4px 8px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+}
+
+.variant-default-field-row button:hover {
     background-color: #c82333;
 }
