@@ -668,6 +668,21 @@ button[type="submit"] {
     gap: 4px;
 }
 
+.propagate-field-label {
+    margin-left: 6px;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.help-text {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8em;
+    color: #555;
+}
+
 #dynamicFormFields .move-field-up-btn,
 #dynamicFormFields .move-field-down-btn {
     background-color: #007bff;

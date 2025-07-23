@@ -117,6 +117,7 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
         applyDefaultFieldsToVariants(currentData, defaultFields);
         displayCurrentVariants(currentData);
     });
+    if (elements.propagateFieldsFromParentBtn) elements.propagateFieldsFromParentBtn.addEventListener('click', propagateFieldsFromParentPrompt);
 
     if (elements.variantDefaultFieldsContainer && elements.variantDefaultFieldsContainer.childElementCount === 0) {
         addVariantDefaultFieldRow();
@@ -806,6 +807,15 @@ function renderDynamicFormFields(productData = {}) {
         inputElement.dataset.key = fieldKey;
         inputElement.disabled = fieldInfo.disabled || false;
 
+        const propagateLabel = document.createElement('label');
+        propagateLabel.classList.add('propagate-field-label');
+        const propagateCheckbox = document.createElement('input');
+        propagateCheckbox.type = 'checkbox';
+        propagateCheckbox.classList.add('propagate-checkbox');
+        propagateCheckbox.dataset.key = fieldKey;
+        propagateLabel.appendChild(propagateCheckbox);
+        propagateLabel.appendChild(document.createTextNode(' Copy')); 
+
         inputElement.addEventListener('change', (e) => {
             isFormDirty = true;
             if (fieldKey === 'type') {
@@ -819,6 +829,7 @@ function renderDynamicFormFields(productData = {}) {
 
 
         formGroup.appendChild(inputElement);
+        formGroup.appendChild(propagateLabel);
 
         const orderWrapper = document.createElement('div');
         orderWrapper.classList.add('field-order-buttons');
@@ -1021,9 +1032,18 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
     valueInput.addEventListener('input', () => { isFormDirty = true; });
 
 
+    const propagateLabel = document.createElement('label');
+    propagateLabel.classList.add('propagate-field-label');
+    const propagateCheckbox = document.createElement('input');
+    propagateCheckbox.type = 'checkbox';
+    propagateCheckbox.classList.add('propagate-checkbox');
+    propagateLabel.appendChild(propagateCheckbox);
+    propagateLabel.appendChild(document.createTextNode(' Copy'));
+
     customFieldRow.appendChild(keyInput);
     customFieldRow.appendChild(valueInput);
     customFieldRow.appendChild(promoteButton);
+    customFieldRow.appendChild(propagateLabel);
     customFieldRow.appendChild(removeButton);
 
     elements.customFieldsContainer.appendChild(customFieldRow);
@@ -1142,6 +1162,81 @@ function applyDefaultFieldsToVariants(variantsData, fields) {
             }
         }
     });
+}
+
+function getParentFieldValues(fieldKeys) {
+    const values = {};
+    fieldKeys.forEach(key => {
+        let val;
+        const input = elements.dynamicFormFields.querySelector(`[data-key="${key}"]`);
+        if (input) {
+            val = input.type === 'checkbox' ? input.checked : input.value;
+        } else if (elements.customFieldsContainer) {
+            elements.customFieldsContainer.querySelectorAll('.custom-field-row').forEach(row => {
+                const k = row.querySelector('.custom-field-key').value.trim();
+                if (k === key) {
+                    val = row.querySelector('.custom-field-value').value;
+                }
+            });
+        }
+        if (val !== undefined) {
+            values[key] = val;
+        }
+    });
+    return values;
+}
+
+function propagateFieldsToVariants(variantsData, fieldValues, level) {
+    for (const pk in variantsData) {
+        const pv = variantsData[pk];
+        if (level === 'variant') {
+            Object.keys(fieldValues).forEach(k => {
+                pv[k] = fieldValues[k];
+            });
+        }
+        if (level === 'subvariant' && pv.variant) {
+            for (const sk in pv.variant) {
+                Object.keys(fieldValues).forEach(k => {
+                    pv.variant[sk][k] = fieldValues[k];
+                });
+            }
+        }
+    }
+}
+
+function propagateFieldsFromParentPrompt() {
+    const fieldKeys = getSelectedFieldsForPropagation();
+    if (fieldKeys.length === 0) {
+        alert('Select fields to copy using the checkboxes.');
+        return;
+    }
+    const levelStr = prompt('Copy to level 1 (variant) or 2 (subvariant)? Enter 1 or 2:');
+    const level = (levelStr && levelStr.trim() === '2') ? 'subvariant' : 'variant';
+    const variantsData = getVariantsFromDisplay();
+    const parentValues = getParentFieldValues(fieldKeys);
+    propagateFieldsToVariants(variantsData, parentValues, level);
+    displayCurrentVariants(variantsData);
+}
+
+function getSelectedFieldsForPropagation() {
+    const selected = [];
+    if (elements.dynamicFormFields) {
+        elements.dynamicFormFields.querySelectorAll('.propagate-checkbox').forEach(cb => {
+            if (cb.checked && cb.dataset.key) {
+                selected.push(cb.dataset.key);
+            }
+        });
+    }
+    if (elements.customFieldsContainer) {
+        elements.customFieldsContainer.querySelectorAll('.custom-field-row').forEach(row => {
+            const cb = row.querySelector('.propagate-checkbox');
+            if (cb && cb.checked) {
+                const key = row.querySelector('.custom-field-key').value.trim();
+                if (key) selected.push(key);
+            }
+        });
+    }
+    return selected;
 }
 
 // Fonction pour gérer les données CSV importées et pré-remplir les champs de variantes
