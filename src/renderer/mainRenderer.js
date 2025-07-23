@@ -216,15 +216,10 @@ async function saveConfiguration(saveAs = false) {
     }
     console.log(`[MainRenderer] Saving to filePath: ${filePath}`);
 
-    // Ensure aliases are at the top before saving
-    const orderedConfig = {};
-    const aliasKeys = Object.keys(currentConfig).filter(key => currentConfig[key].type === 'alias').sort((a, b) => a.localeCompare(b));
-    const productKeys = Object.keys(currentConfig).filter(key => currentConfig[key].type !== 'alias').sort((a, b) => a.localeCompare(b));
-
-    aliasKeys.forEach(key => orderedConfig[key] = currentConfig[key]);
-    productKeys.forEach(key => orderedConfig[key] = currentConfig[key]);
-
-    const success = await window.electronAPI.saveConfig(orderedConfig, filePath);
+    // Directly save currentConfig without reordering to preserve the existing
+    // product order. This keeps the order from CSV imports or previously saved
+    // configurations intact.
+    const success = await window.electronAPI.saveConfig(currentConfig, filePath);
     if (success) {
         currentConfigFilePath = filePath;
         if (elements.currentConfigFileName) elements.currentConfigFileName.textContent = `Config: ${currentConfigFilePath.split(/[\\/]/).pop()}`;
