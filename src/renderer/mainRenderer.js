@@ -3,7 +3,7 @@
 // Import all necessary modules and constants
 import { TEMPLATES_FILE_NAME, PREDEFINED_VALUES, KNOWN_FIELDS_CONFIG, FIELDS_CONFIG_FILE_NAME } from './constants.js';
 import { openAddProductModal, openEditProductModal, closeProductModal, updateModalData, initializeModalElements, handleCloseModalRequest, generateVariantsStructure } from './modalHandlers.js';
-import { renderProducts, initializeProductElements, updateProductData } from './productManagement.js';
+import { renderProducts, initializeProductElements, updateProductData, resetCollapseState } from './productManagement.js';
 import { loadProductTemplates, openSaveTemplateModal, closeSaveTemplateModal, addProductFromTemplate, deleteProductTemplate, renderSavedProductTemplates, saveProductTemplatesToDisk, updateTemplateData, initializeTemplateElements } from './templateManagement.js';
 import { initializeFieldManagementElements, loadKnownFieldsConfig, updateFieldManagementData, openManageFieldsModal, openManageFieldsModalForPromotion } from './fieldManagement.js';
 import { cleanObject } from './utils.js';
@@ -172,6 +172,7 @@ async function newConfiguration() {
     currentConfig = {};
     currentConfigFilePath = null;
     currentSelectedProductKey = null;
+    resetCollapseState();
     renderAllContent(); // Refreshes the display
     if (elements.currentConfigFileName) elements.currentConfigFileName.textContent = "No Configuration Loaded";
     alert('New configuration started.');
@@ -185,6 +186,7 @@ async function loadConfiguration() {
         currentConfig = result.data;
         currentConfigFilePath = result.filePath;
         currentSelectedProductKey = null;
+        resetCollapseState();
         renderAllContent(); // Refreshes the display
         if (elements.currentConfigFileName) elements.currentConfigFileName.textContent = `Config: ${currentConfigFilePath.split(/[\\/]/).pop()}`;
         console.log("[MainRenderer] Config loaded from file. currentConfig:", currentConfig);

@@ -3,6 +3,9 @@ import { findDuplicates, getDragAfterElement } from './utils.js';
 // Importer KNOWN_FIELDS_CONFIG pour le fallback par défaut
 import { KNOWN_FIELDS_CONFIG, FIELD_CONDITIONS } from './constants.js';
 
+// Internal collapsed state for each product card
+let collapseState = {};
+
 // DOM elements (passed during initialization)
 let elements;
 let currentConfig; // This will be passed from mainRenderer
@@ -10,6 +13,11 @@ let currentSelectedProductKey; // This will be passed from mainRenderer
 let currentKnownFieldsConfig; // Nouvelle variable pour la configuration des champs connus
 
 let draggedItem = null; // Internal state for drag & drop
+
+// Reset collapse state (called when loading a new configuration)
+export const resetCollapseState = () => {
+    collapseState = {};
+};
 
 export const initializeProductElements = (domElements, config, selectedKey, knownFieldsConfig) => { // Ajout de knownFieldsConfig
     elements = domElements;
@@ -119,17 +127,40 @@ export function renderProducts(configToRender, container, isTemplateView = false
         if (!isTemplateView && duplicateNames.includes(key)) {
             productCard.classList.add('duplicate');
         }
-
         const header = document.createElement('h3');
         header.classList.add('product-header');
-        header.innerHTML = `
-            ${product.name || key}
-            <span class="collapse-icon">&#9660;</span>
-        `;
-        header.addEventListener('click', () => {
+
+        const titleSpan = document.createElement('span');
+        titleSpan.textContent = product.name || key;
+
+        const editShortBtn = document.createElement('button');
+        editShortBtn.textContent = 'Edit';
+        editShortBtn.classList.add('header-edit-btn');
+        editShortBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentSelectedProductKey = key;
+            document.dispatchEvent(new CustomEvent('open-edit-product-modal', { detail: { productKey: key } }));
+        });
+
+        const collapseIcon = document.createElement('span');
+        collapseIcon.classList.add('collapse-icon');
+        collapseIcon.innerHTML = '&#9660;';
+
+        header.appendChild(titleSpan);
+        header.appendChild(editShortBtn);
+        header.appendChild(collapseIcon);
+
+        header.addEventListener('click', (e) => {
+            if (e.target.closest('.header-edit-btn')) return;
+            const collapsedNow = !productCard.classList.contains('collapsed');
             productCard.classList.toggle('collapsed');
+            collapseState[key] = collapsedNow;
         });
         productCard.appendChild(header);
+
+        const isCollapsed = collapseState[key] !== undefined ? collapseState[key] : true;
+        collapseState[key] = isCollapsed;
+        if (isCollapsed) productCard.classList.add('collapsed');
 
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('product-details');
