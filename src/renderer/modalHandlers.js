@@ -1189,11 +1189,13 @@ function getParentFieldValues(fieldKeys) {
 function propagateFieldsToVariants(variantsData, fieldValues, level) {
     for (const pk in variantsData) {
         const pv = variantsData[pk];
-        if (level === 'variant') {
-            Object.keys(fieldValues).forEach(k => {
-                pv[k] = fieldValues[k];
-            });
-        }
+
+        // Always copy to the primary variant level
+        Object.keys(fieldValues).forEach(k => {
+            pv[k] = fieldValues[k];
+        });
+
+        // Additionally copy to sub-variants when requested
         if (level === 'subvariant' && pv.variant) {
             for (const sk in pv.variant) {
                 Object.keys(fieldValues).forEach(k => {
@@ -1220,6 +1222,18 @@ function propagateFieldsFromParentPrompt() {
     const parentValues = getParentFieldValues(fieldKeys);
     propagateFieldsToVariants(variantsData, parentValues, level);
     displayCurrentVariants(variantsData);
+
+    // Reset copy checkboxes after propagation for clarity
+    if (elements.dynamicFormFields) {
+        elements.dynamicFormFields.querySelectorAll('.propagate-checkbox').forEach(cb => {
+            cb.checked = false;
+        });
+    }
+    if (elements.customFieldsContainer) {
+        elements.customFieldsContainer.querySelectorAll('.propagate-checkbox').forEach(cb => {
+            cb.checked = false;
+        });
+    }
 }
 
 function getSelectedFieldsForPropagation() {
