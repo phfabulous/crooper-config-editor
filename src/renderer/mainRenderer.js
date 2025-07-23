@@ -610,6 +610,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         variantDefaultFieldsContainer: document.getElementById('variantDefaultFieldsContainer'),
         addVariantDefaultFieldBtn: document.getElementById('addVariantDefaultFieldBtn'),
         applyVariantDefaultFieldsBtn: document.getElementById('applyVariantDefaultFieldsBtn'),
+        propagationLevelSelect: document.getElementById('propagationLevelSelect'),
+        propagateFieldsFromParentBtn: document.getElementById('propagateFieldsFromParentBtn'),
         currentVariantsDisplay: document.getElementById('currentVariantsDisplay'),
 
         // Error message spans for dynamic fields are now handled by querySelector within dynamicFormFields

@@ -1210,8 +1210,12 @@ function propagateFieldsFromParentPrompt() {
         alert('Select fields to copy using the checkboxes.');
         return;
     }
-    const levelStr = prompt('Copy to level 1 (variant) or 2 (subvariant)? Enter 1 or 2:');
-    const level = (levelStr && levelStr.trim() === '2') ? 'subvariant' : 'variant';
+
+    let level = 'variant';
+    if (elements.propagationLevelSelect) {
+        level = elements.propagationLevelSelect.value || 'variant';
+    }
+
     const variantsData = getVariantsFromDisplay();
     const parentValues = getParentFieldValues(fieldKeys);
     propagateFieldsToVariants(variantsData, parentValues, level);
