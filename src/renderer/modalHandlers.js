@@ -117,7 +117,6 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
         applyDefaultFieldsToVariants(currentData, defaultFields);
         displayCurrentVariants(currentData);
     });
-    if (elements.propagateFieldsFromParentBtn) elements.propagateFieldsFromParentBtn.addEventListener('click', propagateFieldsFromParentPrompt);
 
     if (elements.variantDefaultFieldsContainer && elements.variantDefaultFieldsContainer.childElementCount === 0) {
         addVariantDefaultFieldRow();
@@ -1143,59 +1142,6 @@ function applyDefaultFieldsToVariants(variantsData, fields) {
             }
         }
     });
-}
-
-function getParentFieldValues(fieldKeys) {
-    const values = {};
-    fieldKeys.forEach(key => {
-        let val;
-        const input = elements.dynamicFormFields.querySelector(`[data-key="${key}"]`);
-        if (input) {
-            val = input.type === 'checkbox' ? input.checked : input.value;
-        } else if (elements.customFieldsContainer) {
-            elements.customFieldsContainer.querySelectorAll('.custom-field-row').forEach(row => {
-                const k = row.querySelector('.custom-field-key').value.trim();
-                if (k === key) {
-                    val = row.querySelector('.custom-field-value').value;
-                }
-            });
-        }
-        if (val !== undefined) {
-            values[key] = val;
-        }
-    });
-    return values;
-}
-
-function propagateFieldsToVariants(variantsData, fieldValues, level) {
-    for (const pk in variantsData) {
-        const pv = variantsData[pk];
-        if (level === 'variant') {
-            Object.keys(fieldValues).forEach(k => {
-                pv[k] = fieldValues[k];
-            });
-        }
-        if (level === 'subvariant' && pv.variant) {
-            for (const sk in pv.variant) {
-                Object.keys(fieldValues).forEach(k => {
-                    pv.variant[sk][k] = fieldValues[k];
-                });
-            }
-        }
-    }
-}
-
-function propagateFieldsFromParentPrompt() {
-    const fieldStr = prompt('Field keys to copy (comma-separated):');
-    if (!fieldStr) return;
-    const levelStr = prompt('Copy to level 1 (variant) or 2 (subvariant)? Enter 1 or 2:');
-    const level = (levelStr && levelStr.trim() === '2') ? 'subvariant' : 'variant';
-    const fieldKeys = fieldStr.split(',').map(f => f.trim()).filter(f => f);
-    if (fieldKeys.length === 0) return;
-    const variantsData = getVariantsFromDisplay();
-    const parentValues = getParentFieldValues(fieldKeys);
-    propagateFieldsToVariants(variantsData, parentValues, level);
-    displayCurrentVariants(variantsData);
 }
 
 // Fonction pour gérer les données CSV importées et pré-remplir les champs de variantes
