@@ -290,25 +290,25 @@ function updateMockupPathVisibilityAndContent() {
         if (elements.mockupsSectionInModal) elements.mockupsSectionInModal.classList.remove('hidden');
 
         let mockupsToDisplay = [];
-        if (hasAliasChecked && selectedAliasKey) {
-            const aliasObject = currentConfig[selectedAliasKey];
-            if (aliasObject && aliasObject.type === 'alias') {
-                mockupsToDisplay = aliasObject.mockups;
-                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Les mockups sont définis ici et sauvegardés dans le profil d'aliasing "${selectedAliasKey}".`;
-                if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = selectedAliasKey;
-            } else {
-                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Profil d'aliasing sélectionné invalide.`;
+        if (productBeingEdited && productBeingEdited.mockups && productBeingEdited.mockups.length > 0) {
+            mockupsToDisplay = productBeingEdited.mockups;
+            if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'self';
+            if (elements.mockupsSourceInfo) {
+                if (hasAliasChecked && selectedAliasKey) {
+                    elements.mockupsSourceInfo.textContent = `Mockups définis ici pour ce produit (lié à l'alias "${selectedAliasKey}").`;
+                } else {
+                    elements.mockupsSourceInfo.textContent = `Définis ici pour ce produit (ils ne seront pas liés à un profil d'aliasing).`;
+                }
             }
         } else {
-            // If no alias is selected, and it's a simple/parent product, use its own mockups if they exist
-            if (productBeingEdited && productBeingEdited.mockups && productBeingEdited.mockups.length > 0) {
-                mockupsToDisplay = productBeingEdited.mockups;
-                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Définis ici pour ce produit (ils ne seront pas liés à un profil d'aliasing).`;
-                if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'self';
-            } else {
-                if (elements.mockupsSourceInfo) elements.mockupsSourceInfo.textContent = `Définir les mockups pour ce produit (ils seront stockés dans un profil d'aliasing si vous en sélectionnez un).`;
-                if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'none';
+            if (elements.mockupsSourceInfo) {
+                if (hasAliasChecked && selectedAliasKey) {
+                    elements.mockupsSourceInfo.textContent = `Définir les mockups pour ce produit (lié à l'alias "${selectedAliasKey}").`;
+                } else {
+                    elements.mockupsSourceInfo.textContent = `Définir les mockups pour ce produit (ils seront stockés dans un profil d'aliasing si vous en sélectionnez un).`;
+                }
             }
+            if (elements.mockupPathsContainer) elements.mockupPathsContainer.dataset.mockupSource = 'none';
         }
         if (elements.mockupPathsContainer && elements.addMockupPathBtn) populateMockupPaths(elements.mockupPathsContainer, elements.addMockupPathBtn, mockupsToDisplay);
     } else {
@@ -1466,20 +1466,8 @@ async function handleProductFormSubmit(event) {
             productData.alias = selectedAliasKey;
             console.log(`[ModalHandlers] Product ${newKey} alias set to: "${selectedAliasKey}"`);
 
-            const aliasObject = currentConfig[selectedAliasKey];
-            if (aliasObject && aliasObject.type === 'alias') {
-                // Mockups for a product with an alias should be saved directly ON THE ALIAS, not on the product itself.
-                // The current logic of getMockupPathsFromForm() gets the mockups displayed in the modal.
-                // The source of truth for these mockups when an alias is selected is the alias itself.
-                // So, update the alias object's mockups.
-                aliasObject.mockups = getMockupPathsFromForm(elements.mockupPathsContainer);
-                currentConfig[selectedAliasKey] = cleanObject(aliasObject);
-                console.log(`[ModalHandlers] Mockups saved to alias "${selectedAliasKey}":`, aliasObject.mockups);
-            } else {
-                 console.warn(`[ModalHandlers] Selected alias "${selectedAliasKey}" not found or not an alias type. Mockups not saved to alias.`);
-            }
-            // Ensure product's own mockups are removed if an alias is selected
-            delete productData.mockups;
+            // Keep mockups on the product even when an alias is selected
+            productData.mockups = getMockupPathsFromForm(elements.mockupPathsContainer);
         } else {
             // If alias checkbox is not checked, or no alias is selected, product handles its own mockups
             delete productData.alias; // Ensure alias property is removed if not linked
