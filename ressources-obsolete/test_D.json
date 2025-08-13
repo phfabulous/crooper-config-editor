@@ -1,0 +1,65 @@
+{
+  "Test": {
+    "name": "Test",
+    "type": "alias",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/Test",
+    "ERPCategory": "",
+    "genre": "",
+    "label": "",
+    "marque": "Fabulous Original",
+    "prefix": "TEST",
+    "price": "",
+    "product": "",
+    "remarque": "aucune",
+    "sizeImpression": "",
+    "stock": 9999,
+    "suffix": "",
+    "tax_status": "taxable",
+    "TEST": "",
+    "weight": "",
+    "mockups": [
+      {
+        "path": "AA",
+        "name": "BB"
+      }
+    ]
+  },
+  "AA": {
+    "name": "AA",
+    "type": "simple",
+    "alias": "Test",
+    "amazon": {
+      "DesCourtes": "",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/AA",
+    "ERPCategory": "",
+    "genre": "",
+    "label": "",
+    "marque": "Fabulous Original",
+    "prefix": "AA",
+    "price": "",
+    "product": "",
+    "remarque": "",
+    "sizeImpression": "",
+    "stock": 9999,
+    "suffix": "",
+    "tax_status": "taxable",
+    "TEST": "",
+    "weight": "",
+    "mockups": []
+  }
+}

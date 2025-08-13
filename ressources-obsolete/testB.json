@@ -1,0 +1,29 @@
+{
+  "Test": {
+    "type": "alias",
+    "name": "Test",
+    "prefix": "TEST",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/Test",
+    "mockups": [
+      {
+        "path": "AA",
+        "name": "BB"
+      }
+    ],
+    "remarque": "aucune",
+    "suffix": ""
+  },
+  "AA": {
+    "type": "simple",
+    "name": "AA",
+    "prefix": "AA",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/AA",
+    "alias": "Test"
+  }
+}

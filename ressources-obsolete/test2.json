@@ -1,0 +1,726 @@
+{
+  "TEST": {
+    "type": "alias",
+    "name": "TEST",
+    "prefix": "TEST",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/TEST",
+    "remarque": "aucune",
+    "mockups": [
+      {
+        "path": "AA",
+        "name": "BB"
+      }
+    ]
+  },
+  "tshirt": {
+    "mockups": [
+      {
+        "path": "C:/Sync/FabulousPh/Work/FabOriginal/Mockup/Couleur/t-shirt/ht/ht-rd",
+        "name": "{label}.jpg"
+      },
+      {
+        "path": "C:/Sync/FabulousPh/Work/FabOriginal/Mockup/Couleur/sweat/hs",
+        "name": "{label}.jpg"
+      }
+    ],
+    "type": "alias",
+    "name": "tshirt",
+    "aspect": "0.711",
+    "densite": "300",
+    "prefix": "",
+    "suffix": "",
+    "dimentions": "1621",
+    "sizeImpression": "4500x4500",
+    "remarque": "aucune",
+    "dossier": "/tshirt"
+  },
+  "A": {
+    "type": "simple",
+    "name": "A",
+    "prefix": "AAAA",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/A",
+    "alias": "TEST"
+  },
+  "mugsCeramique": {
+    "type": "simple",
+    "name": "mugsCeramique",
+    "prefix": "MUG",
+    "category": "accessories",
+    "genre": "unisex",
+    "product": "mugCeramic",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/mugsCeramique",
+    "amazon": {
+      "DesCourtes": "Le mug en Céramique de Fabulous Original vous garantit une impression indestructible et sans aucune surépaisseur. Pour des couleurs éclatantes et une image en haute définition il est traité par le dernier procédé de sublimation et vous assure une parfaite conservation pour plus de 1000 cycles de lavages.  Ce design exclusif créé par Fabulous Original est fièrement imprimé en France dans notre atelier du Tarn avec des encres écologiques certifiées OKEO TEX. Nous vous offrons une qualité d'impression exceptionnelle, conforme au plus haut standard de l'industrie, avec des couleurs éclatantes qui préserveront leurs brillances même avec le temps.",
+      "Title_FR": "Mug Céramique {AmazonTitleFr}"
+    },
+    "ERPCategory": "MUGS",
+    "price": "9.9",
+    "weight": "400",
+    "alias": "tshirt"
+  },
+  "SweatHomme": {
+    "alias": "tshirt",
+    "CompositeItem": "Bio_{prefix}_{color}_{taille}",
+    "tree": "{category}_{genre}_{product}",
+    "marque": "Fabulous Original",
+    "ERPCategory": "Bio Sweat Homme",
+    "type": "parent",
+    "category": "adult",
+    "genre": "male",
+    "product": "sweat",
+    "name": "SweatHomme",
+    "prefix": "Bio-SwHomme",
+    "sku": "FOR_{prefix}_{skuLabel}__{color}_{taille}",
+    "parentSku": "FOR_{prefix}_{label}",
+    "parentSkuOriginal": "FOR_{genre}_{product}_{label}",
+    "label": "",
+    "skuLabel": "",
+    "price": "{prixFabric}",
+    "stock": "9999",
+    "dossier": "/tshirt",
+    "weight": "250",
+    "length": "",
+    "width": "",
+    "height": "",
+    "picture_catalog": "{dossier}/{mockupChoice}_{color_FR}_hs{mockID}_{skuLabel}.jpg",
+    "picture_Original1": "https://storage.googleapis.com/mockup_public{dossier}/1_{color_FR}_hs{mockID}_{skuLabel}.jpg",
+    "picture_Original2": "https://storage.googleapis.com/mockup_public{dossier}/2_{color_FR}_hs{mockID}_{skuLabel}.jpg, https://storage.googleapis.com/mockup_public{dossier}/3_{color_FR}_hs{mockID}_{skuLabel}.jpg",
+    "amazon": {
+      "DesCourtes": "{AMZfabricTextFR}",
+      "Title_FR": "Sweat Shirt Coton Bio Homme {fabricAmazon} {AmazonTitleFr}"
+    },
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "prixFabric": "34.90",
+        "saleFabric": "54.90",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_hs1_{skuLabel}.jpg",
+        "picture_Amazon2": "_",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "prixFabric": "34.90",
+        "saleFabric": "54.90",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_hs1_{skuLabel}.jpg",
+        "picture_Amazon2": "_",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "prixFabric": "34.90",
+        "saleFabric": "54.90",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_hs1_{skuLabel}.jpg",
+        "picture_Amazon2": "_",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "prixFabric": "34.90",
+        "saleFabric": "54.90",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_hs{mockID}_{skuLabel}.jpg",
+        "picture_Amazon2": "_",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "prixFabric": "34.90",
+        "saleFabric": "54.90",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_hs{mockID}_{skuLabel}.jpg",
+        "picture_Amazon2": "_",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      }
+    }
+  },
+  "Test": {
+    "type": "parent",
+    "name": "Test",
+    "prefix": "test",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/Test",
+    "alias": "tshirt",
+    "CompositeItem": "Bio_{prefix}_{color}_{taille}",
+    "tree": "{category}_{genre}_{product}",
+    "sku": "FOR_{prefix}_{skuLabel}_{color}_{taille}",
+    "parentSku": "FOR_{prefix}_{label}",
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "green": {
+        "type": "child",
+        "color": "green",
+        "color_FR": "vert",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "yellow": {
+        "type": "child",
+        "color": "yellow",
+        "color_FR": "jaune",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "orange": {
+        "type": "child",
+        "color": "orange",
+        "color_FR": "orange",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      },
+      "purple": {
+        "type": "child",
+        "color": "purple",
+        "color_FR": "violet",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          },
+          "3XL": {
+            "taille": "3XL"
+          },
+          "4XL": {
+            "taille": "4XL"
+          },
+          "5XL": {
+            "taille": "5XL"
+          }
+        }
+      }
+    }
+  },
+  "TshirtHommeColRond": {
+    "type": "parent",
+    "name": "TshirtHommeColRond",
+    "prefix": "Bio-TSHColRnd",
+    "category": "adult",
+    "genre": "male",
+    "product": "tshirt",
+    "marque": "Fabulous Original",
+    "stock": "9999",
+    "tax_status": "taxable",
+    "dossier": "/TshirtHommeColRond",
+    "amazon": {
+      "DesCourtes": "{AMZfabricTextFR}",
+      "Title_FR": "T-shirt Coton Bio Homme Col Rond {fabricAmazon} {AmazonTitleFr}"
+    },
+    "ERPCategory": "Bio T-Shirt Homme Col Rond",
+    "weight": "120",
+    "alias": "tshirt",
+    "CompositeItem": "Bio_{prefix}_{color}_{taille}",
+    "tree": "{category}_{genre}_{product}",
+    "sku": "FOR_{prefix}_{skuLabel}_{color}_{taille}",
+    "parentSku": "FOR_{prefix}_{label}",
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_ht-rd1_{skuLabel}.jpg",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_ht-rd1_{skuLabel}.jpg",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "picture_Amazon1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_ht-rd1_{skuLabel}.jpg",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "picture_1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_ht-rd1_{skuLabel}.jpg",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "picture_1": "https://storage.googleapis.com/mockup_public{dossier}/Amazon_{color_FR}_ht-rd1_{skuLabel}.jpg",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          },
+          "XXL": {
+            "taille": "XXL"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1382 @@
+/* Amélioration lisibilité mockup path dans modale */
+.mockup-path-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f7fafc;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+}
+.mockup-label {
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 2px;
+}
+.mockup-path-input {
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    font-size: 1em;
+    width: 100%;
+    min-width: 400px;
+    max-width: 100%;
+    resize: horizontal;
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid #b0bec5;
+    border-radius: 5px;
+    padding: 8px;
+}
+.mockup-name-input {
+    font-size: 1em;
+    width: 100%;
+    min-width: 300px;
+    max-width: 100%;
+    background: #fff;
+    border: 1px solid #b0bec5;
+    border-radius: 5px;
+    padding: 8px;
+}
+.copy-mockup-path-btn {
+    align-self: flex-end;
+    background: #e3f2fd;
+    color: #1976d2;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+.copy-mockup-path-btn:hover {
+    background: #bbdefb;
+    color: #0d47a1;
+}
+/* style.css */
+/* Base Styles */
+html, body { /* Assurez-vous que HTML et BODY prennent 100% de la hauteur */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent body scroll, content areas will scroll */
+}
+
+/* --- HEADER MODERNISÉ --- */
+.app-header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+}
+.header-right button {
+    margin-left: 8px;
+}
+#themeToggleBtn {
+    font-size: 1.2em;
+    background: none;
+    color: #6c757d;
+}
+#themeToggleBtn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+#userProfileBtn {
+    font-size: 1.2em;
+    background: none;
+    color: #6c757d;
+}
+#userProfileBtn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+/* Header Styles */
+#app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    z-index: 101; /* Au-dessus d'autres éléments principaux */
+    position: relative; /* TRÈS IMPORTANT pour le positionnement du dropdown */
+}
+
+.header-left, .header-right, .header-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.current-file-display {
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Base button styles */
+button {
+    padding: 8px 15px;
+    font-size: 0.95em;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Primary buttons */
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Icon buttons (for menu, actions on cards) */
+.icon-btn {
+    background: none;
+    color: #6c757d;
+    font-size: 1.4em;
+    padding: 5px;
+    border-radius: 4px;
+}
+.icon-btn:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+
+/* Dropdown Menu Styles (for global actions) */
+#mainMenuDropdown {
+    position: absolute;
+    top: calc(100% + 5px); /* Positionne juste en dessous du header, avec un petit espace */
+    left: 20px; /* Aligné avec le bouton menu */
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 250px;
+    z-index: 1000; /* Assure qu'il est au-dessus de tout */
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    /* Styles de débogage temporaires */
+    border: 2px solid red !important; /* TEMPORAIRE: Bordure rouge pour le voir */
+}
+#mainMenuDropdown.visible {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: #f8f8f8 !important; /* TEMPORAIRE: Couleur de fond distincte */
+}
+.dropdown-menu .menu-section-title {
+    font-weight: bold;
+    color: #888;
+    padding: 8px 15px 5px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+}
+.dropdown-menu .menu-item {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    background: none;
+    color: #333;
+    border-radius: 0;
+    font-size: 1em;
+}
+.dropdown-menu .menu-item:hover {
+    background-color: #f0f2f5;
+}
+
+
+/* Main Wrapper Styles */
+#main-wrapper {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* --- SIDEBAR MODERNISÉE --- */
+.sidebar-search {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#sidebarSearchInput {
+    width: 90%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #b0bec5;
+    font-size: 1em;
+    background: #f8fafc;
+    color: #222;
+    transition: border 0.2s;
+}
+#sidebarSearchInput:focus {
+    border: 1.5px solid #85c1e9;
+    outline: none;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out;
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.sidebar.collapsed .saved-templates-container,
+.sidebar.collapsed .sidebar-actions,
+.sidebar.collapsed h2 {
+    display: none;
+}
+
+.sidebar.collapsed .toggle-sidebar-btn {
+    transform: rotate(180deg);
+    left: 50%;
+    transform-origin: center center;
+    top: 50%;
+}
+
+
+.sidebar h2 {
+    color: #85c1e9;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Saved Templates section */
+.saved-templates-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#noSavedTemplatesMessage {
+    text-align: center;
+    color: #a0b0c0;
+    font-style: italic;
+    padding: 20px;
+}
+
+.template-item {
+    background-color: #3a5068;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.template-item:hover {
+    background-color: #4c6a85;
+    transform: translateY(-2px);
+}
+
+.template-item.selected {
+    border: 2px solid #85c1e9;
+}
+
+.template-item .template-name-container {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.template-item .friendly-name {
+    font-weight: 500;
+    color: #fff;
+    font-size: 1em;
+    display: block;
+}
+
+.template-item .tech-name {
+    font-size: 0.75em;
+    color: #a0b0c0;
+    display: block;
+}
+
+.template-item .template-actions {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.template-item .template-actions button {
+    background: none;
+    color: #ccc;
+    padding: 3px 6px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    line-height: 1;
+    text-align: center;
+    min-width: 30px;
+}
+.template-item .template-actions button:hover {
+    background-color: #607d8b;
+    color: white;
+}
+.template-item .template-actions button.delete-template-btn {
+    color: #ff7f7f;
+}
+.template-item .template-actions button.delete-template-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.template-section {
+    margin-bottom: 10px;
+}
+
+.template-section-header {
+    background-color: #263544;
+    color: #fff;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.template-section-items {
+    padding-left: 10px;
+}
+
+
+/* Content Area Styles */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* ANCIEN: top-controls - SUPPRIMÉ */
+.top-controls {
+    display: none;
+}
+
+.product-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#noProductMessage {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 50px;
+}
+
+
+.product-card {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 0;
+    margin-bottom: 18px;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: box-shadow 0.2s, border 0.2s;
+    cursor: pointer;
+}
+.product-card.selected {
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 16px rgba(0,123,255,0.10);
+}
+.product-card .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7fafc;
+    padding: 14px 20px 12px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.13em;
+    font-weight: 600;
+}
+.product-card .product-header span {
+    font-size: 1.08em;
+    font-weight: 600;
+    color: #222;
+}
+.product-card .product-actions {
+    display: flex;
+    gap: 8px;
+}
+.product-card .product-actions button {
+    background: #e9ecef;
+    color: #495057;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+}
+.product-card .product-actions button:hover {
+    background: #dde1e6;
+    color: #007bff;
+}
+.product-card .edit-btn { background: #fffbe7; color: #e65100; }
+.product-card .edit-btn:hover { background: #ffe082; color: #b26a00; }
+.product-card .duplicate-btn { background: #e3f7fa; color: #00bcd4; }
+.product-card .duplicate-btn:hover { background: #b3e0ed; color: #0097a7; }
+.product-card .delete-btn { background: #ffeaea; color: #c62828; }
+.product-card .delete-btn:hover { background: #ffcdd2; color: #a71d2a; }
+.product-card .product-details {
+    padding: 18px 22px 16px 22px;
+    background: #fff;
+    font-size: 1em;
+}
+.product-card.collapsed .product-details {
+    display: none;
+}
+.product-card .editable-field {
+    border: 1px solid #e0e0e0;
+    padding: 5px 8px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background-color: #f8fafc;
+    width: calc(100% - 12px);
+    pointer-events: none;
+    color: #555;
+}
+.product-card.duplicate {
+    border: 2px solid #ff7f7f;
+    box-shadow: 0 0 10px rgba(255, 127, 127, 0.13);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 30px 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+#productModal .modal-content {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(25, 118, 210, 0.10);
+    padding: 32px 36px 28px 36px;
+    max-width: 700px;
+    width: 95%;
+    position: relative;
+    font-size: 1.04em;
+    animation: modalFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+    scrollbar-width: thin;
+    scrollbar-color: #bbdefb #e3f2fd;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#productModal .close-button {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-size: 1.7em;
+    color: #1976d2;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10;
+}
+#productModal .close-button:hover {
+    color: #c62828;
+}
+#productModal h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    color: #1976d2;
+    font-size: 1.45em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+#productForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+#dynamicFormFields .form-group {
+    margin-bottom: 12px;
+}
+#dynamicFormFields label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 3px;
+}
+#dynamicFormFields input[type="text"],
+#dynamicFormFields input[type="number"],
+#dynamicFormFields select,
+#dynamicFormFields textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 6px;
+    border: 1.2px solid #b0bec5;
+    font-size: 1em;
+    background: #f8fafc;
+    color: #222;
+    transition: border 0.2s;
+}
+#dynamicFormFields input:focus,
+#dynamicFormFields select:focus,
+#dynamicFormFields textarea:focus {
+    border: 1.5px solid #1976d2;
+    outline: none;
+    background: #fff;
+}
+#productForm .modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+#productForm .modal-actions button[type="submit"] {
+    background: #1976d2;
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 1.08em;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#productForm .modal-actions button[type="submit"]:hover {
+    background: #125ea2;
+}
+#productForm .secondary-action-btn {
+    background: #e3f2fd;
+    color: #1976d2;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+#productForm .secondary-action-btn:hover {
+    background: #bbdefb;
+    color: #0d47a1;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 24px);
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+    background-color: #fcfcfc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.2);
+    background-color: white;
+}
+
+.form-group textarea {
+    min-height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Container for actions inside confirmation modal */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Secondary action buttons in modals */
+.modal-actions .secondary-action-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+.modal-actions .secondary-action-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Alias Quick Access Section */
+.alias-quick-access-container {
+    background-color: #e0f7fa;
+    border-left: 5px solid #00acc1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.alias-quick-access-container h2 {
+    color: #00838f;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 1.5em;
+}
+
+.alias-blocks-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 50px;
+}
+
+.alias-block {
+    background-color: #00bcd4;
+    color: white;
+    padding: 8px 18px 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: relative;
+}
+.alias-block:hover {
+    background-color: #0097a7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.alias-block .alias-label {
+    flex: 1;
+    font-size: 1.08em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.edit-alias-btn {
+    background: #fff;
+    color: #00bcd4;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.edit-alias-btn:hover {
+    background: #e0f7fa;
+    color: #0097a7;
+}
+
+/* Styles pour les champs dynamiques dans la modale d'édition/ajout de produit */
+#dynamicFormFields .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+#dynamicFormFields .form-group label {
+    flex: 0 0 35%;
+    margin-bottom: 0;
+}
+#dynamicFormFields .form-group input[type="text"],
+#dynamicFormFields .form-group input[type="number"],
+#dynamicFormFields .form-group select,
+#dynamicFormFields .form-group textarea {
+    flex: 1;
+    width: auto;
+    padding: 6px 8px;
+    box-sizing: border-box;
+}
+
+#dynamicFormFields .field-order-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.propagate-field-label {
+    margin-left: 6px;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.help-text {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8em;
+    color: #555;
+}
+
+#dynamicFormFields .move-field-up-btn,
+#dynamicFormFields .move-field-down-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+#dynamicFormFields .move-field-up-btn:hover,
+#dynamicFormFields .move-field-down-btn:hover {
+    background-color: #0069d9;
+}
+
+/* Styles pour la modale Manage Fields */
+#manageFieldsModal .modal-content {
+    max-width: 1100px;
+}
+
+.field-management-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.field-management-controls label {
+    font-weight: bold;
+}
+
+.field-management-controls select,
+.field-management-controls button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.field-management-controls button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.field-management-controls button:hover {
+    background-color: #0056b3;
+}
+
+#fieldsListContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    cursor: grab;
+}
+
+.field-row:last-child {
+    border-bottom: none;
+}
+
+.field-row.field-header {
+    font-weight: bold;
+    background-color: #e9ecef;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.field-row input[type="text"],
+.field-row select {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+    flex-grow: 1;
+}
+
+/* Spécifications de largeur pour les colonnes des champs */
+.field-label-col, .field-label-input { flex: 3; }
+.field-key-col, .field-key-input { flex: 3; }
+.field-type-col, .field-type-select { flex: 2; }
+.field-required-col { flex: 1; text-align: center; }
+.field-required-checkbox-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; } /* Added for checkbox centering */
+.field-options-col, .field-options-input { flex: 4; }
+.field-actions-col {
+    flex: 1.5;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+
+.field-row input[type="checkbox"] {
+    margin: 0;
+}
+
+.field-row .remove-field-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.field-row .remove-field-btn:hover {
+    background-color: #c82333;
+}
+
+.field-row .move-field-up-btn,
+.field-row .move-field-down-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-right: 4px;
+}
+
+.field-row .move-field-up-btn:hover,
+.field-row .move-field-down-btn:hover {
+    background-color: #0069d9;
+}
+
+#saveFieldsConfigBtn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#saveFieldsConfigBtn:hover {
+    background-color: #218838;
+}
+/* Styles for custom fields in product modal */
+#customFieldsContainer .custom-field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+#customFieldsContainer .custom-field-row input[type="text"] {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+#customFieldsContainer .custom-field-row button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#customFieldsContainer .promote-field-btn {
+    background-color: #17a2b8;
+    color: white;
+}
+#customFieldsContainer .promote-field-btn:hover {
+    background-color: #117a8b;
+}
+
+#customFieldsContainer .remove-custom-field-btn {
+    background-color: #dc3545;
+    color: white;
+}
+#customFieldsContainer .remove-custom-field-btn:hover {
+    background-color: #c82333;
+}
+
+/* Styles for variant default fields */
+#variantDefaultFieldsContainer {
+    margin-bottom: 10px;
+}
+
+.variant-default-field-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.variant-default-field-row input[type="text"],
+.variant-default-field-row select {
+    padding: 4px 6px;
+    font-size: 0.9em;
+}
+
+.variant-default-field-row button {
+    padding: 4px 8px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+}
+
+.variant-default-field-row button:hover {
+    background-color: #c82333;
+}
+
+/* --- TOASTS/NOTIFICATIONS --- */
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+.toast {
+    background: #222;
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    font-size: 1em;
+    opacity: 0.97;
+    min-width: 220px;
+    max-width: 350px;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+}
+.toast.success { background: #28a745; }
+.toast.error { background: #c82333; }
+.toast.info { background: #007bff; }
+
+/* --- THEME SOMBRE (préparation) --- */
+body.dark {
+    background: #181a1b;
+    color: #e0e0e0;
+}
+body.dark .app-header {
+    background: #23272b;
+    color: #e0e0e0;
+}
+body.dark .sidebar {
+    background: #23272b;
+    color: #e0e0e0;
+}
+body.dark .content-area {
+    background: #23272b;
+    color: #e0e0e0;
+}
+body.dark .product-container {
+    background: #23272b;
+    color: #e0e0e0;
+}
+body.dark .alias-quick-access-container {
+    background: #1e2a2f;
+    border-left: 5px solid #00acc1;
+}
+body.dark #sidebarSearchInput {
+    background: #23272b;
+    color: #e0e0e0;
+    border: 1px solid #374151;
+}
+body.dark #toast-container .toast {
+    background: #333;
+    color: #fff;
+}
+body.dark .toast.success { background: #218838; }
+body.dark .toast.error { background: #a71d2a; }
+body.dark .toast.info { background: #0056b3; }
+/* --- MODERNISATION TABLEAU VARIANTS MODALE PRODUIT --- */
+.variants-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.98em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.variants-table th, .variants-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+.variants-table th {
+    background: #e3f2fd;
+    color: #1976d2;
+    font-weight: 600;
+}
+.variants-table tr:last-child td {
+    border-bottom: none;
+}
+.variants-table td {
+    color: #333;
+}
+@media (max-width: 600px) {
+    .variants-table, .variants-table thead, .variants-table tbody, .variants-table th, .variants-table td, .variants-table tr {
+        display: block;
+    }
+    .variants-table thead tr {
+        display: none;
+    }
+    .variants-table tr {
+        margin-bottom: 12px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .variants-table td {
+        padding: 10px 12px;
+        border: none;
+        position: relative;
+    }
+    .variants-table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #1976d2;
+        display: block;
+        margin-bottom: 4px;
+    }
+}
+
+/* --- STYLE BOUTON SUPPRESSION VARIANT --- */
+.delete-variant-btn {
+    background: #ffeaea;
+    color: #c62828;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin: 0 auto;
+}
+.delete-variant-btn:hover {
+    background: #ffcdd2;
+    color: #a71d2a;
+}
+
+/* --- UI/UX : Amélioration ergonomie et clarté section variants dans la modale produit --- */
+#parentFields h3, #parentFields h4 {
+    color: #1976d2;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+#variantGenerationContainer {
+    background: #f7fafc;
+    border-radius: 8px;
+    padding: 16px 18px 10px 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.variant-batch-group {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+.variant-batch-group:last-child {
+    border-bottom: none;
+}
+#variantDefaultFieldsSection {
+    margin-top: 10px;
+    background: #e3f2fd;
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+#generateVariantsBtn {
+    background: #1976d2;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#generateVariantsBtn:hover {
+    background: #125ea2;
+}
+.current-variants-display {
+    margin-top: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px 10px 8px 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.subvariant-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #e3f2fd;
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-bottom: 4px;
+    font-size: 0.97em;
+}
+
+/* --- UI/UX : Améliorations supplémentaires modale produit --- */
+#productModal .modal-content {
+    animation: modalFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#productModal .form-group input:disabled,
+#productModal .form-group select:disabled,
+#productModal .form-group textarea:disabled {
+    background: #f0f0f0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+#productModal .form-group .error-message {
+    color: #c62828;
+    font-size: 0.93em;
+    margin-top: 2px;
+    margin-bottom: 0;
+    display: block;
+    min-height: 18px;
+}
+#productModal .form-group input:invalid,
+#productModal .form-group select:invalid,
+#productModal .form-group textarea:invalid {
+    border-color: #c62828;
+}
+#productModal .form-group input:focus:invalid,
+#productModal .form-group select:focus:invalid,
+#productModal .form-group textarea:focus:invalid {
+    box-shadow: 0 0 0 2px #ffcdd2;
+}
+#productModal .help-text {
+    color: #1976d2;
+    font-size: 0.93em;
+    margin-top: 2px;
+    margin-bottom: 0;
+    display: block;
+}
+#productModal .modal-content::-webkit-scrollbar {
+    width: 8px;
+    background: #e3f2fd;
+    border-radius: 8px;
+}
+#productModal .modal-content::-webkit-scrollbar-thumb {
+    background: #bbdefb;
+    border-radius: 8px;
+}
+
+/* Responsive modale produit */
+@media (max-width: 600px) {
+    #productModal .modal-content {
+        padding: 16px 4vw 16px 4vw;
+        font-size: 0.98em;
+    }
+    #productForm .modal-actions {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+}
+
+/* --- TOOLTIP MODERNE --- */
+[data-tooltip], .has-tooltip {
+  position: relative;
+  cursor: help;
+}
+[data-tooltip]:hover::after, .has-tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: 125%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  white-space: pre-line;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 9999;
+  min-width: 120px;
+  max-width: 260px;
+  text-align: center;
+}
+[data-tooltip]:hover::before, .has-tooltip:hover::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 115%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top: none;
+  border-bottom: 7px solid #222;
+  z-index: 10000;
+}
+
+[data-tooltip]::after, [data-tooltip]::before,
+.has-tooltip::after, .has-tooltip::before {
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+[data-tooltip]:hover::after, [data-tooltip]:hover::before,
+.has-tooltip:hover::after, .has-tooltip:hover::before {
+  opacity: 1;
+}

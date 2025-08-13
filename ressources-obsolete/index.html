@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Crooper Config Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-header">
+        <div class="header-left">
+            <button id="mainMenuBtn" class="icon-btn">&#9776;</button> <span class="app-title">Crooper Config Editor</span>
+        </div>
+        <div class="header-center">
+            <span class="current-file-display" id="currentConfigFileName">No Configuration Loaded</span>
+        </div>
+        <div class="header-right">
+            <button id="addProductBtn" class="primary-btn">Add New Product</button>
+        </div>
+    </div>
+
+    <div id="main-wrapper">
+        <div id="sidebar" class="sidebar">
+            <button id="toggleSidebarBtn" class="toggle-sidebar-btn">&lt;</button>
+            <h2>Saved Templates</h2>
+            <div id="savedTemplatesContainer" class="saved-templates-container">
+                <p id="noSavedTemplatesMessage">No product templates saved yet.</p>
+            </div>
+            <div class="sidebar-actions">
+                </div>
+        </div>
+
+        <div id="content-area" class="content-area">
+            <div id="aliasQuickAccess" class="alias-quick-access-container">
+                <h2>Profils d'Aliasing</h2>
+                <div id="aliasBlocksContainer" class="alias-blocks-container">
+                    <p id="noAliasesMessage">Aucun profil d'aliasing défini.</p>
+                </div>
+            </div>
+
+
+            <div id="productContainer" class="product-container">
+                <p id="noProductMessage">No configuration loaded. Load a file or add a new product.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainMenuDropdown" class="dropdown-menu hidden">
+        <div class="menu-section-title">File</div>
+        <button id="newConfigBtn" class="menu-item">New Configuration</button>
+        <button id="loadConfigBtn" class="menu-item">Load Configuration</button>
+        <button id="saveConfigBtn" class="menu-item">Save Configuration</button>
+        <button id="saveAsConfigBtn" class="menu-item">Save Configuration As...</button>
+        <button id="importCsvBtn" class="menu-item">Import CSV</button>
+        <button id="exportCsvBtn" class="menu-item">Export CSV</button>
+        <button id="generateCsvTemplateBtn" class="menu-item">Generate CSV Template</button>
+        <div class="menu-section-title">Tools</div>
+        <button id="manageFieldsBtn" class="menu-item">Manage Fields</button>
+        </div>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeButton">&times;</span> <h2><span id="modalTitle">Add New Product</span></h2>
+            <form id="productForm">
+                <input type="hidden" id="originalProductName" value="">
+
+                <div id="dynamicFormFields"></div>
+
+                <div id="aliasSelectionGroup" class="form-group hidden">
+                    <input type="checkbox" id="hasAliasCheckbox">
+                    <label for="hasAliasCheckbox" style="display: inline-block; margin-left: 5px;">Utiliser un profil d'aliasing existant ?</label>
+                    <div id="aliasDropdownContainer" class="hidden">
+                        <label for="productAliasSelect">Sélectionner un profil d'aliasing:</label>
+                        <select id="productAliasSelect">
+                            <option value="">-- Sélectionner un Alias --</option>
+                        </select>
+                        <span class="error-message" id="productAliasError"></span>
+                    </div>
+                </div>
+
+                <div id="mockupsSectionInModal" class="product-type-fields hidden">
+                    <h3>Mockups Paths:</h3>
+                    <div class="mockups-info">
+                        <p id="mockupsSourceInfo">Définis ici pour ce groupe d'aliasing.</p>
+                    </div>
+                    <div id="mockupPathsContainer">
+                        <button type="button" id="addMockupPathBtn">Add Mockup Path</button>
+                    </div>
+                </div>
+
+                <div id="customFieldsSection" class="product-type-fields">
+                    <h3>Champs personnalisés :</h3>
+                    <div id="customFieldsContainer">
+                        </div>
+                    <button type="button" id="addCustomFieldBtn">Ajouter un champ personnalisé</button>
+                </div>
+
+
+                <div id="parentFields" class="product-type-fields hidden">
+                    <h3>Variant Generation:</h3>
+                    <div id="variantGenerationContainer">
+                        <div class="variant-batch-group">
+                            <h4>Variant Group 1 (Primary)</h4>
+                            <div class="form-group">
+                                <label for="variant1Type">Variant 1 Type (e.g., color):</label>
+                                <input type="text" id="variant1Type" value="color">
+                            </div>
+                            <div class="form-group">
+                                <label for="variant1Values">Variant 1 Values (comma-separated, e.g., white, black, red):</label>
+                                <input type="text" id="variant1Values">
+                                <small>Use predefined values: <span class="predefined-values" data-target="variant1Values">colors</span></small>
+                            </div>
+                        </div>
+
+                        <div class="variant-batch-group">
+                            <h4>Variant Group 2 (Secondary, Optional)</h4>
+                            <div class="form-group">
+                                <label for="variant2Type">Variant 2 Type (e.g., taille):</label>
+                                <input type="text" id="variant2Type" value="taille">
+                            </div>
+                            <div class="form-group">
+                                <label for="variant2Values">Variant 2 Values (comma-separated, e.g., XS, S, M):</label>
+                                <input type="text" id="variant2Values">
+                                <small>Use predefined values: <span class="predefined-values" data-target="variant2Values">sizes</span></small>
+                            </div>
+                        </div>
+                        <button type="button" id="generateVariantsBtn">Generate Variants</button>
+                    </div>
+
+                    <h3>Current Variants (generated/edited):</h3>
+                    <div id="currentVariantsDisplay" class="current-variants-display">
+                        <p>No variants generated yet.</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit">Save Product</button>
+                    <button type="button" id="saveProductAsTemplateBtn" class="secondary-action-btn">Save As Template</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="saveTemplateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeSaveTemplateModalBtn">&times;</span>
+            <h2>Save Product as Template</h2>
+            <form id="saveTemplateForm">
+                <div class="form-group">
+                    <label for="templateFriendlyName">Friendly Name (e.g., "My T-shirt Base"):</label>
+                    <input type="text" id="templateFriendlyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="templateTechnicalName">Technical Name (auto-filled):</label>
+                    <input type="text" id="templateTechnicalName" readonly>
+                </div>
+                <button type="submit">Save Template</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="aliasEditModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeAliasEditModalBtn">&times;</span>
+            <h2>Éditer Profil d'Aliasing: <span id="aliasEditName"></span></h2>
+            <form id="aliasEditForm">
+                <input type="hidden" id="aliasEditOriginalName" value="">
+
+                <div class="form-group">
+                    <label for="aliasEditAspect">Aspect Ratio:</label>
+                    <input type="text" id="aliasEditAspect">
+                </div>
+                <div class="form-group">
+                    <label for="aliasEditDensite">Density:</label>
+                    <input type="text" id="aliasEditDensite">
+                </div>
+                <div class="form-group">
+                    <label for="aliasEditDimentions">Dimensions:</label>
+                    <input type="text" id="aliasEditDimentions">
+                </div>
+                <div class="form-group">
+                    <label for="aliasEditSizeImpression">Impression Size (WxH):</label>
+                    <input type="text" id="aliasEditSizeImpression"> </div>
+                <h3>Mockups Paths:</h3>
+                <div id="aliasEditDirectMockupsContainer" class="mockup-path-source">
+                    <p class="mockups-source-label">Définis directement sur ce profil:</p>
+                    <div id="aliasEditMockupPathsContainer">
+                        <button type="button" id="addAliasEditMockupPathBtn">Add Mockup Path</button>
+                    </div>
+                </div>
+                <div id="aliasEditInheritedMockupsContainer" class="mockup-path-source hidden">
+                    <p class="mockups-source-label">Hérités des produits associés:</p>
+                    <div id="inheritedMockupsList">
+                        </div>
+                </div>
+
+                <button type="submit">Save Profil d'Aliasing</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="manageFieldsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeManageFieldsModalBtn">&times;</span>
+            <h2>Manage Known Fields</h2>
+            <div class="field-management-controls">
+                <label for="productTypeForFields">Select Product Type:</label>
+                <select id="productTypeForFields">
+                    <option value="alias">Groupe d'Aliasing</option>
+                    <option value="simple">Produit Simple</option>
+                    <option value="parent">Produit Parent</option>
+                    <option value="all">All (Common Fields)</option>
+                </select>
+                <button id="addNewFieldBtn">Add New Field</button>
+            </div>
+            <div id="fieldsListContainer">
+                </div>
+            <button id="saveFieldsConfigBtn">Save Fields Configuration</button>
+        </div>
+    </div>
+
+    <datalist id="crooperVariableSuggestions"></datalist>
+    <datalist id="knownFieldSuggestions"></datalist>
+
+
+    <script type="module" src="./src/renderer/mainRenderer.js"></script>
+</body>
+</html>

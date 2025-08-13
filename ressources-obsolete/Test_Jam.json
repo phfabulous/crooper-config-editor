@@ -1,0 +1,3610 @@
+{
+  "HousseCoussin": {
+    "name": "HousseCoussin",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4843x4843",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/HousseCoussin",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "L_133": {
+    "name": "L_133",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1.33,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/L_133",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "L_140": {
+    "name": "L_140",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1.406,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "L_140",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "L_150": {
+    "name": "L_150",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1.5,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/L_150",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "mugMetal": {
+    "name": "mugMetal",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "2484x2484",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 3.14,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/mugMetal",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "mugsCeramique": {
+    "name": "mugsCeramique",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "2598x2598",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 2.44,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/mugsCeramique",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "P_133": {
+    "name": "P_133",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 0.751,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/P_133",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "P_140": {
+    "name": "P_140",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 0.711,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/P_140",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "P_150": {
+    "name": "P_150",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 0.666,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/P_150",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "poster": {
+    "name": "poster",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": 4500,
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": "NaN",
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/poster",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "tapisDeSouris": {
+    "name": "tapisDeSouris",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "2835x2835",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1.182,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/tapisDeSouris",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "TDS_GrandFormat": {
+    "name": "TDS_GrandFormat",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4606x2717",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 1.7,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/TDS_GrandFormat",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "tote": {
+    "name": "tote",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "alias",
+    "sizeImpression": "4500x4500",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 0.878,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/tote",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "tshirt": {
+    "name": "tshirt",
+    "type": "alias",
+    "prefix": "",
+    "price": "",
+    "product": "",
+    "sizeImpression": "",
+    "sku": "",
+    "compositeItem": "",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "",
+      "Title_FR": ""
+    },
+    "aspect": 0.711,
+    "category": "",
+    "CompositeItem": "",
+    "densite": 300,
+    "dimentions": "",
+    "dossier": "/tshirt",
+    "ERPCategory": "",
+    "genre": "",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "BoiteBois": {
+    "name": "BoiteBois",
+    "type": "parent",
+    "prefix": "Wb",
+    "price": 12.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{taille}",
+    "compositeItem": "boite-bois-{taille}",
+    "parentSku": "COR_Wb_{Label}",
+    "weight": "",
+    "width": 11,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Boite en Bois Coffret – {AmazonTitleFr} - Petit ou Grand Format",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/woodenBox",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 11,
+    "label": "",
+    "length": 3.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_3_wb_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_2_wb_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_1_wb_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_4_wb_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_5_wb_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_6_wb_{skuLabel}.jpg",
+    "picture_7": "https://storage.googleapis.com/mockup_public_col/{dossier}/wb-info.png",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "S": {
+        "type": "child",
+        "taille": "S",
+        "taille_FR": "S"
+      },
+      "L": {
+        "type": "child",
+        "taille": "L",
+        "taille_FR": "L"
+      }
+    }
+  },
+  "BoiteMétal": {
+    "name": "BoiteMétal",
+    "type": "parent",
+    "prefix": "Mbx",
+    "price": 18.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "boite-sucre-metal",
+    "parentSku": "COR_Mbx_{Label}",
+    "weight": 150,
+    "width": 11,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Boite en Métal {AmazonTitleFr} - 11 x 18,5 x 5,5 cm - Boite de rangement, clé, outils, boite à Lunch, Sucre, Biscuit",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/metal_box",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 5.5,
+    "label": "",
+    "length": 18.2,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_mb-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mb-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mb-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mb-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_mb-{color_FR}_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/metalbox-info.png",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "BouteilleInox": {
+    "name": "BouteilleInox",
+    "type": "parent",
+    "prefix": "Btx500",
+    "price": 19.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "bouteille-inox-500-blanc",
+    "parentSku": "COR_Btx500_{Label}",
+    "weight": 325,
+    "width": 8,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Bouteille Inox Gourde Thermo Isotherme – {AmazonTitleFr} - 500ml",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/gourde_inox",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 24,
+    "label": "",
+    "length": 8,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_th_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_th_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_th_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_th_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_th_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/thermos-info.png",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "CarreauxCéramique": {
+    "name": "CarreauxCéramique",
+    "type": "parent",
+    "prefix": "CRT",
+    "price": 3.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{taille}_{quantite}",
+    "compositeItem": "Carreau-ceramique-{taille}",
+    "parentSku": "COR_CRT_{Label}",
+    "weight": "",
+    "width": 4.5,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Carreaux Ceramique Décoratif – {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/ceramicTiles",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 0.5,
+    "label": "",
+    "length": 4.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_1_ct_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_2_ct_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_3_ct_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_4_ct_{skuLabel}.jpg",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "5": {
+        "type": "child",
+        "taille": "5",
+        "taille_FR": "5",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          },
+          "x9": {
+            "quantite": "x9"
+          }
+        }
+      },
+      "10": {
+        "type": "child",
+        "taille": "10",
+        "taille_FR": "10",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          },
+          "x9": {
+            "quantite": "x9"
+          }
+        }
+      },
+      "15": {
+        "type": "child",
+        "taille": "15",
+        "taille_FR": "15",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          },
+          "x9": {
+            "quantite": "x9"
+          }
+        }
+      },
+      "20": {
+        "type": "child",
+        "taille": "20",
+        "taille_FR": "20",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          },
+          "x9": {
+            "quantite": "x9"
+          }
+        }
+      }
+    }
+  },
+  "CoussinDeChaise": {
+    "name": "CoussinDeChaise",
+    "type": "parent",
+    "prefix": "Ccc",
+    "price": 14.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "coussin-chaise-{type}",
+    "parentSku": "COR_Ccc_{Label}",
+    "weight": 150,
+    "width": 40,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Coussin de Chaise {AmazonTitleFr} - 40 cm - Galette de Chaise",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/coussin_chaise",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1.5,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_cr-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_cr-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_cr-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/cush-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "variant": {
+          "carre": {
+            "type": "carre"
+          },
+          "rond": {
+            "type": "rond"
+          }
+        }
+      }
+    }
+  },
+  "HoodiesEnfant": {
+    "name": "HoodiesEnfant",
+    "type": "parent",
+    "prefix": "HoE",
+    "price": 34.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "Hoodies-Enfant-{taille}-{color}",
+    "parentSku": "COR_HoE_{Label}",
+    "weight": 300,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Hoodie Sweat à Capuche Enfant {AmazonTitleFr} - Premium",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "kid",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/hoodiesEnfant",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_kdh-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_kdh-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_kdh-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "variant": {
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      },
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      }
+    }
+  },
+  "HorlogeVerre": {
+    "name": "HorlogeVerre",
+    "type": "parent",
+    "prefix": "Hor",
+    "price": 27.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "horloge-verre",
+    "parentSku": "COR_Hor_{Label}",
+    "weight": 300,
+    "width": 20,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Horloge Murale en Verre – {AmazonTitleFr} - Diamètre 20 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/clock",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 4,
+    "label": "",
+    "length": 20,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_cl-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_cl-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_cl-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/clock-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "HousseCoussinLin": {
+    "name": "HousseCoussinLin",
+    "type": "parent",
+    "prefix": "HCL40",
+    "price": 12.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "housse-coussin-lin-40",
+    "parentSku": "COR_HCL40_{Label}",
+    "weight": 150,
+    "width": 40,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Housse de Coussin en Lin – {AmazonTitleFr} - 40 x 40 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pillowLin",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pil_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pil_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pil_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/pillowlin-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "HousseCoussinPeluche": {
+    "name": "HousseCoussinPeluche",
+    "type": "parent",
+    "prefix": "HPlu40",
+    "price": 12.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "housse-coussin-peluche-40-{color}",
+    "parentSku": "COR_HPlu40_{Label}",
+    "weight": 85,
+    "width": 40,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Housse de Coussin en Peluche {AmazonTitleFr} - 40 x 40 cm Toucher Peluche",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pillow_color",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1.5,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pic_{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pic_{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pic_{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pic_{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_pic_{color_FR}_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/pillowcolor-info.png",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "lime": {
+        "type": "child",
+        "color": "lime",
+        "color_FR": "lime"
+      }
+    }
+  },
+  "HousseCoussinSimili-cuir": {
+    "name": "HousseCoussinSimili-cuir",
+    "type": "parent",
+    "prefix": "HCui40",
+    "price": 10.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "housse-coussin-cuir-40-{color}",
+    "parentSku": "COR_HCui40_{Label}",
+    "weight": 150,
+    "width": 40,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Housse de Coussin Similicuir {AmazonTitleFr} - 40 x 40 cm Toucher Cuir",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pillowLeather",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1.5,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pif_{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pif_{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pif_{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pif_{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_pif_{color_FR}_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/pillowfaux-info.png",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "camel": {
+        "type": "child",
+        "color": "camel",
+        "color_FR": "camel"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "HousseCoussinVelours": {
+    "name": "HousseCoussinVelours",
+    "type": "parent",
+    "prefix": "HVel40",
+    "price": 14.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "housse-coussin-velours-40",
+    "parentSku": "COR_HVel40_{Label}",
+    "weight": 85,
+    "width": 40,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Housse de Coussin en Velours {AmazonTitleFr} - 40 x 40 cm Toucher Velours",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pillow_velour",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1.5,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pilv-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pilv-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pilv-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pilv-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/pillowvelour-info.png",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "LunchBox": {
+    "name": "LunchBox",
+    "type": "parent",
+    "prefix": "Lbx",
+    "price": 16.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "Boite-lunch-bambou",
+    "parentSku": "COR_Lbx_{Label}",
+    "weight": 150,
+    "width": 11.2,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Lunch Box - Boite à Repas avec couverts {AmazonTitleFr} - 700 ml",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/lunchBox",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 7,
+    "label": "",
+    "length": 16.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_6_lb-{color_FR}_{skuLabel}.jpg",
+    "picture_7": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_7_lb-{color_FR}_{skuLabel}.jpg",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "Maniques": {
+    "name": "Maniques",
+    "type": "parent",
+    "prefix": "Ph",
+    "price": 19.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "manique-17x17",
+    "parentSku": "COR_Ph_{Label}",
+    "weight": 50,
+    "width": 17,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Manique de cuisine – {AmazonTitleFr} - 17 x 17 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/potHolder",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1,
+    "label": "",
+    "length": 17,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_ph-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_ph-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_ph-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/potholder-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "MiroirPocheMétal": {
+    "name": "MiroirPocheMétal",
+    "type": "parent",
+    "prefix": "Mim",
+    "price": 12.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "Miroir-poche-metal-argent",
+    "parentSku": "COR_Mim_{Label}",
+    "weight": 80,
+    "width": 7,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Miroir de Poche en  - {AmazonTitleFr} - (Diamètre 70 mm)",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/miroir",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": "",
+    "label": "",
+    "length": 7,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pm-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pm-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pm-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/pm-blanc.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "Mug Céramique": {
+    "name": "Mug Céramique",
+    "type": "parent",
+    "prefix": "Mug",
+    "price": 11.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "MugCeramique",
+    "parentSku": "COR_Mug_{Label}",
+    "weight": 360,
+    "width": 8.1,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug céramique {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.6,
+    "label": "",
+    "length": 8.1,
+    "picture_1": "",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "Mug Magique": {
+    "name": "Mug Magique",
+    "type": "parent",
+    "prefix": "Mgm",
+    "price": 20.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "mug-magique-ceramique",
+    "parentSku": "COR_Mgm_{Label}",
+    "weight": 400,
+    "width": 8.2,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug Thermo-réactif Tasse Magique – {AmazonTitleFr} - 325 ml",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mugMagic",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.5,
+    "label": "",
+    "length": 8.2,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mm_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mms_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_mm_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mm_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mm_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mms_{skuLabel}.jpg",
+    "picture_7": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mms_{skuLabel}.jpg",
+    "": "https://storage.googleapis.com/mockup_public_col/{dossier}/mmagic-info.png",
+    "mockups": [],
+    "variant": {}
+  },
+  "mugceramique11oz": {
+    "name": "mugceramique11oz",
+    "type": "simple",
+    "prefix": "MUG",
+    "price": 12.9,
+    "product": "simple",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "MugCeramique",
+    "parentSku": "",
+    "weight": "",
+    "width": "",
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug céramique {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "MugCeramique",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mugsCeramique",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab1_mgc-blanc_{skuLabel}.png",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": []
+  },
+  "MugCéramiqueAnseCouleur": {
+    "name": "MugCéramiqueAnseCouleur",
+    "type": "parent",
+    "prefix": "Mcc",
+    "price": 12.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "Mug-Ceramique-Couleur-{color}",
+    "parentSku": "COR_Mcc_{Label}",
+    "weight": 360,
+    "width": 8.1,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug de Couleur Qualité Premium  - {AmazonTitleFr} - Tasse avec anse et intérieur de couleur",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mugCouleur",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.6,
+    "label": "",
+    "length": 8.1,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mg-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mg-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mg-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_mg-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_mg-{color_FR}_{skuLabel}.jpg",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "orange": {
+        "type": "child",
+        "color": "orange",
+        "color_FR": "orange"
+      },
+      "yellow": {
+        "type": "child",
+        "color": "yellow",
+        "color_FR": "yellow"
+      },
+      "green": {
+        "type": "child",
+        "color": "green",
+        "color_FR": "green"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "MugDoré": {
+    "name": "MugDoré",
+    "type": "parent",
+    "prefix": "Mgd",
+    "price": 15.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "mug-chrome-dore",
+    "parentSku": "COR_Mgd_{Label}",
+    "weight": 400,
+    "width": 8.2,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug Doré en Céramique Chromé – {AmazonTitleFr} - 325 ml",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mugChrome",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.5,
+    "label": "",
+    "length": 8.2,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mc_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mc_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mc_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_mc_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_mc_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_6_mc_{skuLabel}.jpg",
+    "picture_7": "https://storage.googleapis.com/mockup_public_col/{dossier}/mchrome-info.png",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "MugIsothermosPaille": {
+    "name": "MugIsothermosPaille",
+    "type": "parent",
+    "prefix": "Mgt",
+    "price": 29.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "mug-thermos-500ml",
+    "parentSku": "COR_Mgt_{Label}",
+    "weight": 232,
+    "width": 8.5,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug Isotherme en Inox avec Couvercle et Paille – {AmazonTitleFr} - 500 ml - Tasse Thermo",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mug_straw",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 14.2,
+    "label": "",
+    "length": 8.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mt_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mt_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mt_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/mtasse-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "MugVerrecoloré": {
+    "name": "MugVerrecoloré",
+    "type": "parent",
+    "prefix": "Mtr",
+    "price": 13.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "Mug-Verre-{color}",
+    "parentSku": "COR_Mtr_{Label}",
+    "weight": 300,
+    "width": 8,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Mug en Verre  - {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/mugTransparent",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9,
+    "label": "",
+    "length": 8,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_6_mtr-{color_FR}_{skuLabel}.jpg",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "violet": {
+        "type": "child",
+        "color": "violet",
+        "color_FR": "violet"
+      },
+      "yellow": {
+        "type": "child",
+        "color": "yellow",
+        "color_FR": "yellow"
+      }
+    }
+  },
+  "Paillasson": {
+    "name": "Paillasson",
+    "type": "parent",
+    "prefix": "Pai60",
+    "price": 34.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "paillasson-{taille}",
+    "parentSku": "COR_Pai60_{Label}",
+    "weight": 470,
+    "width": 40,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Paillasson {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/doormat",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1.5,
+    "label": "",
+    "length": 60,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_fm_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_fm_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_fm_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_fm_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fm-info2.png",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fm-info.png",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "60x40": {
+        "type": "child",
+        "taille": "60x40",
+        "taille_FR": "60x40"
+      },
+      "75x50": {
+        "type": "child",
+        "taille": "75x50",
+        "taille_FR": "75x50"
+      }
+    }
+  },
+  "PochetteLin": {
+    "name": "PochetteLin",
+    "type": "parent",
+    "prefix": "PocLin",
+    "price": 8.39,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{taille}",
+    "compositeItem": "pochette-lin-{taille}",
+    "parentSku": "COR_PocLin_{Label}",
+    "weight": 100,
+    "width": 10,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Pochette en Lin – {AmazonTitleFr} - Trousse maquillage en Toile aspect Lin - Trousse de toilette - Porte Monnaie",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pochette",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 3,
+    "label": "",
+    "length": 15,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pob_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pob_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pob_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/pochette-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "S": {
+        "type": "child",
+        "taille": "S",
+        "taille_FR": "S"
+      },
+      "L": {
+        "type": "child",
+        "taille": "L",
+        "taille_FR": "L"
+      }
+    }
+  },
+  "PotCéramque": {
+    "name": "PotCéramque",
+    "type": "parent",
+    "prefix": "Poc",
+    "price": 15.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{taille}",
+    "compositeItem": "pot-ceramique-bambou-{taille}",
+    "parentSku": "COR_Poc_{Label}",
+    "weight": 450,
+    "width": 10,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Pot en Céramique avec couvercle Bambou – {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/ceramicPot",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.5,
+    "label": "",
+    "length": 10,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pcs_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pcs_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pcs_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pcs_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/potceramic-info.png",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "S": {
+        "type": "child",
+        "taille": "S",
+        "taille_FR": "S"
+      },
+      "M": {
+        "type": "child",
+        "taille": "M",
+        "taille_FR": "M"
+      },
+      "L": {
+        "type": "child",
+        "taille": "L",
+        "taille_FR": "L"
+      }
+    }
+  },
+  "PotCrayon": {
+    "name": "PotCrayon",
+    "type": "parent",
+    "prefix": "Crp",
+    "price": 14.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "pot-a-crayon-cermique",
+    "parentSku": "COR_Crp_{Label}",
+    "weight": 350,
+    "width": 8.2,
+    "alias": "mugsCeramique",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Pot à Crayon en Céramique – {AmazonTitleFr} - 325 ml",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/pencilPot",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 9.5,
+    "label": "",
+    "length": 8.2,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pen_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pen_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pen_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/pencil-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "PuzzleBois": {
+    "name": "PuzzleBois",
+    "type": "parent",
+    "prefix": "Pzb",
+    "price": "",
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{piece}",
+    "compositeItem": "Puzzle_bois_{piece}",
+    "parentSku": "COR_Pzb_{Label}",
+    "weight": 200,
+    "width": 20,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Puzzle en bois 48 ou 96 pièces {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/puzzleBois",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 0.6,
+    "label": "",
+    "length": 28,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_puz_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_puz_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_puz_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_puz_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_puz_{skuLabel}.jpg",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "48": {
+        "type": "child",
+        "piece": "48",
+        "piece_FR": "48"
+      },
+      "96": {
+        "type": "child",
+        "piece": "96",
+        "piece_FR": "96"
+      }
+    }
+  },
+  "PuzzleCarton": {
+    "name": "PuzzleCarton",
+    "type": "parent",
+    "prefix": "Pzc",
+    "price": "",
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{piece}",
+    "compositeItem": "Puzzle_carton_{piece}",
+    "parentSku": "COR_Pzc_{Label}",
+    "weight": 300,
+    "width": 30,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Puzzle Classique {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/puzzleCarton",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 0.3,
+    "label": "",
+    "length": 40,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_pz2_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pz2_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pz2_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pz2_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pz2_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_6_pz2_{skuLabel}.jpg",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "100": {
+        "type": "child",
+        "piece": "100",
+        "piece_FR": "100"
+      },
+      "280": {
+        "type": "child",
+        "piece": "280",
+        "piece_FR": "280"
+      },
+      "500": {
+        "type": "child",
+        "piece": "500",
+        "piece_FR": "500"
+      },
+      "540": {
+        "type": "child",
+        "piece": "540",
+        "piece_FR": "540"
+      },
+      "1000": {
+        "type": "child",
+        "piece": "1000",
+        "piece_FR": "1000"
+      }
+    }
+  },
+  "RéveilCube": {
+    "name": "RéveilCube",
+    "type": "parent",
+    "prefix": "Rev",
+    "price": 17.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "reveil-cube",
+    "parentSku": "COR_Rev_{Label}",
+    "weight": 150,
+    "width": 7.8,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Réveil Cube Lumineux {AmazonTitleFr} - 7,8 x 7,8 x 7,8 cm - Retro Éclairage multicolore Led",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/clock_cube",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 7.8,
+    "label": "",
+    "length": 7.8,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_clc-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_clc-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_clc-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/clockcube-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "SetdeTableCaouctouch": {
+    "name": "SetdeTableCaouctouch",
+    "type": "parent",
+    "prefix": "Srub",
+    "price": 9.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{quantite}",
+    "compositeItem": "Set-table-dessous-caoutchouc",
+    "parentSku": "COR_Srub_{Label}",
+    "weight": 150,
+    "width": 39.5,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Set de Table Dessous en Caoutchouc  - {AmazonTitleFr} - Grand Format 39,5 x 28,5 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/placemats_rubber",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 3,
+    "label": "",
+    "length": 28.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pr-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pr-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pr-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pr-{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/plrub-info.png",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x4": {
+            "quantite": "x4"
+          }
+        }
+      }
+    }
+  },
+  "SetdeTableClassique": {
+    "name": "SetdeTableClassique",
+    "type": "parent",
+    "prefix": "Stb",
+    "price": 9.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{quantite}",
+    "compositeItem": "Set-table-dessous-liege",
+    "parentSku": "COR_Stb_{Label}",
+    "weight": 150,
+    "width": 39.5,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Set de Table Dessous en liège {AmazonTitleFr} - Grand Format 39,5 x 28,5 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/placemats",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 2,
+    "label": "",
+    "length": 28.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pl-blanc_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pl-blanc_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_pl-blanc_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_pl-blanc_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_pls-blanc_{skuLabel}.jpg",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_pls-blanc_{skuLabel}.jpg",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "1": {
+        "type": "child",
+        "quantite": "1",
+        "quantite_FR": "1"
+      },
+      "4": {
+        "type": "child",
+        "quantite": "4",
+        "quantite_FR": "4"
+      }
+    }
+  },
+  "SetdeTableLin": {
+    "name": "SetdeTableLin",
+    "type": "parent",
+    "prefix": "Stlin",
+    "price": 9.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{quantite}",
+    "compositeItem": "Set-table-dessous-lin",
+    "parentSku": "COR_Stlin_{Label}",
+    "weight": 100,
+    "width": 40,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Set de Table en Lin – {AmazonTitleFr} - Grand Format 40 x 28,5 cm",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/placemats_lin",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1,
+    "label": "",
+    "length": 28.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_plin_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_plin_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_plin_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_plin_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/plin-info.png",
+    "picture_6": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_5_plin_{skuLabel}.jpg",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "1": {
+        "type": "child",
+        "quantite": "1",
+        "quantite_FR": "1"
+      },
+      "4": {
+        "type": "child",
+        "quantite": "4",
+        "quantite_FR": "4"
+      }
+    }
+  },
+  "SousVerre": {
+    "name": "SousVerre",
+    "type": "parent",
+    "prefix": "Svl",
+    "price": 2,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "sous-verre-{material}",
+    "parentSku": "COR_Svl_{Label}",
+    "weight": "",
+    "width": 9.5,
+    "alias": "HousseCoussin",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Sous Verre en liège – {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/sousVerre",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 0.5,
+    "label": "",
+    "length": 9.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_1_cc_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_2_cc_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_3_cc_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fu_4_cc_{skuLabel}.jpg",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "liege": {
+        "type": "child",
+        "material": "liege",
+        "material_FR": "liege",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "decapsuleur": {
+        "type": "child",
+        "material": "decapsuleur",
+        "material_FR": "decapsuleur",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "ceramique": {
+        "type": "child",
+        "material": "ceramique",
+        "material_FR": "ceramique",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "lin": {
+        "type": "child",
+        "material": "lin",
+        "material_FR": "lin",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "boismdf": {
+        "type": "child",
+        "material": "boismdf",
+        "material_FR": "boismdf",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "ceramiquerond": {
+        "type": "child",
+        "material": "ceramiquerond",
+        "material_FR": "ceramiquerond",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      },
+      "liegerond": {
+        "type": "child",
+        "material": "liegerond",
+        "material_FR": "liegerond",
+        "variant": {
+          "x1": {
+            "quantite": "x1"
+          },
+          "x6": {
+            "quantite": "x6"
+          }
+        }
+      }
+    }
+  },
+  "SweatshirtEnfant": {
+    "name": "SweatshirtEnfant",
+    "type": "parent",
+    "prefix": "SwE",
+    "price": 29.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "Sweat-Shirt-Enfant-{taille}-{color}",
+    "parentSku": "COR_SwE_{Label}",
+    "weight": 300,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Sweatshirt Enfant {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "kid",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/sweatEnfantCouleur",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_kss-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_kss-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_kss-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "4a": {
+            "taille": "4a"
+          },
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "4a": {
+            "taille": "4a"
+          },
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      },
+      "orange": {
+        "type": "child",
+        "color": "orange",
+        "color_FR": "orange",
+        "variant": {
+          "4a": {
+            "taille": "4a"
+          },
+          "6a": {
+            "taille": "6a"
+          },
+          "8a": {
+            "taille": "8a"
+          },
+          "10a": {
+            "taille": "10a"
+          },
+          "12a": {
+            "taille": "12a"
+          }
+        }
+      }
+    }
+  },
+  "SweatshirtFemme": {
+    "name": "SweatshirtFemme",
+    "type": "parent",
+    "prefix": "Swf",
+    "price": 24.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "Sweat-Shirt-Femme-{taille}-{color}",
+    "parentSku": "COR_Swf_{Label}",
+    "weight": 250,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Sweatshirt Femme {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "adult",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/sweatFemme",
+    "ERPCategory": "",
+    "genre": "female",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_ssf-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_ssf-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_ssf-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      }
+    }
+  },
+  "SweatshirtHomme": {
+    "name": "SweatshirtHomme",
+    "type": "parent",
+    "prefix": "SwH",
+    "price": 24.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "Sweat-Shirt-Homme-{taille}-{color}",
+    "parentSku": "COR_SwH_{Label}",
+    "weight": 300,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Sweatshirt Homme {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "adult",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/sweatHomme",
+    "ERPCategory": "",
+    "genre": "male",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_ssh-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_ssh-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_ssh-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      }
+    }
+  },
+  "TapisdeSourisClassique": {
+    "name": "TapisdeSourisClassique",
+    "type": "parent",
+    "prefix": "TDS",
+    "CompositeItem": "",
+    "dossier": "/tapisDeSouris",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "parentSku": "COR_TDS_{Label}",
+    "category": "accessories",
+    "genre": "unisex",
+    "label": "",
+    "price": 9.9,
+    "weight": 120,
+    "length": 24,
+    "width": 20,
+    "height": 0.5,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-blanc_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-blanc_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-blanc_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-blanc_{skuLabel}.jpg",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "amazon": {
+      "title": "Tapis de Souris – {AmazonTitleFr} – (Dimensions 24 x 20 cm)"
+    },
+    "ERPCategory": "",
+    "compositeItem": "TapisDeSourisRectangle",
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_td-{color_FR}_{skuLabel}.jpg",
+        "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_td-{color_FR}_{skuLabel}.jpg",
+        "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_td-{color_FR}_{skuLabel}.jpg",
+        "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_td-{color_FR}_{skuLabel}.jpg"
+      }
+    },
+    "alias": "tapisDeSouris",
+    "product": "parent"
+  },
+  "TapisSalledeBain": {
+    "name": "TapisSalledeBain",
+    "type": "parent",
+    "prefix": "Tsdb",
+    "price": 17.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "tapis-sdb-40x60",
+    "parentSku": "COR_Tsdb_{Label}",
+    "weight": 160,
+    "width": 40,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Tapis de Salle de Bain {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/bathmat",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 1,
+    "label": "",
+    "length": 60,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_bm-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_bm-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_bm-{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/bathmat-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc"
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu"
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir"
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris"
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge"
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose"
+      }
+    }
+  },
+  "Thermos": {
+    "name": "Thermos",
+    "type": "parent",
+    "prefix": "Ther",
+    "price": 25.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}",
+    "compositeItem": "thermos-350ml",
+    "parentSku": "COR_Ther_{Label}",
+    "weight": 300,
+    "width": 7,
+    "alias": "",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Thermos en Inox avec Tasse Intégrée – {AmazonTitleFr} - Bouteille Isotherme",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/thermos",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 20.5,
+    "label": "",
+    "length": 7,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_gi_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_gi_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_gi_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/gourde-info.png",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {}
+  },
+  "ToteBag": {
+    "name": "ToteBag",
+    "type": "parent",
+    "prefix": "Tot",
+    "price": 14.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}",
+    "compositeItem": "tote-bag-{color}",
+    "parentSku": "COR_Tot_{Label}",
+    "weight": 120,
+    "width": 1,
+    "alias": "tote",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Tote Bag Sac Shopping en Toile – {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "accessories",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/tote",
+    "ERPCategory": "",
+    "genre": "unisex",
+    "height": 42,
+    "label": "",
+    "length": 38,
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_tb_{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_tb_{color_FR}_{skuLabel}.jpg",
+    "picture_3": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_3_tb_{color_FR}_{skuLabel}.jpg",
+    "picture_4": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_4_tb_{color_FR}_{skuLabel}.jpg",
+    "picture_5": "https://storage.googleapis.com/mockup_public_col/{dossier}/tb-info.png",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "blanc": {
+        "type": "child",
+        "color": "blanc",
+        "color_FR": "blanc"
+      },
+      "bleu": {
+        "type": "child",
+        "color": "bleu",
+        "color_FR": "bleu"
+      },
+      "turq": {
+        "type": "child",
+        "color": "turq",
+        "color_FR": "turq"
+      },
+      "noir": {
+        "type": "child",
+        "color": "noir",
+        "color_FR": "noir"
+      },
+      "rouge": {
+        "type": "child",
+        "color": "rouge",
+        "color_FR": "rouge"
+      },
+      "orange": {
+        "type": "child",
+        "color": "orange",
+        "color_FR": "orange"
+      }
+    }
+  },
+  "tshirtFemmeColRond": {
+    "name": "tshirtFemmeColRond",
+    "type": "parent",
+    "prefix": "tsf",
+    "price": 20.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "TshirtFemmeColRond_{color}_{taille}",
+    "parentSku": "COR_tsf_{Label}",
+    "weight": 150,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "T-shirt Femme Col Rond {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "adult",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/tshirt",
+    "ERPCategory": "",
+    "genre": "female",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_1_tsf-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab_2_tsf-{color_FR}_{skuLabel}.jpg",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "variant": {
+          "XS": {
+            "taille": "XS"
+          },
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      }
+    }
+  },
+  "tshirtHommeColRond": {
+    "name": "tshirtHommeColRond",
+    "type": "parent",
+    "prefix": "Tsh",
+    "price": 22.9,
+    "product": "parent",
+    "sizeImpression": "",
+    "sku": "COR_{prefix}_{skuLabel}_{color}_{taille}",
+    "compositeItem": "TsHommeBioColRond{color}_{taille}",
+    "parentSku": "COR_Tsh_{Label}",
+    "weight": 120,
+    "width": "",
+    "alias": "tshirt",
+    "amazon": {
+      "DesCourtes": "",
+      "title": "Tshirt Homme col rond {AmazonTitleFr}",
+      "Title_FR": ""
+    },
+    "aspect": "",
+    "category": "adult",
+    "CompositeItem": "",
+    "densite": "",
+    "dimentions": "",
+    "dossier": "/tshirt",
+    "ERPCategory": "",
+    "genre": "male",
+    "height": "",
+    "label": "",
+    "length": "",
+    "picture_1": "https://storage.googleapis.com/mockup_public_col/{dossier}/fab1_ht-{color_FR}_{skuLabel}.jpg",
+    "picture_2": "",
+    "picture_3": "",
+    "picture_4": "",
+    "picture_5": "",
+    "picture_6": "",
+    "picture_7": "",
+    "": "",
+    "mockups": [],
+    "variant": {
+      "white": {
+        "type": "child",
+        "color": "white",
+        "color_FR": "blanc",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "blue": {
+        "type": "child",
+        "color": "blue",
+        "color_FR": "bleu",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "black": {
+        "type": "child",
+        "color": "black",
+        "color_FR": "noir",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "grey": {
+        "type": "child",
+        "color": "grey",
+        "color_FR": "gris",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "red": {
+        "type": "child",
+        "color": "red",
+        "color_FR": "rouge",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      },
+      "pink": {
+        "type": "child",
+        "color": "pink",
+        "color_FR": "rose",
+        "variant": {
+          "S": {
+            "taille": "S"
+          },
+          "M": {
+            "taille": "M"
+          },
+          "L": {
+            "taille": "L"
+          },
+          "XL": {
+            "taille": "XL"
+          }
+        }
+      }
+    }
+  }
+}

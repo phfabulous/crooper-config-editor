@@ -1,0 +1,155 @@
+{
+  "HousseCoussin": {
+    "name": "HousseCoussin",
+    "type": "alias",
+    "aspect": "1",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4843x4843",
+    "dossier": "/HousseCoussin",
+    "mockups": [],
+    "product": "alias"
+  },
+  "L_133": {
+    "name": "L_133",
+    "type": "alias",
+    "aspect": "1.33",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/L_133",
+    "mockups": [],
+    "product": "alias"
+  },
+  "L_140": {
+    "name": "L_140",
+    "type": "alias",
+    "aspect": "1.406",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "L_140",
+    "mockups": [],
+    "product": "alias"
+  },
+  "L_150": {
+    "name": "L_150",
+    "type": "alias",
+    "aspect": "1.5",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/L_150",
+    "mockups": [],
+    "product": "alias"
+  },
+  "mugMetal": {
+    "name": "mugMetal",
+    "type": "alias",
+    "aspect": "3.14",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "2484x2484",
+    "dossier": "/mugMetal",
+    "mockups": [],
+    "product": "alias"
+  },
+  "mugsCeramique": {
+    "name": "mugsCeramique",
+    "type": "alias",
+    "aspect": "2.44",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "2598x2598",
+    "dossier": "/mugsCeramique",
+    "mockups": [],
+    "product": "alias"
+  },
+  "P_133": {
+    "name": "P_133",
+    "type": "alias",
+    "aspect": "0.751",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/P_133",
+    "mockups": [],
+    "product": "alias"
+  },
+  "P_140": {
+    "name": "P_140",
+    "type": "alias",
+    "aspect": "0.711",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/P_140",
+    "mockups": [],
+    "product": "alias"
+  },
+  "P_150": {
+    "name": "P_150",
+    "type": "alias",
+    "aspect": "0.666",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/P_150",
+    "mockups": [],
+    "product": "alias"
+  },
+  "poster": {
+    "name": "poster",
+    "type": "alias",
+    "aspect": "NaN",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500",
+    "dossier": "/poster",
+    "mockups": [],
+    "product": "alias"
+  },
+  "tapisDeSouris": {
+    "name": "tapisDeSouris",
+    "type": "alias",
+    "aspect": "1.182",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "2835x2835",
+    "dossier": "/tapisDeSouris",
+    "mockups": [],
+    "product": "alias"
+  },
+  "TDS_GrandFormat": {
+    "name": "TDS_GrandFormat",
+    "type": "alias",
+    "aspect": "1.700",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4606x2717",
+    "dossier": "/TDS_GrandFormat",
+    "mockups": [],
+    "product": "alias"
+  },
+  "tote": {
+    "name": "tote",
+    "type": "alias",
+    "aspect": "0.878",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "4500x4500",
+    "dossier": "/tote",
+    "mockups": [],
+    "product": "alias"
+  },
+  "tshirt": {
+    "name": "tshirt",
+    "type": "alias",
+    "aspect": "0.711",
+    "densite": "300",
+    "dimentions": "",
+    "sizeImpression": "",
+    "dossier": "/tshirt",
+    "mockups": []
+  }
+}

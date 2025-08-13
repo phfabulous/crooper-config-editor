@@ -1,0 +1,443 @@
+/* style.css */
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif; /* Example modern font */
+    margin: 0;
+    background-color: #f0f2f5; /* Lighter background */
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Stack header and main-wrapper vertically */
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll, content areas will scroll */
+}
+
+/* Header Styles */
+#app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* Don't shrink header */
+    z-index: 101; /* Above other elements */
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #2c3e50; /* Darker title */
+}
+
+.current-file-display {
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Base button styles */
+button {
+    padding: 8px 15px;
+    font-size: 0.95em;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px; /* Slightly more rounded */
+    transition: all 0.2s ease-in-out;
+    display: flex; /* For icon+text alignment */
+    align-items: center;
+    gap: 5px;
+}
+
+/* Primary buttons */
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Icon buttons (for menu, actions on cards) */
+.icon-btn {
+    background: none;
+    color: #6c757d;
+    font-size: 1.4em;
+    padding: 5px;
+    border-radius: 4px;
+}
+.icon-btn:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+
+/* Dropdown Menu Styles (for global actions) */
+.dropdown-menu {
+    position: absolute;
+    top: 55px; /* Adjust based on header height */
+    left: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 200px;
+    z-index: 100;
+    display: none; /* Controlled by JS */
+    flex-direction: column;
+}
+.dropdown-menu.hidden {
+    display: none;
+}
+.dropdown-menu .menu-section-title {
+    font-weight: bold;
+    color: #888;
+    padding: 8px 15px 5px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+}
+.dropdown-menu .menu-item {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    background: none;
+    color: #333;
+    border-radius: 0; /* No rounded corners for menu items */
+}
+.dropdown-menu .menu-item:hover {
+    background-color: #f0f2f5;
+}
+
+
+/* Main Wrapper Styles */
+#main-wrapper {
+    display: flex;
+    flex-grow: 1; /* Take remaining vertical space */
+    width: 100%;
+    overflow: hidden; /* Contain scrolling to sub-areas */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px; /* Slightly wider */
+    background-color: #2c3e50; /* Darker, more prominent sidebar */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out;
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    width: 60px; /* Adjust for larger toggle icon */
+}
+
+/* ... existing sidebar collapsed styles for content visibility ... */
+
+.sidebar h2 {
+    color: #85c1e9; /* Lighter blue for sidebar titles */
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+/* Saved Templates section */
+.saved-templates-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.template-item {
+    background-color: #3a5068; /* Slightly lighter than sidebar background */
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.template-item:hover {
+    background-color: #4c6a85;
+    transform: translateY(-2px);
+}
+
+.template-item.selected {
+    border: 2px solid #85c1e9; /* Accent color for selected */
+}
+
+.template-item .friendly-name {
+    font-weight: 500; /* Medium font weight */
+    color: #fff;
+    font-size: 1em;
+}
+
+.template-item .tech-name {
+    font-size: 0.75em;
+    color: #a0b0c0;
+    margin-left: 5px;
+}
+
+.template-item .template-actions button {
+    background: none;
+    color: #ccc;
+    padding: 3px 6px;
+    font-size: 1em;
+    border-radius: 4px;
+}
+.template-item .template-actions button:hover {
+    background-color: #607d8b;
+    color: white;
+}
+.template-item .template-actions button.delete-template-btn {
+    color: #ff7f7f; /* Reddish for delete */
+}
+.template-item .template-actions button.delete-template-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* Content Area Styles */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f8f9fa; /* Very light background for main content */
+}
+
+h1 {
+    color: #2c3e50; /* Darker heading */
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* Remove top-controls since buttons moved to header/menu */
+.top-controls {
+    display: none;
+}
+
+.product-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
+
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* More rounded */
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05); /* Subtle card shadow */
+}
+.product-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+.product-card.dragging {
+    opacity: 0.6;
+    border: 2px dashed #007bff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ... rest of product card styling ... */
+.product-card h3 {
+    margin-top: 0;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.product-card h3 .collapse-icon {
+    font-size: 1em;
+    transition: transform 0.2s;
+    color: #6c757d;
+}
+
+.product-card.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+/* Duplicate Product Styling */
+.product-card.duplicate {
+    border: 2px solid #ff7f7f; /* Softer red for border */
+    box-shadow: 0 0 10px rgba(255, 127, 127, 0.6);
+}
+
+.product-card.duplicate::before {
+    content: "DUPLICATE!";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff7f7f; /* Matching softer red */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Product Card Actions (Icons) */
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Slightly more space */
+    margin-top: 15px;
+}
+
+.product-actions button {
+    padding: 6px 10px; /* Slightly more padding */
+    font-size: 0.75em;
+    border-radius: 4px;
+    background-color: #e9ecef; /* Light background for normal action icons */
+    color: #495057;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.product-actions button:hover {
+    background-color: #dde1e6;
+    color: #212529;
+}
+
+.product-actions button.edit-btn {
+    background-color: #ffecb3; /* Light yellow */
+    color: #e65100; /* Dark orange text */
+}
+.product-actions button.edit-btn:hover {
+    background-color: #ffe082;
+}
+
+.product-actions button.duplicate-btn {
+    background-color: #b3e0ed; /* Light blue */
+    color: #007bff; /* Primary blue text */
+}
+.product-actions button.duplicate-btn:hover {
+    background-color: #90d6ec;
+}
+
+.product-actions button.delete-btn {
+    background-color: #ffcdd2; /* Light red */
+    color: #c62828; /* Dark red text */
+}
+.product-actions button.delete-btn:hover {
+    background-color: #ef9a9a;
+}
+
+/* Modals */
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25); /* Stronger shadow for modals */
+    padding: 30px 40px; /* More internal padding */
+}
+
+/* Form Groups */
+.form-group label {
+    font-weight: 600; /* Bolder labels */
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border: 1px solid #ced4da; /* Softer border */
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-size: 0.95em;
+    background-color: #fcfcfc; /* Slightly off-white for inputs */
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.2); /* Softer focus glow */
+    background-color: white;
+}
+
+/* Modal actions - Submit button */
+button[type="submit"] {
+    background-color: #28a745;
+    padding: 12px 25px; /* Larger submit button */
+    font-size: 1.05em;
+    border-radius: 6px;
+}
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Secondary action buttons in modals */
+.modal-actions .secondary-action-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+}
+.modal-actions .secondary-action-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Alias Quick Access (can be styled similar to product cards but simpler) */
+.alias-quick-access-container {
+    background-color: #e0f7fa; /* Lighter blue background */
+    border-left: 5px solid #00acc1; /* Teal accent */
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+.alias-quick-access-container h2 {
+    color: #00838f; /* Darker teal for title */
+    font-size: 1.5em;
+}
+
+.alias-block {
+    background-color: #00bcd4; /* Teal for alias blocks */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px; /* Pill shape */
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.alias-block:hover {
+    background-color: #0097a7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.alias-block .edit-alias-icon {
+    font-size: 0.9em;
+    margin-left: 8px;
+    color: rgba(255,255,255,0.8);
+}
+.alias-block:hover .edit-alias-icon {
+    color: white;
+}
+
+/* ... other minor adjustments for visual appeal ... */
