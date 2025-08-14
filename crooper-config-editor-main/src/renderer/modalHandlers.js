@@ -108,7 +108,10 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
         });
     });
 
-    if (elements.addCustomFieldBtn) elements.addCustomFieldBtn.addEventListener('click', () => addCustomFieldInput());
+    if (elements.addCustomFieldBtn) elements.addCustomFieldBtn.addEventListener('click', () => {
+        addCustomFieldInput();
+        isFormDirty = true; // Marquer le formulaire comme modifié lors de l'ajout d'un champ
+    });
 
     if (elements.addVariantDefaultFieldBtn) elements.addVariantDefaultFieldBtn.addEventListener('click', () => addVariantDefaultFieldRow());
     if (elements.applyVariantDefaultFieldsBtn) elements.applyVariantDefaultFieldsBtn.addEventListener('click', () => {
@@ -853,12 +856,24 @@ export function openAddProductModal() {
     elements.productModal.style.display = 'block';
     isFormDirty = false;
     
+    // Forcer l'activation des champs et assurer la fonctionnalité d'édition
     setTimeout(() => {
+        // Activer explicitement tous les champs de saisie
+        const allInputs = elements.productModal.querySelectorAll('input, select, textarea');
+        allInputs.forEach(input => {
+            input.disabled = false;
+            input.readOnly = false;
+            // Déclencher un focus/blur pour activer les champs
+            input.focus();
+            input.blur();
+        });
+        
+        // Focus sur le premier champ après activation
         const firstInput = elements.dynamicFormFields.querySelector('input, select, textarea');
         if (firstInput) {
             firstInput.focus();
         }
-    }, 100);
+    }, 150); // Augmenter le délai pour laisser plus de temps
 }
 
 export function openEditProductModal(productKey) {
@@ -942,12 +957,24 @@ export function openEditProductModal(productKey) {
     isFormDirty = false;
     console.log(`[ModalHandlers] Edit modal for ${productKey} opened. Final Alias UI state: checkbox=${elements.hasAliasCheckbox ? elements.hasAliasCheckbox.checked : 'N/A'}, select value="${elements.productAliasSelect ? elements.productAliasSelect.value : 'N/A'}"`);
 
+    // Forcer l'activation des champs et assurer la fonctionnalité d'édition
     setTimeout(() => {
+        // Activer explicitement tous les champs de saisie
+        const allInputs = elements.productModal.querySelectorAll('input, select, textarea');
+        allInputs.forEach(input => {
+            input.disabled = false;
+            input.readOnly = false;
+            // Déclencher un focus/blur pour activer les champs
+            input.focus();
+            input.blur();
+        });
+        
+        // Focus sur le premier champ après activation
         const firstInput = elements.dynamicFormFields.querySelector('input, select, textarea');
         if (firstInput) {
             firstInput.focus();
         }
-    }, 100);
+    }, 150); // Augmenter le délai pour laisser plus de temps
 }
 
 export function closeProductModal() {
@@ -1177,7 +1204,8 @@ function renderDynamicFormFields(productData = {}) {
 }
 
 function renderCustomFields(productData = {}) {
-    console.log("[ModalHandlers] Rendering custom fields.");
+    console.log("[ModalHandlers] Rendering custom fields for product:", productData);
+    console.log("[DEBUG] Product variant structure:", productData.variant);
     if (!elements.customFieldsContainer || !currentKnownFieldsConfig) {
         console.error("[ModalHandlers] Missing customFieldsContainer or currentKnownFieldsConfig for rendering custom fields.");
         return;
@@ -1208,8 +1236,70 @@ function renderCustomFields(productData = {}) {
         'friendlyName'
     ]);
 
+    // Champs structurels des variantes qui ne doivent pas apparaître comme champs personnalisés
+    const variantStructuralKeys = new Set([
+        'type', 'color', 'color_FR', 'taille', 'taille_FR', 'size', 'size_FR',
+        'label', 'sku', 'parentSku', 'CompositeItem', 'tree',
+        'name', 'prefix', 'category', 'genre', 'variant'
+    ]);
+
+    // Analyser la structure des variants pour identifier les champs structurels vs données
+    function analyzeVariantStructure(productData) {
+        const structuralFields = new Set(['type', 'variant']); // Champs système des variants
+        const variantKeys = new Set(); // Clés des variants (ex: color, taille)
+        
+        if (productData.variant && typeof productData.variant === 'object') {
+            // Analyser chaque variant pour identifier les champs de structure
+            for (const variantKey in productData.variant) {
+                const variant = productData.variant[variantKey];
+                if (typeof variant === 'object' && variant !== null) {
+                    for (const fieldKey in variant) {
+                        // Si la valeur du champ correspond à la clé du variant, c'est un champ de structure
+                        // Ex: variant["pink"].color = "pink" -> color est un champ de structure
+                        if (variantKey === variant[fieldKey]) {
+                            variantKeys.add(fieldKey);
+                            structuralFields.add(fieldKey);
+                        }
+                        // Les champs _FR sont aussi structurels
+                        if (fieldKey.endsWith('_FR')) {
+                            structuralFields.add(fieldKey);
+                        }
+                    }
+                    
+                    // Analyser les sous-variants pour identifier d'autres champs de structure
+                    if (variant.variant && typeof variant.variant === 'object') {
+                        for (const subVariantKey in variant.variant) {
+                            const subVariant = variant.variant[subVariantKey];
+                            if (typeof subVariant === 'object' && subVariant !== null) {
+                                for (const subFieldKey in subVariant) {
+                                    // Si la valeur du sous-champ correspond à la clé du sous-variant
+                                    if (subVariantKey === subVariant[subFieldKey]) {
+                                        variantKeys.add(subFieldKey);
+                                        structuralFields.add(subFieldKey);
+                                    }
+                                    if (subFieldKey.endsWith('_FR')) {
+                                        structuralFields.add(subFieldKey);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        console.log("[DEBUG] Structural fields detected:", structuralFields);
+        console.log("[DEBUG] Variant keys detected:", variantKeys);
+        
+        return { structuralFields, variantKeys };
+    }
+
     function extractUnknownFields(obj, prefix = '') {
         const unknownFields = {};
+        
+        // Analyser la structure des variants pour identifier les champs structurels
+        const variantAnalysis = analyzeVariantStructure(productData);
+        
         for (const key in obj) {
             if (Object.hasOwnProperty.call(obj, key)) {
                 const fullKey = prefix ? `${prefix}.${key}` : key;
@@ -1220,14 +1310,37 @@ function renderCustomFields(productData = {}) {
                 const isEmptyArray = isObjectOrArray && Array.isArray(obj[key]) && obj[key].length === 0;
 
                 if (isObjectOrArray && !Array.isArray(obj[key]) && !isEmptyObject) {
-                    const nestedUnknowns = extractUnknownFields(obj[key], fullKey);
-                    if (Object.keys(nestedUnknowns).length > 0 || isEmptyObject || isEmptyArray) {
-                        Object.assign(unknownFields, nestedUnknowns);
+                    // Cas spécial pour les variantes : toujours explorer la structure variant
+                    const shouldExploreVariants = key === 'variant' || prefix.includes('variant');
+                    
+                    if (shouldExploreVariants || !systemOrStructuralKeys.has(key)) {
+                        const nestedUnknowns = extractUnknownFields(obj[key], fullKey);
+                        if (Object.keys(nestedUnknowns).length > 0) {
+                            Object.assign(unknownFields, nestedUnknowns);
+                        }
                     }
                 } else {
                     let isKnownDirectly = allKnownFieldKeys.has(fullKey);
                     let isSystemOrStructural = systemOrStructuralKeys.has(fullKey) || systemOrStructuralKeys.has(key);
                     let isKnownNested = false;
+
+                    // Logique spéciale pour les champs dans les variants
+                    if (prefix.includes('variant')) {
+                        isSystemOrStructural = false;
+                        
+                        // Utiliser l'analyse dynamique de la structure des variants
+                        const isVariantStructural = variantAnalysis.structuralFields.has(key);
+                        
+                        if (isVariantStructural) {
+                            // Ignorer les champs structurels des variantes (identifiés dynamiquement)
+                            console.log("[DEBUG] Skipping structural field:", fullKey);
+                            continue;
+                        }
+                        
+                        // IMPORTANT: Ne pas ignorer les champs connus comme price dans les variants
+                        // Ils doivent apparaître comme champs personnalisés pour être éditables
+                        console.log("[DEBUG] Processing variant field:", fullKey, "value:", obj[key]);
+                    }
 
                     if (!isKnownDirectly && !isSystemOrStructural) {
                         for (const knownKey of allKnownFieldKeys) {
@@ -1240,6 +1353,7 @@ function renderCustomFields(productData = {}) {
                     
                     if (!isKnownDirectly && !isSystemOrStructural && !isKnownNested) {
                         unknownFields[fullKey] = obj[key];
+                        console.log("[DEBUG] Added unknown field:", fullKey, "=", obj[key]);
                     }
                 }
             }
@@ -1248,8 +1362,10 @@ function renderCustomFields(productData = {}) {
     }
 
     const customFields = extractUnknownFields(productData);
+    console.log("[DEBUG] Extracted custom fields:", customFields);
 
     for (const fieldKey in customFields) {
+        console.log("[DEBUG] Adding custom field input for:", fieldKey, "=", customFields[fieldKey]);
         addCustomFieldInput(fieldKey, customFields[fieldKey]);
     }
 }
@@ -1259,16 +1375,31 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
         console.warn("[ModalHandlers] Missing customFieldsContainer for addCustomFieldInput.");
         return;
     }
+    
+    // Analyser les variants existants pour fournir des suggestions
+    const variantSuggestions = getVariantPathSuggestions();
+    
     const customFieldRow = document.createElement('div');
     customFieldRow.classList.add('custom-field-row');
 
     const keyInput = document.createElement('input');
     keyInput.type = 'text';
     keyInput.classList.add('custom-field-key');
-    keyInput.placeholder = 'Key (e.g., custom.property)';
+    keyInput.placeholder = 'Key (e.g., custom.property or variant.pink.price)';
     keyInput.value = fieldKey;
-    keyInput.setAttribute('list', 'knownFieldSuggestions');
+    keyInput.setAttribute('list', 'variantPathSuggestions');
     keyInput.autocomplete = 'off';
+
+    // Créer une datalist pour les suggestions de variants si elle n'existe pas
+    let variantDatalist = document.getElementById('variantPathSuggestions');
+    if (!variantDatalist) {
+        variantDatalist = document.createElement('datalist');
+        variantDatalist.id = 'variantPathSuggestions';
+        document.body.appendChild(variantDatalist);
+    }
+    
+    // Mettre à jour les suggestions de variants
+    populateDatalist(variantDatalist, variantSuggestions);
 
     const valueInput = document.createElement('input');
     valueInput.type = 'text';
@@ -1304,7 +1435,21 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
     });
 
     keyInput.addEventListener('change', () => { isFormDirty = true; });
-    keyInput.addEventListener('input', () => { isFormDirty = true; });
+    
+    // Debounce pour éviter les pertes de focus lors des suggestions
+    let suggestionTimeout;
+    keyInput.addEventListener('input', () => { 
+        isFormDirty = true;
+        // Annuler le timeout précédent
+        if (suggestionTimeout) {
+            clearTimeout(suggestionTimeout);
+        }
+        // Attendre 300ms avant de mettre à jour les suggestions
+        suggestionTimeout = setTimeout(() => {
+            const updatedSuggestions = getVariantPathSuggestions();
+            populateDatalist(variantDatalist, updatedSuggestions);
+        }, 300);
+    });
     valueInput.addEventListener('change', () => { isFormDirty = true; });
     valueInput.addEventListener('input', () => { isFormDirty = true; });
 
@@ -1324,6 +1469,84 @@ function addCustomFieldInput(fieldKey = '', fieldValue = '') {
     customFieldRow.appendChild(removeButton);
 
     elements.customFieldsContainer.appendChild(customFieldRow);
+    
+    // Marquer le formulaire comme modifié lors de l'ajout d'un champ personnalisé
+    isFormDirty = true;
+}
+
+// Nouvelle fonction pour générer les suggestions de chemins vers les variants
+function getVariantPathSuggestions() {
+    const generalSuggestions = [];
+    const variantSuggestions = [];
+    
+    // Ajouter des suggestions génériques EN PREMIER
+    generalSuggestions.push(
+        'custom.property',
+        'amazon.title',
+        'amazon.description',
+        'amazon.keywords',
+        'category',
+        'price',
+        'weight',
+        'description',
+        'sku',
+        'label',
+        'picture_1',
+        'picture_2'
+    );
+    
+    // Essayer d'obtenir les données du produit actuel depuis différentes sources
+    let currentProductData = null;
+    
+    // 1. Essayer modalProductState
+    if (modalProductState && modalProductState.productKey) {
+        const productKey = modalProductState.productKey;
+        if (currentConfig && currentConfig[productKey]) {
+            currentProductData = currentConfig[productKey];
+        }
+    }
+    // 2. Essayer de récupérer depuis le formulaire dynamique
+    else if (elements.originalProductNameInput && elements.originalProductNameInput.value) {
+        const productKey = elements.originalProductNameInput.value;
+        if (currentConfig && currentConfig[productKey]) {
+            currentProductData = currentConfig[productKey];
+        }
+    }
+    
+    // Analyser les variants existants et les ajouter À LA FIN
+    if (currentProductData && currentProductData.variant) {
+        console.log("[DEBUG] Found variants for suggestions:", Object.keys(currentProductData.variant));
+        
+        for (const variantKey in currentProductData.variant) {
+            const variant = currentProductData.variant[variantKey];
+            
+            // Suggestions pour les variants de premier niveau
+            variantSuggestions.push(`variant.${variantKey}.price`);
+            variantSuggestions.push(`variant.${variantKey}.weight`);
+            variantSuggestions.push(`variant.${variantKey}.description`);
+            variantSuggestions.push(`variant.${variantKey}.sku`);
+            
+            // Si le variant a des sous-variants
+            if (variant && variant.variant) {
+                for (const subVariantKey in variant.variant) {
+                    variantSuggestions.push(`variant.${variantKey}.variant.${subVariantKey}.price`);
+                    variantSuggestions.push(`variant.${variantKey}.variant.${subVariantKey}.weight`);
+                    variantSuggestions.push(`variant.${variantKey}.variant.${subVariantKey}.description`);
+                    variantSuggestions.push(`variant.${variantKey}.variant.${subVariantKey}.sku`);
+                }
+            }
+        }
+    } else {
+        console.log("[DEBUG] No variants found for suggestions");
+    }
+    
+    // Combiner : suggestions générales D'ABORD, puis variants À LA FIN
+    const allSuggestions = [...generalSuggestions, ...variantSuggestions];
+    
+    console.log("[DEBUG] Generated suggestions (general first, variants last):", allSuggestions);
+    
+    // Retourner les suggestions uniques mais en préservant l'ordre
+    return allSuggestions.filter((item, index) => allSuggestions.indexOf(item) === index);
 }
 
 function getKnownFieldOptions(fieldKey) {
@@ -1653,24 +1876,67 @@ async function handleProductFormSubmit(event) {
     });
 
     // Collecter les champs personnalisés
+    console.log("[DEBUG] Collecting custom fields...");
     elements.customFieldsContainer.querySelectorAll('.custom-field-row').forEach(row => {
-        const key = row.querySelector('.custom-field-key').value.trim();
-        const value = row.querySelector('.custom-field-value').value;
+        const keyInput = row.querySelector('.custom-field-key');
+        const valueInput = row.querySelector('.custom-field-value');
+        const key = keyInput ? keyInput.value.trim() : '';
+        const value = valueInput ? valueInput.value : '';
+        
+        console.log("[DEBUG] Custom field found:", { key, value });
 
         if (key) {
-            const pathParts = key.split('.');
-            let currentLevel = productData;
-            for (let i = 0; i < pathParts.length; i++) {
-                const part = pathParts[i];
-                if (i === pathParts.length - 1) {
-                    currentLevel[part] = value;
-                } else {
-                    if (!currentLevel[part] || typeof currentLevel[part] !== 'object' || Array.isArray(currentLevel[part])) {
-                        currentLevel[part] = {};
+            // Vérifier si c'est un champ de variante
+            if (key.startsWith('variant.')) {
+                // Champ de variante : appliquer à la structure variant existante
+                const pathParts = key.split('.');
+                // pathParts[0] = 'variant'
+                // pathParts[1] = nom de la variante (ex: 'pink')
+                // pathParts[2] = 'variant' (pour les sous-variantes) ou nom du champ
+                // pathParts[3] = nom de la sous-variante (ex: 'XL') ou undefined
+                // pathParts[4] = nom du champ (ex: 'price') ou undefined
+
+                if (!productData.variant) {
+                    productData.variant = {};
+                }
+
+                let currentLevel = productData.variant;
+                // Ignorer le premier 'variant' et naviguer dans la structure
+                for (let i = 1; i < pathParts.length; i++) {
+                    const part = pathParts[i];
+                    if (i === pathParts.length - 1) {
+                        // Dernière partie : assigner la valeur
+                        currentLevel[part] = value;
+                        console.log("[DEBUG] Added variant field:", key, "=", value);
+                    } else {
+                        // Partie intermédiaire : créer l'objet si nécessaire
+                        if (!currentLevel[part] || typeof currentLevel[part] !== 'object' || Array.isArray(currentLevel[part])) {
+                            currentLevel[part] = {};
+                        }
+                        currentLevel = currentLevel[part];
                     }
-                    currentLevel = currentLevel[part];
+                }
+            } else {
+                // Champ personnalisé normal : appliquer à la racine du produit
+                const pathParts = key.split('.');
+                let currentLevel = productData;
+                for (let i = 0; i < pathParts.length; i++) {
+                    const part = pathParts[i];
+                    if (i === pathParts.length - 1) {
+                        // Dernière partie : assigner la valeur
+                        currentLevel[part] = value;
+                        console.log("[DEBUG] Added custom field to productData:", key, "=", value);
+                    } else {
+                        // Partie intermédiaire : créer l'objet si nécessaire
+                        if (!currentLevel[part] || typeof currentLevel[part] !== 'object' || Array.isArray(currentLevel[part])) {
+                            currentLevel[part] = {};
+                        }
+                        currentLevel = currentLevel[part];
+                    }
                 }
             }
+        } else {
+            console.log("[DEBUG] Skipping custom field with empty key");
         }
     });
 
@@ -1754,7 +2020,33 @@ async function handleProductFormSubmit(event) {
     }
 
     if (type === 'parent') {
-        productData.variant = getVariantsFromDisplay();
+        const variantsFromDisplay = getVariantsFromDisplay();
+        
+        // Fonction pour fusionner récursivement deux objets
+        function deepMerge(target, source) {
+            const result = { ...target };
+            for (const key in source) {
+                if (source.hasOwnProperty(key)) {
+                    if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key]) &&
+                        typeof result[key] === 'object' && result[key] !== null && !Array.isArray(result[key])) {
+                        result[key] = deepMerge(result[key], source[key]);
+                    } else {
+                        result[key] = source[key];
+                    }
+                }
+            }
+            return result;
+        }
+        
+        // Fusionner les variantes générées avec les champs personnalisés déjà appliqués
+        if (productData.variant && Object.keys(productData.variant).length > 0) {
+            console.log("[DEBUG] Merging variants. Custom fields variant:", productData.variant);
+            console.log("[DEBUG] Merging variants. Display variant:", variantsFromDisplay);
+            productData.variant = deepMerge(productData.variant, variantsFromDisplay);
+            console.log("[DEBUG] Final merged variants:", productData.variant);
+        } else {
+            productData.variant = variantsFromDisplay;
+        }
     }
 
     if (!productData.product) {

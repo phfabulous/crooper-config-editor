@@ -273,7 +273,50 @@ ipcMain.handle('import-csv-data', async () => {
             });
         });
         console.log("[Main Process] CSV data parsed successfully:", records);
-        return { data: records };
+
+        // Nouvelle logique : reconstruction parent/enfant avec héritage et override
+        const configData = {};
+        let lastParent = null;
+        for (const row of records) {
+            // Si la ligne a un nom et type, c'est un parent
+            if (row.name && row.type) {
+                lastParent = JSON.parse(JSON.stringify(row));
+                // Préparer la structure variant si parent
+                if (row.type === 'parent') {
+                    lastParent.variant = {};
+                }
+                configData[row.name] = lastParent;
+            } else if (lastParent) {
+                // Ligne enfant : override sur variant(s) ciblés
+                if (lastParent.type === 'parent') {
+                    // Ciblage variant1/variant2
+                    const v1val = row.variant1Values;
+                    const v2val = row.variant2Values;
+                    // On applique les overrides sur le(s) variant(s) ciblés
+                    if (v1val && !v2val) {
+                        // Override sur variant1
+                        if (!lastParent.variant[v1val]) lastParent.variant[v1val] = {};
+                        for (const key in row) {
+                            if (row[key] !== '' && key !== 'variant1Values' && key !== 'variant2Values') {
+                                lastParent.variant[v1val][key] = row[key];
+                            }
+                        }
+                    } else if (v1val && v2val) {
+                        // Override sur sous-variant
+                        if (!lastParent.variant[v1val]) lastParent.variant[v1val] = {};
+                        if (!lastParent.variant[v1val].variant) lastParent.variant[v1val].variant = {};
+                        if (!lastParent.variant[v1val].variant[v2val]) lastParent.variant[v1val].variant[v2val] = {};
+                        for (const key in row) {
+                            if (row[key] !== '' && key !== 'variant1Values' && key !== 'variant2Values') {
+                                lastParent.variant[v1val].variant[v2val][key] = row[key];
+                            }
+                        }
+                    }
+                }
+        }
+        // Retourne à la fois le format array (records) et le format objet (configData)
+        return { data: records, configData };
+    }
     } catch (error) {
         console.error(`[Main Process] Failed to import CSV file ${filePath}:`, error);
         dialog.showErrorBox('Error', 'Failed to import CSV file: ' + error.message + '\nPath: ' + filePath);
@@ -284,10 +327,7 @@ ipcMain.handle('import-csv-data', async () => {
 
 // Helper function to flatten a product object for CSV export
 function flattenProduct(product, knownFieldsConfig) {
-    const flatProduct = {
-        name: product.name || '', // Always include name, even if empty
-        type: product.type || ''  // Always include type, even if empty
-    };
+    const flatProduct = {};
 
     // Get all known fields from all types to ensure comprehensive headers
     const allKnownHeaders = new Set();
@@ -302,119 +342,123 @@ function flattenProduct(product, knownFieldsConfig) {
         }
     }
 
-    // Recursively process nested objects
-    function processObject(obj, prefix = '') {
-        for (const key in obj) {
-            if (Object.hasOwnProperty.call(obj, key)) {
-                const fullKey = prefix ? `${prefix}.${key}` : key;
-                const value = obj[key];
+    // Flatten the product object
+    for (const key in product) {
+        if (Object.hasOwnProperty.call(product, key)) {
+            const value = product[key];
 
-                // Special handling for CSV export
-                if (key === 'mockups' && Array.isArray(value)) {
-                    value.forEach((mockup, index) => {
-                        flatProduct[`mockups_path_${index}`] = mockup.path || '';
-                        flatProduct[`mockups_name_${index}`] = mockup.name || '';
-                    });
-                } else if (key === 'variant' && typeof value === 'object' && !Array.isArray(value) && product.type === 'parent') {
-                    // Flatten variants for 'parent' type products
-                    // This section will try to extract data for variant1Type/Values, variant2Type/Values
-                    const allPrimaryValues = new Set();
-                    let detectedVariant1Type = '';
-                    const allSecondaryValues = new Set();
-                    let detectedVariant2Type = '';
+            // Special handling for CSV export
+            if (key === 'mockups' && Array.isArray(value)) {
+                value.forEach((mockup, index) => {
+                    flatProduct[`mockups_path_${index}`] = mockup.path || '';
+                    flatProduct[`mockups_name_${index}`] = mockup.name || '';
+                });
+            } else if (key === 'variant' && typeof value === 'object' && !Array.isArray(value) && product.type === 'parent') {
+                // Flatten variants for 'parent' type products
+                // This section will try to extract data for variant1Type/Values, variant2Type/Values
+                let allPrimaryValues = new Set();
+                let detectedVariant1Type = '';
+                let allSecondaryValues = new Set();
+                let detectedVariant2Type = '';
 
-                    Object.values(value).forEach(primaryVariant => {
-                        // Pour le type de variante principal, ne cherchez que la propriété qui correspond à l'ID de la variante
-                        // et qui n'est pas un attribut secondaire comme prix, images, etc.
-                        for(const k in primaryVariant) {
-                            // Exclure 'type', 'variant', et les propriétés qui ressemblent à des attributs ou URLs d'image
-                            // et s'assurer que la valeur n'est pas vide pour être considérée comme une "valeur" de variante
-                            if (Object.hasOwnProperty.call(primaryVariant, k) && k !== 'type' && !k.endsWith('_FR') && k !== 'variant' && !k.startsWith('prix') && !k.startsWith('sale') && !k.startsWith('picture_')) {
-                                if (primaryVariant[k]) { // S'assurer que la valeur n'est pas vide
-                                    if (!detectedVariant1Type) detectedVariant1Type = k;
-                                    allPrimaryValues.add(primaryVariant[k]);
+                // Analyser d'abord toute la structure pour identifier les vrais champs structurels
+                const structuralFieldCandidates = new Map(); // fieldName -> Set of values
+                
+                Object.entries(value).forEach(([variantKey, primaryVariant]) => {
+                    // Un champ est structurel si sa valeur correspond à la clé du variant
+                    for(const k in primaryVariant) {
+                        if (Object.hasOwnProperty.call(primaryVariant, k) && 
+                            k !== 'type' && k !== 'variant' && 
+                            primaryVariant[k] === variantKey) {
+                            // C'est un champ structurel de niveau 1
+                            if (!structuralFieldCandidates.has(k)) {
+                                structuralFieldCandidates.set(k, new Set());
+                            }
+                            structuralFieldCandidates.get(k).add(primaryVariant[k]);
+                        }
+                        // Également vérifier les champs _FR associés
+                        if (k.endsWith('_FR') && primaryVariant[k]) {
+                            const baseField = k.replace('_FR', '');
+                            if (primaryVariant[baseField] === variantKey) {
+                                if (!structuralFieldCandidates.has(k)) {
+                                    structuralFieldCandidates.set(k, new Set());
                                 }
+                                structuralFieldCandidates.get(k).add(primaryVariant[k]);
                             }
                         }
-
-                        // Pour le type de variante secondaire (si présent)
-                        if (primaryVariant.variant && typeof primaryVariant.variant === 'object') {
-                            Object.values(primaryVariant.variant).forEach(secondaryVariant => {
-                                for(const skey in secondaryVariant) {
-                                    // Similaire, exclure les attributs et n'inclure que la valeur d'identification
-                                    if (Object.hasOwnProperty.call(secondaryVariant, skey) && !skey.startsWith('prix') && !skey.startsWith('sale') && !skey.startsWith('picture_')) {
-                                        if (secondaryVariant[skey]) { // S'assurer que la valeur n'est pas vide
-                                            if (!detectedVariant2Type) detectedVariant2Type = skey;
-                                            allSecondaryValues.add(secondaryVariant[skey]);
-                                        }
+                    }
+                    
+                    // Analyser les sous-variants pour le niveau 2
+                    if (primaryVariant.variant && typeof primaryVariant.variant === 'object') {
+                        Object.entries(primaryVariant.variant).forEach(([subKey, subVariant]) => {
+                            for(const sk in subVariant) {
+                                if (Object.hasOwnProperty.call(subVariant, sk) && 
+                                    sk !== 'type' && sk !== 'variant' && 
+                                    subVariant[sk] === subKey) {
+                                    // C'est un champ structurel de niveau 2
+                                    if (!structuralFieldCandidates.has(sk)) {
+                                        structuralFieldCandidates.set(sk, new Set());
                                     }
-                                }
-                            });
-                        }
-
-                        // Export other direct properties of the primary variant (prixFabric, saleFabric, etc.)
-                        // These should be appended as `variant_KEY_PROP` to flatProduct.
-                        // We need to define a consistent way to handle these to avoid column explosion and allow re-import.
-                        // For simplicity in export, we'll prefix them if they are not the primary/secondary variant identifying values.
-                        for (const prop in primaryVariant) {
-                            if (Object.hasOwnProperty.call(primaryVariant, prop) && prop !== 'variant' && prop !== 'type' && !prop.endsWith('_FR') && prop !== detectedVariant1Type) {
-                                // Add a specific column for each direct property of the primary variant
-                                // E.g., variant_color_prixFabric (if color is variant1Type)
-                                // This requires more specific column names for export and corresponding re-import logic.
-                                // For now, let's append generically if they exist and are not primary/secondary value.
-                                // But avoid adding them to the 'variant values' lists.
-                                // Let's simplify this part: only export primary/secondary values in variant1/2Values,
-                                // and if other specific variant attributes (like price, images) need to be exported,
-                                // they should be added as new top-level flattened keys with a clear convention,
-                                // or handled by a separate variant-specific export if too complex for the main CSV.
-                                // Given the current problem is mixed values in 'variant values', this is key.
-                                if (primaryVariant[prop] !== undefined && primaryVariant[prop] !== null && primaryVariant[prop] !== '') {
-                                    // Check if this property is one of the specific attributes we want to export directly.
-                                    // For example, if you want "prixFabric" and "saleFabric" to appear as `variant_prixFabric` etc.
-                                    // This assumes all primary variants will have these properties, or they'll just be empty.
-                                    // For now, let's not add them as `variant_prop` here if they are not explicitly handled.
-                                    // The main goal is to fix `variantValues`.
+                                    structuralFieldCandidates.get(sk).add(subVariant[sk]);
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+                });
 
-                    if (detectedVariant1Type) {
-                        flatProduct['variant1Type'] = detectedVariant1Type;
-                        // allPrimaryValues contient des valeurs uniques, joindre par virgule.
-                        flatProduct['variant1Values'] = [...allPrimaryValues].join(',');
-                    }
-                    if (detectedVariant2Type) {
-                        flatProduct['variant2Type'] = detectedVariant2Type;
-                        // allSecondaryValues contient des valeurs uniques, joindre par virgule.
-                        flatProduct['variant2Values'] = [...allSecondaryValues].join(',');
-                    }
-
-                } else if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
-                    processObject(value, fullKey); // Recursively flatten nested objects
-                } else {
-                    // Simple values or arrays (that are not mockups/variants)
-                    let exportValue = value;
-                    if (typeof value === 'boolean') {
-                        exportValue = value ? 'true' : 'false';
-                    } else if (Array.isArray(value)) {
-                        exportValue = value.join(','); // Join array elements with commas
-                    }
-                    flatProduct[fullKey] = exportValue === null || exportValue === undefined ? '' : exportValue; // Ensure empty string for null/undefined
+                // Maintenant identifier les types de variants corrects
+                const structuralFields = Array.from(structuralFieldCandidates.keys())
+                    .filter(field => !field.endsWith('_FR')); // Exclure les champs _FR du type principal
+                
+                if (structuralFields.length > 0) {
+                    detectedVariant1Type = structuralFields[0];
+                    allPrimaryValues = structuralFieldCandidates.get(detectedVariant1Type);
                 }
+                
+                if (structuralFields.length > 1) {
+                    detectedVariant2Type = structuralFields[1];
+                    allSecondaryValues = structuralFieldCandidates.get(detectedVariant2Type);
+                }
+
+                // Export other direct properties of the primary variant
+                Object.values(value).forEach(primaryVariant => {
+                    for (const prop in primaryVariant) {
+                        if (Object.hasOwnProperty.call(primaryVariant, prop) && 
+                            prop !== 'variant' && prop !== 'type' && !prop.endsWith('_FR') && 
+                            prop !== detectedVariant1Type && prop !== detectedVariant2Type) {
+                            flatProduct[`variant_${prop}`] = primaryVariant[prop];
+                        }
+                    }
+                });
+
+                if (detectedVariant1Type) {
+                    flatProduct['variant1Type'] = detectedVariant1Type;
+                    flatProduct['variant1Values'] = [...allPrimaryValues].join(',');
+                }
+                if (detectedVariant2Type) {
+                    flatProduct['variant2Type'] = detectedVariant2Type;
+                    flatProduct['variant2Values'] = [...allSecondaryValues].join(',');
+                }
+
+            } else if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                // Nested object, recurse into it
+                const nestedFlat = flattenProduct(value, knownFieldsConfig);
+                for (const nestedKey in nestedFlat) {
+                    if (Object.hasOwnProperty.call(nestedFlat, nestedKey)) {
+                        flatProduct[nestedKey] = nestedFlat[nestedKey];
+                    }
+                }
+            } else {
+                // Simple value, just add it
+                flatProduct[key] = value;
             }
         }
     }
 
-    processObject(product);
-
-    // Fill in any known fields that weren't present in the product with empty strings
-    allKnownHeaders.forEach(header => {
-        if (!(header in flatProduct)) {
-            flatProduct[header] = '';
-        }
-    });
-
+    // Ne pas forcer des valeurs vides pour tous les champs connus
+    // Cette logique était problématique et écrasait les vraies valeurs
+    // Les lignes parent gardent leurs valeurs, les lignes enfant sont gérées séparément
+    
     return flatProduct;
 }
 
@@ -436,36 +480,194 @@ ipcMain.handle('export-config-to-csv', async (event, configData, knownFieldsConf
     const filePath = result.filePath;
     console.log(`[Main Process] Attempting to save config CSV to: ${filePath}`);
 
+    // Nouvelle logique export CSV :
+    // 1. Générer une ligne parent (toutes valeurs héritées)
+    // 2. Générer une ligne enfant pour chaque variant avec données spécifiques
     const allProductsFlat = [];
     const allHeaders = new Set();
-
-    // Prioriser les headers 'name' et 'type'
     allHeaders.add('name');
     allHeaders.add('type');
 
-    // Collecter tous les produits (y compris les alias pour l'export complet)
     for (const productKey in configData) {
-        if (Object.hasOwnProperty.call(configData, productKey)) {
-            const product = configData[productKey];
-            const flatProduct = flattenProduct(product, knownFieldsConfig);
-            allProductsFlat.push(flatProduct);
-            Object.keys(flatProduct).forEach(header => allHeaders.add(header));
-        }
-    }
+        if (!Object.hasOwnProperty.call(configData, productKey)) continue;
+        const product = configData[productKey];
+        const flatParent = flattenProduct(product, knownFieldsConfig);
+        // Les lignes parent gardent TOUTES leurs données - pas de modification
+        allProductsFlat.push(flatParent);
+        Object.keys(flatParent).forEach(header => allHeaders.add(header));
 
-    // Ajouter tous les champs connus (de tous les types) aux en-têtes
-    // pour garantir que le template exporté est complet.
-    for (const type in knownFieldsConfig) {
-        if (Object.hasOwnProperty.call(knownFieldsConfig, type) && knownFieldsConfig[type].fields) {
-            for (const fieldKey in knownFieldsConfig[type].fields) {
-                // Les champs 'mockups' et 'variant' sont déjà gérés dans flattenProduct pour générer des colonnes spécifiques.
-                // On s'assure qu'ils sont ajoutés au set global.
-                allHeaders.add(fieldKey);
+        // Si le produit a des variants enfants avec données spécifiques
+        if (product.type === 'parent' && product.variant) {
+            console.log("[Main Process] Export - Processing variants for product:", product.name);
+            
+            // Réutiliser la même logique de détection des champs structurels que dans flattenProduct
+            const structuralFieldCandidates = new Map();
+            
+            // Identifier dynamiquement les champs de structure
+            Object.entries(product.variant).forEach(([variantKey, primaryVariant]) => {
+                // Un champ est structurel si sa valeur correspond à la clé du variant
+                for(const k in primaryVariant) {
+                    if (Object.hasOwnProperty.call(primaryVariant, k) && 
+                        k !== 'type' && k !== 'variant' && 
+                        primaryVariant[k] === variantKey) {
+                        // C'est un champ structurel de niveau 1
+                        if (!structuralFieldCandidates.has(k)) {
+                            structuralFieldCandidates.set(k, new Set());
+                        }
+                        structuralFieldCandidates.get(k).add(primaryVariant[k]);
+                    }
+                    // Également vérifier les champs _FR associés
+                    if (k.endsWith('_FR') && primaryVariant[k]) {
+                        const baseField = k.replace('_FR', '');
+                        if (primaryVariant[baseField] === variantKey) {
+                            if (!structuralFieldCandidates.has(k)) {
+                                structuralFieldCandidates.set(k, new Set());
+                            }
+                            structuralFieldCandidates.get(k).add(primaryVariant[k]);
+                        }
+                    }
+                }
+                
+                // Analyser les sous-variants pour le niveau 2
+                if (primaryVariant.variant && typeof primaryVariant.variant === 'object') {
+                    Object.entries(primaryVariant.variant).forEach(([subKey, subVariant]) => {
+                        for(const sk in subVariant) {
+                            if (Object.hasOwnProperty.call(subVariant, sk) && 
+                                sk !== 'type' && sk !== 'variant' && 
+                                subVariant[sk] === subKey) {
+                                // C'est un champ structurel de niveau 2
+                                if (!structuralFieldCandidates.has(sk)) {
+                                    structuralFieldCandidates.set(sk, new Set());
+                                }
+                                structuralFieldCandidates.get(sk).add(subVariant[sk]);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Créer l'ensemble des champs structurels détectés
+            const structuralFields = new Set(['type', 'variant']);
+            structuralFieldCandidates.forEach((values, fieldName) => {
+                structuralFields.add(fieldName);
+            });
+            
+            console.log("[Main Process] Export - Structural fields detected:", Array.from(structuralFields));
+            
+            // Collecter tous les variants uniques avec leurs champs spécifiques
+            for (const variantKey in product.variant) {
+                const variantObj = product.variant[variantKey];
+                
+                // Identifier les champs spécifiques (différents du parent et non structurels)
+                const specificFields = {};
+                for (const field in variantObj) {
+                    // Exclure les champs structurels identifiés dynamiquement
+                    if (!structuralFields.has(field) && 
+                        variantObj[field] !== '' && variantObj[field] !== null && variantObj[field] !== undefined) {
+                        
+                        // Vérifier si la valeur diffère du parent (si le parent a cette propriété)
+                        const parentValue = product[field];
+                        if (parentValue === undefined || parentValue !== variantObj[field]) {
+                            specificFields[field] = variantObj[field];
+                        }
+                    }
+                }
+                
+                // Si on a des champs spécifiques différents du parent, créer une ligne enfant
+                if (Object.keys(specificFields).length > 0) {
+                    console.log("[Main Process] Export - Creating child line for variant:", variantKey, "with fields:", specificFields);
+                    
+                    const childLine = { ...flatParent };
+                    
+                    // Définir seulement les champs essentiels pour identifier les variants
+                    const essentialFields = new Set([
+                        'name', 'type', 'variant1Type', 'variant1Values', 'variant2Type', 'variant2Values'
+                    ]);
+                    
+                    // Vider tous les champs sauf ceux spécifiques ET les champs d'identification des variants
+                    for (const key in childLine) {
+                        if (!(key in specificFields) && !essentialFields.has(key)) {
+                            childLine[key] = '';
+                        }
+                    }
+                    
+                    // Remplir les champs spécifiques
+                    Object.assign(childLine, specificFields);
+                    
+                    // Définir la valeur du variant principal
+                    childLine['variant1Values'] = variantObj[flatParent['variant1Type']] || variantKey;
+                    
+                    allProductsFlat.push(childLine);
+                    Object.keys(childLine).forEach(header => allHeaders.add(header));
+                }
+                
+                // Traiter les sous-variants de niveau 2
+                if (variantObj.variant) {
+                    for (const subKey in variantObj.variant) {
+                        const subObj = variantObj.variant[subKey];
+                        const subSpecificFields = {};
+                        
+                        for (const subField in subObj) {
+                            // Exclure les champs structurels identifiés dynamiquement
+                            if (!structuralFields.has(subField) &&
+                                subObj[subField] !== '' && subObj[subField] !== null && subObj[subField] !== undefined) {
+                                
+                                // Vérifier si diffère du parent ou du variant de niveau 1
+                                const parentValue = product[subField];
+                                const variant1Value = variantObj[subField];
+                                
+                                if ((parentValue === undefined || parentValue !== subObj[subField]) &&
+                                    (variant1Value === undefined || variant1Value !== subObj[subField])) {
+                                    subSpecificFields[subField] = subObj[subField];
+                                }
+                            }
+                        }
+                        
+                        // Si on a des champs spécifiques pour ce sous-variant
+                        if (Object.keys(subSpecificFields).length > 0) {
+                            console.log("[Main Process] Export - Creating child line for sub-variant:", variantKey + ">" + subKey, "with fields:", subSpecificFields);
+                            
+                            const subChildLine = { ...flatParent };
+                            
+                            // Définir seulement les champs essentiels pour identifier les variants
+                            const essentialFields = new Set([
+                                'name', 'type', 'variant1Type', 'variant1Values', 'variant2Type', 'variant2Values'
+                            ]);
+                            
+                            // Vider tous les champs sauf ceux spécifiques ET les champs d'identification des variants
+                            for (const key in subChildLine) {
+                                if (!(key in subSpecificFields) && !essentialFields.has(key)) {
+                                    subChildLine[key] = '';
+                                }
+                            }
+                            
+                            // Remplir les champs spécifiques
+                            Object.assign(subChildLine, subSpecificFields);
+                            
+                            // Définir les valeurs des variants
+                            subChildLine['variant1Values'] = variantObj[flatParent['variant1Type']] || variantKey;
+                            if (flatParent['variant2Type']) {
+                                subChildLine['variant2Values'] = subObj[flatParent['variant2Type']] || subKey;
+                            }
+                            
+                            allProductsFlat.push(subChildLine);
+                            Object.keys(subChildLine).forEach(header => allHeaders.add(header));
+                        }
+                    }
+                }
             }
         }
     }
 
-    // Ajouter les en-têtes spécifiques pour les mockups (basé sur le nombre max trouvé)
+    // Ajout des headers restants (mockups, variants, etc.)
+    for (const type in knownFieldsConfig) {
+        if (Object.hasOwnProperty.call(knownFieldsConfig, type) && knownFieldsConfig[type].fields) {
+            for (const fieldKey in knownFieldsConfig[type].fields) {
+                allHeaders.add(fieldKey);
+            }
+        }
+    }
+    // Mockups
     const maxMockups = allProductsFlat.reduce((max, prod) => {
         let currentMax = 0;
         for (let i = 0; ; i++) {
@@ -481,13 +683,11 @@ ipcMain.handle('export-config-to-csv', async (event, configData, knownFieldsConf
         allHeaders.add(`mockups_path_${i}`);
         allHeaders.add(`mockups_name_${i}`);
     }
-
-    // Ajouter les en-têtes de génération de variantes pour la ré-importation facilitée si non déjà présents
+    // Variants
     allHeaders.add('variant1Type');
     allHeaders.add('variant1Values');
     allHeaders.add('variant2Type');
     allHeaders.add('variant2Values');
-    // Si des propriétés directes de variants ont été détectées et aplaties (ex: variant_prixFabric), les ajouter aussi
     allProductsFlat.forEach(fp => {
         for (const key in fp) {
             if (key.startsWith('variant_') && !key.startsWith('variant1') && !key.startsWith('variant2')) {
@@ -495,39 +695,46 @@ ipcMain.handle('export-config-to-csv', async (event, configData, knownFieldsConf
             }
         }
     });
-
-
-    // Convertir le Set en Array et trier pour un ordre cohérent
     const sortedHeaders = Array.from(allHeaders).sort((a, b) => {
-        // Prioriser 'name' et 'type' au début
-        if (a === 'name') return -1;
-        if (b === 'name') return 1;
-        if (a === 'type') return -1;
-        if (b === 'type') return 1;
-
-        // Puis les mockups ensemble
-        const isAMockupPath = a.startsWith('mockups_path_');
-        const isBMockupPath = b.startsWith('mockups_path_');
-        const isAMockupName = a.startsWith('mockups_name_');
-        const isBMockupName = b.startsWith('mockups_name_');
-
-        if ((isAMockupPath || isAMockupName) && !(isBMockupPath || isBMockupName)) return -1;
-        if ((isBMockupPath || isBMockupName) && !(isAMockupPath || isAMockupName)) return 1;
-        // Si les deux sont des mockups, trier par index numérique
-        if ((isAMockupPath || isAMockupName) && (isBMockupPath || isBMockupName)) {
-            const indexA = parseInt(a.split('_').pop());
-            const indexB = parseInt(b.split('_').pop());
-            if (indexA !== indexB) return indexA - indexB;
-            return a.localeCompare(b); // path avant name
+        // Ordre spécifique des colonnes selon vos exigences
+        const customOrder = [
+            'name', 'type', 'prefix', 'price', 'product', 'sizeImpression', 'sku', 'alias', 
+            'CompositeItem', 'parentSku', 'variant1Type', 'variant1Values', 'variant2Type', 'variant2Values',
+            'weight', 'width', 'amazon.DesCourtes', 'amazon.title', 'amazon.Title_FR', 'aspect', 
+            'category', 'densite', 'dimentions', 'dossier', 'ERPCategory', 'genre', 'height', 
+            'label', 'length', 'picture_1', 'picture_2', 'picture_3', 'picture_4', 'picture_5', 
+            'picture_6', 'picture_7', 'picture_8', 'mockups_name_0', 'mockups_path_0', 'psd'
+        ];
+        
+        const indexA = customOrder.indexOf(a);
+        const indexB = customOrder.indexOf(b);
+        
+        // Si les deux sont dans l'ordre personnalisé, utiliser cet ordre
+        if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
         }
-
-        // Puis les champs de variantes (variant1Type, variant1Values, etc.)
-        const isAVariantGen = a.startsWith('variant1') || a.startsWith('variant2');
-        const isBVariantGen = b.startsWith('variant1') || b.startsWith('variant2');
-        if (isAVariantGen && !isBVariantGen) return -1;
-        if (isBVariantGen && !isAVariantGen) return 1;
-
-        // Enfin le reste par ordre alphabétique
+        
+        // Si seulement A est dans l'ordre personnalisé, A vient en premier
+        if (indexA !== -1) return -1;
+        
+        // Si seulement B est dans l'ordre personnalisé, B vient en premier
+        if (indexB !== -1) return 1;
+        
+        // Pour les mockups supplémentaires, les trier par index numérique
+        const isAMockup = a.startsWith('mockups_');
+        const isBMockup = b.startsWith('mockups_');
+        if (isAMockup && isBMockup) {
+            const matchA = a.match(/mockups_\w+_(\d+)/);
+            const matchB = b.match(/mockups_\w+_(\d+)/);
+            if (matchA && matchB) {
+                const numA = parseInt(matchA[1]);
+                const numB = parseInt(matchB[1]);
+                if (numA !== numB) return numA - numB;
+                return a.localeCompare(b); // path avant name pour le même index
+            }
+        }
+        
+        // Si aucun n'est dans l'ordre personnalisé, ordre alphabétique
         return a.localeCompare(b);
     });
 

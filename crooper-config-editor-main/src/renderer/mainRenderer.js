@@ -48,6 +48,84 @@ function generateVariantsStructureInternal(variant1Type, variant1ValuesArray, va
     return generatedVariants;
 }
 
+// Helper function: Reconstructs a full product object from multiple CSV records (for handling variants).
+function reconstructProductFromMultipleCsvRecords(records, knownFieldsConfig) {
+    if (!records || records.length === 0) {
+        throw new Error("No records provided");
+    }
+
+    // Trier les enregistrements : d'abord le parent principal, puis les variants spécifiques
+    const sortedRecords = records.sort((a, b) => {
+        // Le parent principal a des variant1Values avec plusieurs valeurs (ex: "pink,white,blue")
+        const aIsMainParent = a.variant1Values && a.variant1Values.includes(',');
+        const bIsMainParent = b.variant1Values && b.variant1Values.includes(',');
+        
+        if (aIsMainParent && !bIsMainParent) return -1;
+        if (!aIsMainParent && bIsMainParent) return 1;
+        return 0;
+    });
+
+    console.log(`[MainRenderer] Processing ${records.length} records for product: ${records[0].name}`);
+    
+    // Construire le produit principal à partir du premier enregistrement
+    const baseProduct = reconstructProductFromFlatCsvRecord(sortedRecords[0], knownFieldsConfig);
+    
+    // Traiter les enregistrements supplémentaires pour les variants spécifiques
+    for (let i = 1; i < sortedRecords.length; i++) {
+        const record = sortedRecords[i];
+        console.log(`[MainRenderer] Processing variant record for ${record.name}:`, record);
+        
+        // Identifier à quel variant cette ligne correspond
+        const variant1Value = record.variant1Values ? record.variant1Values.trim() : '';
+        const variant2Value = record.variant2Values ? record.variant2Values.trim() : '';
+        
+        if (variant1Value && baseProduct.variant && baseProduct.variant[variant1Value]) {
+            const targetVariant = baseProduct.variant[variant1Value];
+            
+            // Appliquer les propriétés spécifiques de cette ligne au variant
+            applyVariantSpecificProperties(targetVariant, record, variant2Value);
+        }
+    }
+    
+    return baseProduct;
+}
+
+// Helper function: Apply specific properties from a CSV record to a variant
+function applyVariantSpecificProperties(targetVariant, record, variant2Value) {
+    // Propriétés à exclure car elles sont structurelles ou déjà gérées
+    const excludedProps = new Set([
+        'name', 'type', 'variant1Type', 'variant1Values', 'variant2Type', 'variant2Values'
+    ]);
+    
+    // Appliquer les propriétés non-vides de cet enregistrement
+    for (const [key, value] of Object.entries(record)) {
+        if (excludedProps.has(key) || value === '' || value === null || value === undefined) {
+            continue;
+        }
+        
+        // Si on a un variant2Value spécifique (ex: "XL"), appliquer au sous-variant
+        if (variant2Value && targetVariant.variant && targetVariant.variant[variant2Value]) {
+            console.log(`[MainRenderer] Setting ${key} = ${value} on variant ${targetVariant.color || 'unknown'}.${variant2Value}`);
+            targetVariant.variant[variant2Value][key] = value;
+        } else {
+            // Sinon appliquer au variant principal - avec réorganisation des propriétés
+            console.log(`[MainRenderer] Setting ${key} = ${value} on variant ${targetVariant.color || 'unknown'}`);
+            
+            // Sauvegarder la structure variant existante
+            const existingVariant = targetVariant.variant;
+            
+            // Ajouter la nouvelle propriété
+            targetVariant[key] = value;
+            
+            // Si on avait un sous-niveau variant, le remettre à la fin
+            if (existingVariant) {
+                delete targetVariant.variant;
+                targetVariant.variant = existingVariant;
+            }
+        }
+    }
+}
+
 // Helper function: Reconstructs a full product object from a flat CSV record.
 function reconstructProductFromFlatCsvRecord(flatRecord, knownFieldsConfig) {
     const product = {};
@@ -56,7 +134,6 @@ function reconstructProductFromFlatCsvRecord(flatRecord, knownFieldsConfig) {
     let variant1Values = '';
     let variant2Type = '';
     let variant2Values = '';
-    const variantProps = {};
 
     for (const flatKey in flatRecord) {
         if (Object.hasOwnProperty.call(flatRecord, flatKey)) {
@@ -87,11 +164,14 @@ function reconstructProductFromFlatCsvRecord(flatRecord, knownFieldsConfig) {
             if (flatKey === 'variant2Type') { variant2Type = value; continue; }
             if (flatKey === 'variant2Values') { variant2Values = value; continue; }
 
-            if (flatKey.startsWith('variant_') && !flatKey.startsWith('variant1') && !flatKey.startsWith('variant2')) {
-                const propName = flatKey.substring('variant_'.length);
-                variantProps[propName] = value;
-                continue;
+            // Ignorer les champs variant_ générés lors de l'export - ils sont redondants
+            if (flatKey.startsWith('variant_')) { 
+                console.log(`[MainRenderer] Ignoring redundant export field: ${flatKey}`);
+                continue; 
             }
+
+            // Les champs variant_ sont maintenant traités comme des champs normaux
+            // et seront appliqués seulement aux variants spécifiques via applyVariantSpecificProperties
 
             const pathParts = flatKey.split('.');
             let currentLevel = product;
@@ -126,18 +206,10 @@ function reconstructProductFromFlatCsvRecord(flatRecord, knownFieldsConfig) {
         
         const generatedVariants = generateVariantsStructureInternal(variant1Type, parsedVariant1Values, variant2Type, parsedVariant2Values);
         
-        for (const primaryKey in generatedVariants) {
-            if (Object.hasOwnProperty.call(generatedVariants, primaryKey)) {
-                const primaryVariant = generatedVariants[primaryKey];
-                for (const propName in variantProps) {
-                    if (Object.hasOwnProperty.call(variantProps, propName)) {
-                        if (primaryVariant[propName] === undefined || primaryVariant[propName] === null || primaryVariant[propName] === '') {
-                            primaryVariant[propName] = variantProps[propName];
-                        }
-                    }
-                }
-            }
-        }
+        // NE PAS appliquer automatiquement variantProps à tous les variants
+        // Les variantProps seront appliqués seulement via applyVariantSpecificProperties
+        // lors du traitement des lignes spécifiques dans reconstructProductFromMultipleCsvRecords
+        
         product.variant = generatedVariants;
     } else if (product.type === 'parent') {
         product.variant = {};
@@ -1053,8 +1125,10 @@ async function handleFullCsvImport(csvData) {
     }
 
     const newConfigFromCsv = {};
+    const productRecords = {}; // Grouper les enregistrements par produit
     let hasErrors = false;
 
+    // Grouper les lignes CSV par nom de produit
     for (const record of csvData) {
         const productKey = record.name;
         if (!productKey || productKey.trim() === '') {
@@ -1063,14 +1137,21 @@ async function handleFullCsvImport(csvData) {
             continue;
         }
 
-        if (newConfigFromCsv.hasOwnProperty(productKey)) {
-            console.warn(`[MainRenderer] CSV Import Warning: Duplicate product key "${productKey}" found. Skipping later occurrences.`);
-            hasErrors = true;
-            continue;
+        if (!productRecords[productKey]) {
+            productRecords[productKey] = [];
         }
+        productRecords[productKey].push(record);
+    }
 
-        const reconstructedProduct = reconstructProductFromFlatCsvRecord(record, currentKnownFieldsConfig);
-        newConfigFromCsv[productKey] = reconstructedProduct;
+    // Traiter chaque groupe de produit
+    for (const [productKey, records] of Object.entries(productRecords)) {
+        try {
+            const mergedProduct = reconstructProductFromMultipleCsvRecords(records, currentKnownFieldsConfig);
+            newConfigFromCsv[productKey] = mergedProduct;
+        } catch (error) {
+            console.error(`[MainRenderer] CSV Import Error: Failed to process product "${productKey}":`, error);
+            hasErrors = true;
+        }
     }
 
     if (Object.keys(newConfigFromCsv).length > 0) {
