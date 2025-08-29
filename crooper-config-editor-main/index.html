@@ -278,6 +278,26 @@
         </div>
     </div>
 
+    <!-- Button to open Catalog Editor -->
+    <button id="openCatalogBtn" class="btn small">Éditer le catalogue</button>
+
+    <!-- Catalog Editor Modal -->
+    <div id="catalogModal" class="modal" style="display:none;">
+        <div class="modal-content wide">
+            <div class="modal-header">
+                <h2>Éditeur de catalogue</h2>
+                <button id="catalogModalCloseBtn" class="modal-close">✖</button>
+            </div>
+            <div id="catalogMetaForm" class="catalog-meta"></div>
+            <div id="catalogControls" class="catalog-controls">
+                <button id="addPageBtn" class="btn">Ajouter une page</button>
+                <button id="saveCatalogBtn" class="btn primary">Enregistrer</button>
+                <button id="closeCatalogBtn" class="btn">Fermer</button>
+            </div>
+            <div id="catalogPagesContainer" class="catalog-pages"></div>
+        </div>
+    </div>
+
         <!-- Modal for unsaved changes confirmation -->
         <div id="unsavedChangesModal" class="modal">
             <div class="modal-content">

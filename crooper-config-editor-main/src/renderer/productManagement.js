@@ -19,6 +19,88 @@ export const resetCollapseState = () => {
     collapseState = {};
 };
 
+// New: ensure toolbar with Expand/Collapse All is available and wired
+function ensureProductToolbar(container) {
+    if (!container || !container.parentElement) return;
+    const parent = container.parentElement;
+    // Avoid creating multiple toolbars
+    if (parent.querySelector('.product-toolbar')) return;
+
+    const toolbar = document.createElement('div');
+    toolbar.classList.add('product-toolbar');
+    toolbar.style.display = 'flex';
+    toolbar.style.gap = '8px';
+    toolbar.style.marginBottom = '8px';
+
+    const expandAllBtn = document.createElement('button');
+    expandAllBtn.textContent = 'Afficher tout';
+    expandAllBtn.title = 'Développer tous les produits';
+    expandAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Dispatch a global event so other modules (catalog) can react
+        document.dispatchEvent(new CustomEvent('global-expand-products'));
+        // Set global flag for future modal openings
+        try { document.documentElement.dataset.productsCollapsed = 'false'; } catch (err) {}
+        // Local fallback
+        try { expandAllProducts(); } catch (err) { console.warn('expandAllProducts error', err); }
+    });
+
+    const collapseAllBtn = document.createElement('button');
+    collapseAllBtn.textContent = 'Réduire tout';
+    collapseAllBtn.title = 'Réduire tous les produits';
+    collapseAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.dispatchEvent(new CustomEvent('global-collapse-products'));
+        try { document.documentElement.dataset.productsCollapsed = 'true'; } catch (err) {}
+        try { collapseAllProducts(); } catch (err) { console.warn('collapseAllProducts error', err); }
+    });
+
+    const toggleAllBtn = document.createElement('button');
+    toggleAllBtn.textContent = 'Basculer';
+    toggleAllBtn.title = 'Basculer l\'état de tous les produits';
+    toggleAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const anyCollapsed = Array.from(parent.querySelectorAll('.product-card')).some(card => card.classList.contains('collapsed'));
+        if (anyCollapsed) {
+            document.dispatchEvent(new CustomEvent('global-expand-products'));
+            try { document.documentElement.dataset.productsCollapsed = 'false'; } catch (err) {}
+            try { expandAllProducts(); } catch (err) { console.warn(err); }
+        } else {
+            document.dispatchEvent(new CustomEvent('global-collapse-products'));
+            try { document.documentElement.dataset.productsCollapsed = 'true'; } catch (err) {}
+            try { collapseAllProducts(); } catch (err) { console.warn(err); }
+        }
+    });
+
+    toolbar.appendChild(expandAllBtn);
+    toolbar.appendChild(collapseAllBtn);
+    toolbar.appendChild(toggleAllBtn);
+
+    parent.insertBefore(toolbar, container);
+}
+
+export function collapseAllProducts() {
+    const container = elements && elements.productContainer;
+    if (!container) return;
+    const cards = container.querySelectorAll('.product-card');
+    cards.forEach(card => {
+        card.classList.add('collapsed');
+        const key = card.dataset.productKey;
+        if (key) collapseState[key] = true;
+    });
+}
+
+export function expandAllProducts() {
+    const container = elements && elements.productContainer;
+    if (!container) return;
+    const cards = container.querySelectorAll('.product-card');
+    cards.forEach(card => {
+        card.classList.remove('collapsed');
+        const key = card.dataset.productKey;
+        if (key) collapseState[key] = false;
+    });
+}
+
 export const initializeProductElements = (domElements, config, selectedKey, knownFieldsConfig) => { // Ajout de knownFieldsConfig
     elements = domElements;
     currentConfig = config;
@@ -27,6 +109,9 @@ export const initializeProductElements = (domElements, config, selectedKey, know
 
     // Vérifier si productContainer existe avant d'attacher les écouteurs
     if (elements.productContainer) {
+        // Ensure toolbar exists for expand/collapse
+        ensureProductToolbar(elements.productContainer);
+
         elements.productContainer.ondragover = (e) => e.preventDefault(); // Allow drop
         elements.productContainer.ondrop = (e) => {
             e.preventDefault();
@@ -91,9 +176,9 @@ export function renderProducts(configToRender, container, isTemplateView = false
     }
     container.innerHTML = '';
 
-    // Filter out 'alias' type products from the main product list
+    // Filter out 'alias' type products and the special 'catalog' key from the main product list
     const nonAliasProducts = Object.keys(configToRender)
-                                .filter(key => configToRender[key].type !== 'alias')
+                                .filter(key => key !== 'catalog' && configToRender[key].type !== 'alias')
                                 .reduce((obj, key) => {
                                     obj[key] = configToRender[key];
                                     return obj;

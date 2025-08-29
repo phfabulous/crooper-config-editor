@@ -1380,3 +1380,143 @@ body.dark .toast.info { background: #0056b3; }
 .has-tooltip:hover::after, .has-tooltip:hover::before {
   opacity: 1;
 }
+
+/* Catalog editor styles */
+#catalogModal .modal-content.wide { width: 90%; max-width: 1100px; }
+.catalog-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.catalog-meta .form-group { flex: 1 1 200px; display:flex; flex-direction:column; }
+.catalog-pages { display: flex; flex-direction: column; gap: 12px; max-height: 60vh; overflow:auto; padding: 6px; }
+.catalog-page-entry { border: 1px solid #ddd; padding: 12px; border-radius: 6px; background: #fff; }
+.catalog-page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.catalog-products-list { display:flex; flex-direction:column; gap:8px; margin:8px 0; }
+.catalog-product-entry { display:flex; gap:8px; align-items:center; }
+.paired-xy { display:flex; gap:8px; }
+.labeled-input { display:flex; flex-direction:column; }
+.labeled-input .mini-label { font-size: 11px; color:#666; }
+.size-xy { display:flex; gap:8px; }
+.catalog-controls { margin: 8px 0; display:flex; gap:8px; }
+
+/* Catalog editor layout fixes */
+.catalog-page-entry { padding: 12px; }
+.catalog-product-entry .row { display:flex; gap:8px; align-items:flex-start; margin-bottom:6px; }
+.catalog-product-entry .row .flex-item { flex: 1 1 33%; }
+.catalog-product_entry .row .flex-item-full { flex: 1 1 100%; }
+.catalog-product-entry .row .labeled-input { display:flex; flex-direction:column; }
+.catalog-product-entry .row .labeled-input input, .catalog-product-entry .row .labeled-input select, .catalog-product-entry .row .labeled-input textarea { width:100%; }
+
+/* modal close button top-right */
+.modal-close { position:absolute; top:8px; right:8px; background:transparent; border:none; font-size:18px; cursor:pointer; }
+
+.catalog-footer { display:flex; justify-content:flex-end; padding:8px; }
+
+/* keep existing styles consistent */
+.catalog-product-entry-header { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px; }
+.catalog-entry-title { font-weight:600; }
+.toggle-details-btn { background:#eee; border:1px solid #ccc; padding:4px 8px; cursor:pointer; }
+.catalog-product-entry.collapsed .row, .catalog-product-entry.collapsed .inline-add-field, .catalog-product-entry.collapsed .delete-field-btn { display:none; }
+.delete-field-btn { margin-left:8px; background:transparent; border:none; color:#900; cursor:pointer; }
+.inline-add-field { display:flex; gap:6px; margin-top:6px; }
+
+/* --- Catalogue editor specific layout (force Row1..Row4 ordering & alignment) --- */
+.catalog-page-entry { margin: 10px 0; border: 1px solid #e6e6e6; padding: 10px; border-radius: 6px; background: #fff; }
+.catalog-page-header { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px; }
+.catalog-page-entry input[type="text"] { font-size: 0.95em; }
+
+.catalog-product-entry { border: 1px solid #f0f0f0; padding: 8px; margin-bottom: 8px; border-radius: 6px; background: #fafafa; }
+.catalog-product-entry-header { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:4px 6px; cursor:default; }
+.catalog-entry-title { font-weight:600; color:#2c3e50; }
+.catalog-product-entry .toggle-details-btn { margin-left:8px; font-weight:700; width:28px; height:28px; }
+
+/* Force catalog product entries to stack rows vertically and enforce Row1..Row4 layout */
+.catalog-product-entry {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+}
+.catalog-product-entry .row {
+    display: flex !important;
+    width: 100% !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+/* Row1: Product + Variant + checkbox */
+.row-product-variant { display:flex !important; width:100%; gap:10px; }
+.row-product-variant .flex-item { flex: 0 0 48%; min-width: 140px; }
+.row-product-variant .flex-item-full { flex: 1 1 100%; }
+.row-product-variant .commented-checkbox { align-self:flex-end; width:18px; height:18px; }
+
+/* Row2: X / Y */
+.row-xy { display:flex !important; width:100%; gap:10px; }
+.row-xy .labeled-input { flex: 0 0 48%; min-width:80px; }
+
+/* Row3: Width / Height / Picture */
+.row-size-pic { display:flex !important; width:100%; gap:10px; }
+.row-size-pic .labeled-input { flex: 0 0 32%; min-width:80px; }
+
+/* Row4: Pairs then singles stacked */
+.row-other { display:flex !important; flex-direction:column !important; gap:8px; width:100%; }
+.row-other .pair-group { display:flex !important; gap:10px; width:100%; }
+.row-other .pair-group .labeled-input { flex: 0 0 48%; }
+.row-other .labeled-input { width:100%; }
+
+/* Ensure header stays horizontal */
+.catalog-product-entry-header { display:flex !important; align-items:center !important; justify-content:space-between !important; }
+
+/* Make sure toggle button remains visible */
+.catalog-product-entry .toggle-details-btn { order: 2; }
+.catalog-product-entry .catalog-entry-title { order: 1; }
+
+/* Small screens: stack columns */
+@media (max-width: 800px) {
+    .row-product-variant .flex-item,
+    .row-xy .labeled-input,
+    .row-size-pic .labeled-input { flex: 1 1 100% !important; }
+    .row-other .pair-group { flex-direction: column !important; }
+}
+
+/* end of catalog layout rules */
+
+/* Improve sizing: prefer content-driven widths, picture-field larger, small-field compact */
+.catalog-product-entry .labeled-input input[type="text"],
+.catalog-product-entry .labeled-input input[type="number"],
+.catalog-product-entry .labeled-input select { width: auto; min-width: 60px; max-width: 100%; }
+
+.catalog-product-entry .small-field { flex: 0 0 18%; }
+.catalog-product-entry .picture-field { flex: 1 1 48%; min-width: 200px; }
+
+/* Ensure add-field button can be visible even when collapsed */
+.catalog-product-entry .add-field-btn.always-visible { display: inline-block; }
+.catalog-product-entry.collapsed .add-field-btn.always-visible { display: inline-block; }
+
+/* Slight visual tweaks for compact inputs */
+.catalog-product-entry input[type="number"] { width: 80px; }
+.catalog-product-entry .pair-group .labeled-input input[type="number"] { width: 100%; }
+
+/* Make delete button always visible (smaller) */
+.catalog-product-entry .delete-field-btn { display:inline-block; }
+
+/* tweak picture field to show longer content */
+.catalog-product-entry .picture-field input[type="text"] { min-width: 180px; max-width: 100%; }
+
+/* Strong override to ensure collapsed entries hide their content (fixes !important conflicts) */
+.catalog-product-entry.collapsed > .row,
+.catalog-product-entry.collapsed .row,
+.catalog-product-entry.collapsed .inline-add-field,
+.catalog-product-entry.collapsed .pair-group,
+.catalog-product-entry.collapsed .picture-field,
+.catalog-product-entry.collapsed .delete-field-btn,
+.catalog-product-entry.collapsed .btn:not(.toggle-details-btn) {
+    display: none !important;
+}
+.catalog-product-entry.collapsed {
+    /* ensure visual compactness */
+    padding: 6px !important;
+    background: #fff !important;
+}
+
+/* ensure header stays visible and toggle remains interactive */
+.catalog-product-entry.collapsed > .catalog-product-entry-header,
+.catalog-product-entry.collapsed > .catalog-product-entry-header * {
+    display: flex !important;
+}

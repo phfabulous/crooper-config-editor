@@ -59,6 +59,14 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
     currentSelectedProductKey = selectedKey;
     currentKnownFieldsConfig = knownFieldsConfig;
 
+    // populate datalists
+    populateKnownFieldsDatalist();
+
+    // populate catalog product selects if any in modals
+    // any select elements with class 'catalog-product-select' will be filled
+    const catalogSelects = document.querySelectorAll('select.catalog-product-select');
+    catalogSelects.forEach(s => populateProductListForCatalog(s));
+
     // Gestionnaires d'événements pour les boutons de fermeture
     if (elements.closeButton) elements.closeButton.addEventListener('click', handleCloseModalRequest);
 
@@ -128,6 +136,11 @@ export const initializeModalElements = (domElements, config, selectedKey, knownF
 
     if (elements.productForm) elements.productForm.addEventListener('submit', handleProductFormSubmit);
 
+    // NOUVEAU: si la modale contient une liste de produits pour le catalogue, la remplir
+    setTimeout(() => {
+        populateProductListForCatalog('productAliasSelect');
+    }, 50);
+
     // Initialiser les datalists des suggestions (appelées après que elements soit prêt)
     populateCrooperVariablesDatalist();
     populateKnownFieldsDatalist();
@@ -142,8 +155,14 @@ export const updateModalData = (config, selectedKey, knownFieldsConfig) => {
     currentConfig = config;
     currentSelectedProductKey = selectedKey;
     currentKnownFieldsConfig = knownFieldsConfig;
-    populateAliasDropdown();
-    populateKnownFieldsDatalist(); // Re-populate datalists if config changes
+    populateKnownFieldsDatalist();
+
+    // update catalog selects
+    const catalogSelects = document.querySelectorAll('select.catalog-product-select');
+    catalogSelects.forEach(s => populateProductListForCatalog(s));
+
+    // Refill catalog product list controls if present
+    populateProductListForCatalog('productAliasSelect');
 };
 
 function populateCrooperVariablesDatalist() {
@@ -193,6 +212,23 @@ function populateKnownFieldsDatalist() {
     }
 }
 
+// nouveau: populate product list for catalog product selection. Exclude 'catalog' key and aliases.
+function populateProductListForCatalog(selectElementOrId) {
+    let selectEl = selectElementOrId;
+    if (typeof selectElementOrId === 'string') selectEl = document.getElementById(selectElementOrId);
+    if (!selectEl) return;
+    // clear
+    selectEl.innerHTML = '';
+    const emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.textContent = '-- Aucun --'; selectEl.appendChild(emptyOpt);
+    for (const k in currentConfig) {
+        if (!Object.hasOwnProperty.call(currentConfig, k)) continue;
+        if (k === 'catalog') continue;
+        const item = currentConfig[k];
+        if (!item || item.type === 'alias') continue;
+        const opt = document.createElement('option'); opt.value = k; opt.textContent = item.name || k;
+        selectEl.appendChild(opt);
+    }
+}
 
 function clearModalErrors() {
     // These specific error elements are no longer directly used for dynamic fields.
@@ -1733,7 +1769,7 @@ function propagateFieldsFromParentPrompt() {
         elements.customFieldsContainer.querySelectorAll('.propagate-checkbox').forEach(cb => {
             cb.checked = false;
         });
-    }
+ }
 }
 
 function getSelectedFieldsForPropagation() {

@@ -8,6 +8,7 @@ import { loadProductTemplates, openSaveTemplateModal, closeSaveTemplateModal, ad
 import { initializeFieldManagementElements, loadKnownFieldsConfig, updateFieldManagementData, openManageFieldsModal, openManageFieldsModalForPromotion } from './fieldManagement.js';
 import { cleanObject } from './utils.js';
 import { initializeUnsavedDialogElements, openUnsavedDialog } from './unsavedDialog.js';
+import CatalogManager from './catalogManagement.js';
 
 // Global state variables
 let currentConfig = {};
@@ -15,6 +16,7 @@ let currentConfigFilePath = null;
 let currentSelectedProductKey = null;
 let savedProductTemplates = {};
 let currentKnownFieldsConfig = {};
+let currentCatalog = null; // NEW: store top-level catalog separately
 
 // Helper function: generates variant structure (extracted from modalHandlers for reuse)
 function generateVariantsStructureInternal(variant1Type, variant1ValuesArray, variant2Type, variant2ValuesArray) {
@@ -242,6 +244,7 @@ async function newConfiguration() {
         if (!confirmNew) return;
     }
     currentConfig = {};
+    currentCatalog = null; // reset catalog when creating new config
     currentConfigFilePath = null;
     currentSelectedProductKey = null;
     resetCollapseState();
@@ -255,13 +258,29 @@ async function loadConfiguration() {
     console.log("[MainRenderer] Initiating load configuration.");
     const result = await window.electronAPI.loadConfig();
     if (result && result.data) {
-        currentConfig = result.data;
-        currentConfigFilePath = result.filePath;
-        currentSelectedProductKey = null;
-        resetCollapseState();
+        const parsed = result.data;
+        // Extract top-level catalog if present
+        if (parsed.catalog) {
+            currentCatalog = parsed.catalog;
+            delete parsed.catalog;
+        } else {
+            currentCatalog = null;
+        }
+        currentConfig = parsed;
+        currentConfigFilePath = result.path || null;
+        // Ensure we pass the current data to updateAllModuleData to avoid TypeError when config is undefined
+        updateAllModuleData(currentConfig, currentSelectedProductKey, savedProductTemplates, currentKnownFieldsConfig);
+        // Notify catalog module
+        document.dispatchEvent(new CustomEvent('external-catalog-update', { detail: { catalog: currentCatalog } }));
         renderAllContent(); // Refreshes the display
-        if (elements.currentConfigFileName) elements.currentConfigFileName.textContent = `Config: ${currentConfigFilePath.split(/[\\/]/).pop()}`;
-        console.log("[MainRenderer] Config loaded from file. currentConfig:", currentConfig);
+        if (elements.currentConfigFileName) {
+            if (currentConfigFilePath) {
+                elements.currentConfigFileName.textContent = `Config: ${currentConfigFilePath.split(/[\\/]/).pop()}`;
+            } else {
+                elements.currentConfigFileName.textContent = `Config: (unsaved)`;
+            }
+        }
+        console.log("[MainRenderer] Config loaded from file. currentConfig:", currentConfig, "currentCatalog:", currentCatalog);
     } else {
         console.log("[MainRenderer] Load config canceled or failed.");
     }
@@ -269,7 +288,7 @@ async function loadConfiguration() {
 
 async function saveConfiguration(saveAs = false) {
     console.log("[MainRenderer] Initiating save configuration. saveAs:", saveAs);
-    if (Object.keys(currentConfig).length === 0 && !currentConfigFilePath) {
+    if (Object.keys(currentConfig).length === 0 && !currentConfigFilePath && !currentCatalog) {
         alert('No configuration to save. Please add products first or load an existing configuration.');
         return;
     }
@@ -288,10 +307,12 @@ async function saveConfiguration(saveAs = false) {
     }
     console.log(`[MainRenderer] Saving to filePath: ${filePath}`);
 
-    // Directly save currentConfig without reordering to preserve the existing
-    // product order. This keeps the order from CSV imports or previously saved
-    // configurations intact.
-    const success = await window.electronAPI.saveConfig(currentConfig, filePath);
+    // When saving, merge currentCatalog back into the exported object so the
+    // original JSON structure (catalog + products) is preserved on disk.
+    const exportObject = Object.assign({}, currentConfig);
+    if (currentCatalog) exportObject.catalog = currentCatalog;
+
+    const success = await window.electronAPI.saveConfig(exportObject, filePath);
     if (success) {
         currentConfigFilePath = filePath;
         if (elements.currentConfigFileName) elements.currentConfigFileName.textContent = `Config: ${currentConfigFilePath.split(/[\\/]/).pop()}`;
@@ -365,6 +386,13 @@ async function generateCsvTemplate() {
 // Function to update data references in all child modules
 function updateAllModuleData(config, selectedKey, templates, fieldsConfig) {
     console.log("[MainRenderer] updateAllModuleData called. Config size:", Object.keys(config).length, "Templates size:", Object.keys(templates).length);
+    // Update catalog manager with the latest config and fields so product lists are populated
+    try {
+        CatalogManager.updateConfigData(config, fieldsConfig);
+        CatalogManager.updateCatalogData(currentCatalog);
+    } catch (err) {
+        console.warn('[MainRenderer] Warning: CatalogManager update failed:', err);
+    }
     // Ces fonctions sont exportées par leurs modules respectifs et manipulent les éléments DOM qu'elles ont reçus à l'initialisation
     updateProductData(config, selectedKey, fieldsConfig); // Passe les éléments et données à productManagement
     updateModalData(config, selectedKey, fieldsConfig); // Passe les éléments et données à modalHandlers
@@ -372,6 +400,7 @@ function updateAllModuleData(config, selectedKey, templates, fieldsConfig) {
     updateFieldManagementData(fieldsConfig); // Passe les éléments et données à fieldManagement
     renderAliasQuickAccess(); // Rerender alias quick access
 }
+
 
 // --- MODERNISATION VISUELLE DES ALIAS ---
 function renderAliasQuickAccess() {
@@ -799,6 +828,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeTemplateElements(elements, currentConfig, savedProductTemplates);
     initializeFieldManagementElements(elements, currentKnownFieldsConfig);
     initializeUnsavedDialogElements(elements);
+    // Initialize catalog module once DOM elements are available
+    const domElements = {
+        openCatalogBtn: document.getElementById('openCatalogBtn')
+    };
+    CatalogManager.initializeCatalogElements(domElements, currentConfig, currentCatalog, currentKnownFieldsConfig);
+
+    // listen for catalog updates from catalog manager
+    document.addEventListener('catalog-data-updated', (e) => {
+        currentCatalog = e.detail.catalog;
+    });
 
     // --- Gestionnaire pour le clic sur le bouton menu principal ---
     if (elements.mainMenuBtn && elements.mainMenuDropdown && elements.appHeader) {
